@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "codingChallenges")
+@Table(name = "coding_challenges")
 public class CodingChallenge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

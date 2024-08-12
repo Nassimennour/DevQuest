@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "codingChallenges")
+@Table(name = "scores")
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

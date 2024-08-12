@@ -19,4 +19,5 @@ public class Ranking {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     private int position;
+    private int level;
 }

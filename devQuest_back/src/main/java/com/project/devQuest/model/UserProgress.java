@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "codingChallenges")
+@Table(name = "user_progresses")
 public class UserProgress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
