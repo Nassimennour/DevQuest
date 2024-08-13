@@ -68,4 +68,14 @@ public class UserController {
         return ResponseEntity.ok(userService.update(userDTO));
     }
 
+    @GetMapping("/verify")
+    public ResponseEntity<?> verifyUser(@RequestParam("token") String token){
+        try {
+            userService.verifyToken(token);
+            return ResponseEntity.ok("User verified successfully");
+        } catch(Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }

@@ -33,7 +33,7 @@ public class AdminQuizzController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Quizz> getQuizzById(Long id) {
+    public ResponseEntity<Quizz> getQuizzById(@PathVariable Long id) {
         Quizz quizz = quizzService.findById(id).orElseThrow(() -> new IllegalArgumentException("Quizz not found"));
         return ResponseEntity.ok(quizz);
     }

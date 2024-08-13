@@ -5,6 +5,7 @@ import com.project.devQuest.dto.ChangePasswordDTO;
 import com.project.devQuest.dto.UserDTO;
 import com.project.devQuest.model.Technology;
 import com.project.devQuest.model.User;
+import com.project.devQuest.model.VerificationToken;
 import com.project.devQuest.repository.TechnologyRepositiry;
 import com.project.devQuest.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,15 +33,24 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private TechnologyRepositiry technologyRepository;
+
+    @Autowired
+    private VerificationTokenService verificationTokenService;
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public UserDTO save(User user){
         logger.info("Saving user: {}", user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setVerified(false);
         User savedUser = userRepository.save(user);
         logger.info("User saved successfully: {}", savedUser.getUsername());
+        VerificationToken verificationToken = verificationTokenService.createVerificationToken(savedUser);
+        emailService.sendVerificationEmail(user.getEmail(), verificationToken.getToken());
         return userDTOConverter.convertToDTO(savedUser);
     }
 
@@ -77,6 +88,22 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void verifyToken(String token){
+        VerificationToken verificationToken = verificationTokenService.getVerificationToken(token);
+        if (verificationToken == null){
+            throw new IllegalArgumentException("Invalid token");
+        }
+        User user = verificationToken.getUser();
+        if (user.isVerified()){
+            throw new IllegalArgumentException("User already verified");
+        }
+        if (verificationToken.getExpiryDate().before(new Date())){
+            throw new IllegalArgumentException("Token expired");
+        }
+        user.setVerified(true);
+        userRepository.save(user);
+    }
+
     public void deleteAll(){
         logger.info("Deleting all users");
         userRepository.deleteAll();
@@ -106,5 +133,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
         userRepository.save(user);
     }
+
 
 }}
