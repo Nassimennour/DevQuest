@@ -1,0 +1,129 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-card {
+  background-color: var(--bg-1);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.logo {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+
+/* logo animation */
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin-animation {
+  animation: spin 3s linear 1;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: var(--text-2);
+  text-decoration: underline var(--text-2);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-control {
+  border-radius: 5px;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--accent-1);
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-1);
+}
+
+.spinner-border {
+  display: none;
+  margin-left: 10px;
+}
+
+.btn-primary.loading .spinner-border {
+  display: inline-block;
+}
+
+.forgot-password {
+  display: block;
+  margin-top: 10px;
+  color: var(--accent-1);
+  text-align: right;
+}
+
+.forgot-password:hover {
+  color: var(--primary-1);
+}
+
+.social-login {
+  margin-top: 20px;
+}
+
+.social-login p {
+  margin: 10px 0;
+}
+
+.social-login .btn {
+  margin: 5px 0;
+  width: 100%;
+}
+
+.social-login i {
+  font-size: 15px;
+  display: inline-block;
+  margin-right: auto;
+}
+
+.sign-up {
+  margin-top: 20px;
+}
+
+.sign-up a {
+  color: var(--primary-1);
+}
+
+.sign-up a:hover {
+  text-decoration: underline;
+}

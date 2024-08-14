@@ -15,8 +15,7 @@ public class EmailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("Vérification de compte");
-        message.setText("Cliquez sur ce lien pour vérifier votre compte : "
-                + "http://localhost:4200/verify?token=" + token);
+        message.setText("Votre code de vérification est: " + token);
         javaMailSender.send(message);
     }
 
