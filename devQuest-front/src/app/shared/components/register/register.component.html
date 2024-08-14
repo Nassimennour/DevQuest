@@ -1,0 +1,249 @@
+<div class="register-page">
+  <div class="register-card">
+    <div class="card-header">
+      <!-- Logo and title -->
+      <img
+        src="assets/logo.png"
+        alt="DevQuest Logo"
+        class="logo spin-animation"
+      />
+      <h2 class="title">
+        Create your <span class="brand">DevQuest</span> account
+      </h2>
+      <p class="welcome-msg">Join DevQuest to enhance your coding skills!</p>
+    </div>
+
+    <!-- Register form -->
+    <form
+      class="form-group"
+      [formGroup]="registerForm"
+      (submit)="onSubmit($event)"
+      *ngIf="step === 1"
+    >
+      <section class="account-section">
+        <h2 class="section-header text-center">
+          <i class="bi bi-1-circle-fill"></i> Fill out your account information
+        </h2>
+        <div class="row">
+          <div class="col-12 mt-2 mb-2">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control"
+              id="username"
+            />
+            <div
+              class="text-danger"
+              *ngIf="
+                registerForm.get('username')?.invalid &&
+                (registerForm.get('username')?.dirty ||
+                  registerForm.get('username')?.touched)
+              "
+            >
+              <span *ngIf="registerForm.get('username')?.errors?.['required']"
+                >Username is required</span
+              >
+              <span *ngIf="registerForm.get('username')?.errors?.['minlength']"
+                >Username must be at least 3 characters long</span
+              >
+              <span *ngIf="registerForm.get('username')?.errors?.['maxlength']"
+                >Username must be at most 20 characters long</span
+              >
+            </div>
+          </div>
+          <div class="col-12 mt-2 mb-2">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" class="form-control" formControlName="email" />
+            <div
+              class="text-danger"
+              *ngIf="
+                registerForm.get('email')?.invalid &&
+                (registerForm.get('email')?.dirty ||
+                  registerForm.get('email')?.touched)
+              "
+            >
+              <span *ngIf="registerForm.get('email')?.errors?.['required']"
+                >Email is required</span
+              >
+
+              <span *ngIf="registerForm.get('email')?.errors?.['email']">
+                Email must be a valid email address
+              </span>
+            </div>
+          </div>
+          <div class="col-12 mt-2 mb-2">
+            <label for="password" class="form-label">Password</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+              />
+              <span class="toggle-password" (click)="togglePassword($event)"
+                ><i class="bi bi-eye-slash-fill"></i
+              ></span>
+            </div>
+            <span class="hint" *ngIf="!registerForm.get('password')?.dirty"
+              >*Password must be at least 8 characters long</span
+            >
+            <span class=""></span>
+            <div
+              class="text-danger"
+              *ngIf="
+                registerForm.get('password')?.invalid &&
+                (registerForm.get('password')?.dirty ||
+                  registerForm.get('password')?.touched)
+              "
+            >
+              <span *ngIf="registerForm.get('password')?.errors?.['required']"
+                >Password is required</span
+              >
+
+              <span *ngIf="registerForm.get('password')?.errors?.['minlength']"
+                >Password must be at least 8 characters long</span
+              >
+              <span
+                *ngIf="registerForm.get('password')?.errors?.['pattern'] && !registerForm.get('password')?.errors?.['minlength']"
+                >Password must contain at least one uppercase letter, one
+                lowercase letter, one number, and one special character</span
+              >
+            </div>
+          </div>
+          <div class="col-12 mt-2 mb-4">
+            <label for="confirm-password" class="form-label"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              id="confirm-password"
+              class="form-control"
+              formControlName="confirmPassword"
+            />
+            <div
+              class="text-danger"
+              *ngIf="
+                registerForm.get('confirmPassword')?.invalid &&
+                (registerForm.get('confirmPassword')?.dirty ||
+                  registerForm.get('confirmPassword')?.touched)
+              "
+            >
+              <span
+                *ngIf="
+                    registerForm.get('confirmPassword')?.errors?.['required']
+                    "
+                >Confirm Password is required</span
+              >
+              <span
+                *ngIf="registerForm.get('confirmPassword')?.errors?.['mismatch']"
+                >Passwords do not match</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-2 text-end">
+          <button
+            class="next-button btn btn-md"
+            type="submit"
+            (click)="submitRegisterForm()"
+            [disabled]="registerForm.invalid"
+          >
+            Next&nbsp;<i class="bi bi-arrow-right-circle-fill"></i>
+          </button>
+        </div>
+        <!-- Already have an account? -->
+        <p class="sign-up mt-4">
+          Already have an account? <a routerLink="/login">Log in</a>
+        </p>
+      </section>
+    </form>
+    <!-- Profile information -->
+    <form (submit)="onSubmit($event)" class="form-group" *ngIf="step === 2">
+      <section class="personnal-section">
+        <h2 class="section-header text-center">
+          <i class="bi bi-2-circle-fill"></i> Fill out your Profile Information
+        </h2>
+
+        <div class="row">
+          <div class="col-12 mt-3 mb-3">
+            <label for="pic" class="form-label">Profile Pic</label>
+            <input type="file" class="form-control" id="pic" />
+          </div>
+          <div class="col-12 col-md-6 mt-3 mb-3">
+            <label for="first-name" class="form-label">First Name</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="col-12 col-md-6 mt-3 mb-3">
+            <label for="last-name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="col-12 mt-3 mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender">
+              <option value="">Select your Gender</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+          </div>
+          <div class="col-12 mt-3 mb-3">
+            <label for="birth-date" class="form-label">Date of Birth</label>
+            <input type="date" id="birth-date" class="form-control" />
+          </div>
+          <div class="col-12 mt-3 mb-4">
+            <label for="first-name" class="form-label">Bio</label>
+            <textarea
+              class="form-control"
+              rows="3"
+              placeholder="Tell us about yourself ..."
+            ></textarea>
+          </div>
+        </div>
+        <div class="actions mt-2">
+          <button
+            class="back-button btn btn-md"
+            type="submit"
+            (click)="prevStep()"
+          >
+            <i class="bi bi-arrow-left-circle-fill"></i>&nbsp;Back
+          </button>
+          <button class="next-button btn btn-md" (click)="nextStep()">
+            Next&nbsp;<i class="bi bi-arrow-right-circle-fill"></i>
+          </button>
+        </div>
+      </section>
+    </form>
+    <!-- Verify your account section -->
+    <section class="verify-section" *ngIf="step === 3">
+      <h2 class="section-header text-center">
+        <i class="bi bi-3-circle-fill"></i> Verify your account
+      </h2>
+      <p class="verify-msg">
+        We have sent a verification code to your email. Please enter the code
+        below to verify your account.
+      </p>
+      <div class="row">
+        <div class="col-12 mb-3">
+          <label for="verification-code" class="form-label"
+            >Verification Code</label
+          >
+          <input type="text" class="form-control" id="verification-code" />
+        </div>
+        <button class="btn btn-md verify-button">Verify Account</button>
+      </div>
+      <div class="actions mt-5">
+        <button
+          class="back-button btn btn-md"
+          type="submit"
+          (click)="prevStep()"
+        >
+          <i class="bi bi-arrow-left-circle-fill"></i>&nbsp;Back
+        </button>
+        <button class="next-button btn btn-md" disabled>
+          Finish&nbsp;<i class="bi bi-check-circle-fill"></i>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

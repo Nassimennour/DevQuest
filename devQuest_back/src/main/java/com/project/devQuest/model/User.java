@@ -25,6 +25,7 @@ public class User {
     private String bio;
     private String profilePicture;
     private Gender gender;
+    private Date birthDate;
     private String role; // ADMIN or User
     private boolean isVerified;
     private Date registrationDate;

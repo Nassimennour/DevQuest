@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  background: linear-gradient(to right, var(--bg-1), var(--bg-3));
+  color: var(--text-1);
+  height: 100%;
+}
+
+[data-theme="dark"] {
+  --primary-1: #2563eb;
+  --primary-2: #598ef3;
+  --primary-3: #d3e6fe;
+  --accent-1: #d946ef;
+  --accent-2: #fae8ff;
+  --text-1: #cbd5e1;
+  --text-2: #94a3b8;
+  --bg-1: #1e293b;
+  --bg-2: #334155;
+  --bg-3: #475569;
+}
+
+[data-theme="light"] {
+  --primary-1: #ff4081;
+  --primary-2: #ff79b0;
+  --primary-3: #ffe4ff;
+  --accent-1: #00e5ff;
+  --accent-2: #00829b;
+  --text-1: #333333;
+  --text-2: #5c5c5c;
+  --bg-1: #f5f5f5;
+  --bg-2: #ebebeb;
+  --bg-3: #c2c2c2;
+}
+
+/*     --primary-100:#2563eb;
+    --primary-200:#598EF3;
+    --primary-300:#D3E6FE;
+    --accent-100:#d946ef;
+    --accent-200:#fae8ff;
+    --text-100:#cbd5e1;
+    --text-200:#94a3b8;
+    --bg-100:#1e293b;
+    --bg-200:#334155;
+    --bg-300:#475569;
+      
+*/
+
+/* Light mode
+    --primary-100:#FF4081;
+    --primary-200:#ff79b0;
+    --primary-300:#ffe4ff;
+    --accent-100:#00E5FF;
+    --accent-200:#00829b;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#F5F5F5;
+    --bg-200:#ebebeb;
+    --bg-300:#c2c2c2;
+       */

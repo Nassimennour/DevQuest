@@ -1,0 +1,68 @@
+<div class="login-page">
+  <div class="login-card">
+    <!-- Logo and title -->
+    <img
+      src="assets/logo.png"
+      alt="DevQuest Logo"
+      class="logo spin-animation"
+    />
+    <h2>Welcome to DevQuest</h2>
+    <form class="login-form">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          class="form-control"
+          placeholder="Enter your username"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input
+            id="password"
+            type="password"
+            class="form-control"
+            placeholder="Enter your password"
+          />
+          <span class="toggle-password" (click)="togglePassword($event)"
+            ><i class="bi bi-eye-slash-fill"></i
+          ></span>
+        </div>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="rememberMe" />
+        <label class="form-check-label" for="rememberMe">Remember me</label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg">
+        Log In
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+      </button>
+      <a href="#" class="forgot-password">Forgot Password?</a>
+      <!-- Social media -->
+      <div class="social-login">
+        <p>OR</p>
+        <button class="btn btn-outline-secondary">
+          <i class="bi bi-google" style="color: var(--accent-1)"></i>&nbsp;Login
+          with Google
+        </button>
+        <button class="btn btn-outline-secondary">
+          <i class="bi bi-github" style="color: var(--accent-1)"></i>&nbsp;Login
+          with GitHub
+        </button>
+        <button class="btn btn-outline-secondary">
+          <i class="bi bi-facebook" style="color: var(--accent-1)"></i
+          >&nbsp;Login with Facebook
+        </button>
+      </div>
+      <p class="sign-up">
+        Don't have an account? <a routerLink="/register">Sign up</a>
+      </p>
+    </form>
+  </div>
+</div>
