@@ -6,12 +6,17 @@ import com.project.devQuest.model.Technology;
 import com.project.devQuest.model.User;
 import com.project.devQuest.service.TechnologyService;
 import com.project.devQuest.service.UserService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -24,7 +29,7 @@ public class UserController {
     private TechnologyService technologyService;
 
     @PutMapping("/change-password")
-    public ResponseEntity<?> changePassworxd(@RequestBody ChangePasswordDTO changePasswordDTO) {
+    public ResponseEntity<?> changePassworxd(@Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
         try {
             userService.changePassword(changePasswordDTO);
             return  ResponseEntity.ok("Password changed successfully");
@@ -34,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/profile")
-    public ResponseEntity<UserDTO> createProfile(@RequestBody User user) {
+    public ResponseEntity<UserDTO> createProfile(@Valid @RequestBody User user) {
         return ResponseEntity.ok(userService.save(user));
     }
 
@@ -45,7 +50,7 @@ public class UserController {
     }
 
     @PutMapping("/profile")
-    public ResponseEntity<UserDTO> updateProfile(@RequestBody User user) {
+    public ResponseEntity<UserDTO> updateProfile(@Valid @RequestBody User user) {
         return ResponseEntity.ok(userService.save(user));
     }
 
@@ -76,6 +81,14 @@ public class UserController {
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public Map<String, String> handleValidationExceptions(IllegalArgumentException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", ex.getMessage());
+        return response;
     }
 
 }

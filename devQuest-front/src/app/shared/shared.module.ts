@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [LoginPageComponent, RegisterComponent],
@@ -15,5 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule,
   ],
+  providers: [provideHttpClient()],
 })
 export class SharedModule {}

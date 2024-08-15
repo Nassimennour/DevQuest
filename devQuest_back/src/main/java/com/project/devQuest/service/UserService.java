@@ -74,6 +74,7 @@ public class UserService {
     public List<UserDTO> findAll(){
         logger.info("Finding all users");
         List<User> users = userRepository.findAll();
+        logger.info("Found {} users", users.size());
         return users.stream().map(user -> userDTOConverter.convertToDTO(user)).toList();
     }
 

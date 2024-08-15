@@ -4,26 +4,36 @@ import com.project.devQuest.dto.UserDTO;
 import com.project.devQuest.model.User;
 import com.project.devQuest.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/users")
 @Slf4j
 public class AdminController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+
     @Autowired
     private UserService userService;
 
     @GetMapping("")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
+        logger.info("Received GET request to fetch all users");
         try {
             List<UserDTO> users  = userService.findAll();
+            logger.info("Returning {} users", users.size());
             return ResponseEntity.ok(users);
         }catch(Exception e) {
+            logger.error("Error fetching users", e);
             return ResponseEntity.badRequest().body(null);
         }
     }
@@ -63,5 +73,13 @@ public class AdminController {
     @PutMapping("")
     public ResponseEntity<UserDTO> updateUser(User user) {
         return ResponseEntity.ok(userService.save(user));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public Map<String, String> handleValidationExceptions(IllegalArgumentException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", ex.getMessage());
+        return response;
     }
 }

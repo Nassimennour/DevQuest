@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { passwordMatchValidator } from '../../validators/passwordMatchValidator';
 import { RegistrationRequest } from '../../models/usermodels';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,7 @@ export class RegisterComponent {
     }
   );
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   nextStep() {
     this.step++;
@@ -63,5 +64,13 @@ export class RegisterComponent {
       password: this.registerForm.get('password')?.value,
       role: 'User',
     };
+    this.authService.registerUser(registrationData).subscribe(
+      (response) => {
+        console.log('Registration Response: ', response);
+      },
+      (error) => {
+        console.error('Registration Error: ', error);
+      }
+    );
   }
 }
