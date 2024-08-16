@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ScoreService {
@@ -25,12 +27,15 @@ public class ScoreService {
     private QuestionRepository questionRepository;
     @Autowired
     private QuizzHistoryRepository quizzHistoryRepository;
+    @Autowired
+    private UserProgressRepository userProgressRepository;
 
     private final static Logger logger = LoggerFactory.getLogger(ScoreService.class);
 
     public Score computeAndSaveScore(long userId, long quizzId, List<Answer> answers) {
         logger.info("Computing score for user: " + userId + " and quizz: " + quizzId);
         double scoreValue = 0;
+        // Compute the score based on the answers
         for (Answer answer : answers) {
             Question question = questionRepository.findById(answer.getQuestionId())
                     .orElseThrow(() -> new RuntimeException("Question not found"));
@@ -44,6 +49,7 @@ public class ScoreService {
         }
         // Take two digits after the decimal point
         scoreValue = Math.round(scoreValue / answers.size() * 100) / 100.0;
+        // Save the score and the answers
         Score scoreEntity = new Score();
         scoreEntity.setUser(userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found")));
         scoreEntity.setQuizz(quizzRepository.findById(quizzId).orElseThrow(() -> new RuntimeException("Quizz not found")));
@@ -58,6 +64,21 @@ public class ScoreService {
         quizzHistory.setUser(userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found")));
         quizzHistory.setScore(scoreValue);
         quizzHistory.setCompltedAt(LocalDateTime.now());
+        quizzHistoryRepository.save(quizzHistory);
+        // Update the user's progress
+        // check if there is a progressUser entity for the user and the technology
+        Optional<UserProgress> userProgress = userProgressRepository.findByUserIdAndTechnologyId(userId, quizzHistory.getQuizz().getTechnology().getId());
+        UserProgress userProgressEntity;
+        // Update the progress or create a new one
+        userProgressEntity = userProgress.orElseGet(UserProgress::new);
+        userProgressEntity.setProgressPercentage((userProgressEntity.getProgressPercentage() + scoreValue) / 2);
+        userProgressEntity.setLastActivityDate(new Date());
+        userProgressEntity.setUser(userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found")));
+        userProgressEntity.setTechnology(quizzHistory.getQuizz().getTechnology());
+        userProgressEntity.setCompletedQuizzes(userProgressEntity.getCompletedQuizzes() + 1);
+        userProgressEntity.setLastQuizz(quizzHistory.getQuizz());
+        // Save the progress
+        userProgressRepository.save(userProgressEntity);
         return savedScore;
     }
 

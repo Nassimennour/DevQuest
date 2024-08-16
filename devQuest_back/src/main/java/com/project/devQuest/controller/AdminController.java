@@ -71,7 +71,7 @@ public class AdminController {
     }
 
     @PutMapping("")
-    public ResponseEntity<UserDTO> updateUser(User user) {
+    public ResponseEntity<UserDTO> updateUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.save(user));
     }
 

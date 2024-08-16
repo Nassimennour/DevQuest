@@ -1,5 +1,6 @@
 package com.project.devQuest.controller;
 
+import com.project.devQuest.dto.UserDTO;
 import com.project.devQuest.model.AuthenticationRequest;
 import com.project.devQuest.model.RegistrationRequest;
 import com.project.devQuest.model.User;
@@ -10,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -51,21 +53,21 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid @RequestBody RegistrationRequest registrationRequest) throws Exception {
+    public ResponseEntity<UserDTO> register(@Valid @RequestBody RegistrationRequest registrationRequest) throws Exception {
         log.info("Registering user: {}", registrationRequest.getUsername());
         User user = new User();
         user.setUsername(registrationRequest.getUsername());
         user.setEmail(registrationRequest.getEmail());
         user.setPassword(registrationRequest.getPassword());
         user.setRole(registrationRequest.getRole());
-        userService.save(user);
+        UserDTO userDTO =  userService.save(user);
         log.info("Registration successful for user: {}", registrationRequest.getUsername());
         // Automatic login after registration
         //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(registrationRequest.getUsername(), registrationRequest.getPassword()));
         //final UserDetails userDetails = userDetailsService.loadUserByUsername(registrationRequest.getUsername());
         //final String jwt = jwtUtil.generateToken(userDetails);
         //return jwt;
-        return "User registered successfully";
+        return ResponseEntity.ok(userDTO);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -24,7 +24,7 @@ public class AdminRankingController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getRankingById(Long id) {
+    public ResponseEntity<?> getRankingById(@PathVariable Long id) {
         if (!rankingService.existsById(id)) {
             return ResponseEntity.badRequest().body("Ranking not found");
         }
@@ -32,7 +32,7 @@ public class AdminRankingController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<?> getRankingByUserId(Long userId) {
+    public ResponseEntity<?> getRankingByUserId(@PathVariable Long userId) {
         if (!rankingService.getRankingByUserId(userId).isPresent()) {
             return ResponseEntity.badRequest().body("Ranking not found");
         }
@@ -40,7 +40,7 @@ public class AdminRankingController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteRanking(Long id) {
+    public ResponseEntity<?> deleteRanking(@PathVariable Long id) {
         if (!rankingService.existsById(id)) {
             return ResponseEntity.badRequest().body("Ranking not found");
         }
@@ -49,12 +49,12 @@ public class AdminRankingController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Ranking> createRanking(RankingDTO ranking) {
+    public ResponseEntity<Ranking> createRanking(@RequestBody RankingDTO ranking) {
         return ResponseEntity.ok(rankingService.createRanking(ranking));
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateRanking(Ranking ranking) {
+    public ResponseEntity<?> updateRanking(@RequestBody Ranking ranking) {
         if (!rankingService.existsById(ranking.getId())) {
             return ResponseEntity.badRequest().body("Ranking not found");
         }

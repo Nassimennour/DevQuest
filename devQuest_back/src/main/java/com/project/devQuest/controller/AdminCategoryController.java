@@ -26,37 +26,37 @@ public class AdminCategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(Long id) {
+    public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
         logger.info("Received request to get category by id: " + id);
         return ResponseEntity.ok(categoryService.getCategoryById(id));
     }
 
     @GetMapping("/parent/{id}")
-    public ResponseEntity<List<Category>> getCategoryByParentCategoryId(Long id) {
+    public ResponseEntity<List<Category>> getCategoryByParentCategoryId(@PathVariable Long id) {
         logger.info("Received request to get category by parent category id: " + id);
         return ResponseEntity.ok(categoryService.getCategoryByParentCategoryId(id));
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<Category> getCategoryByName(String name) {
+    public ResponseEntity<Category> getCategoryByName(@PathVariable String name) {
         logger.info("Received request to get category by name: " + name);
         return ResponseEntity.ok(categoryService.getCategoryByName(name));
     }
 
     @PostMapping()
-    public ResponseEntity<Category> createCategory(CategoryDTO category) {
+    public ResponseEntity<Category> createCategory(@RequestBody CategoryDTO category) {
         logger.info("Received request to create category: " + category.getName());
         return ResponseEntity.ok(categoryService.createCategory(category));
     }
 
     @PutMapping("")
-    public ResponseEntity<Category> updateCategory(Category category) {
+    public ResponseEntity<Category> updateCategory(@RequestBody Category category) {
         logger.info("Received request to update category: " + category.getName());
         return ResponseEntity.ok(categoryService.updateCategory(category));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(Long id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         logger.info("Received request to delete category by id: " + id);
         categoryService.deleteCategory(id);
         return ResponseEntity.ok().build();

@@ -26,43 +26,43 @@ public class AdminCodingChallengeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CodingChallenge> getCodingChallengeById(long id) {
+    public ResponseEntity<CodingChallenge> getCodingChallengeById(@PathVariable long id) {
         logger.info("Received GET /admin/coding-challenge/" + id);
         return ResponseEntity.ok(codingChallengeService.getCodingChallengeById(id).orElseThrow(() -> new RuntimeException("Coding challenge not found")));
     }
 
     @GetMapping("/technology/{technologyId}")
-    public ResponseEntity<List<CodingChallenge>> getCodingChallengesByTechnologyId(long technologyId) {
+    public ResponseEntity<List<CodingChallenge>> getCodingChallengesByTechnologyId(@PathVariable long technologyId) {
         logger.info("Received GET /admin/coding-challenges/technology/" + technologyId);
         return ResponseEntity.ok(codingChallengeService.getCodingChallengesByTechnologyId(technologyId));
     }
 
     @GetMapping("/creator/{creatorId}")
-    public ResponseEntity<List<CodingChallenge>> getCodingChallengesByCreatorId(long creatorId) {
+    public ResponseEntity<List<CodingChallenge>> getCodingChallengesByCreatorId(@PathVariable long creatorId) {
         logger.info("Received GET /admin/coding-challenges/creator/" + creatorId);
         return ResponseEntity.ok(codingChallengeService.getCodingChallengesByCreatorId(creatorId));
     }
 
     @GetMapping("/difficulty/{difficulty}")
-    public ResponseEntity<List<CodingChallenge>> getCodingChallengesByDifficulty(String difficulty) {
+    public ResponseEntity<List<CodingChallenge>> getCodingChallengesByDifficulty(@PathVariable String difficulty) {
         logger.info("Received GET /admin/coding-challenges/difficulty/" + difficulty);
         return ResponseEntity.ok(codingChallengeService.getCodingChallengesByDifficulty(difficulty));
     }
 
     @GetMapping("/creator/{creatorId}/technology/{technologyId}")
-    public ResponseEntity<List<CodingChallenge>> getCodingChallengesByCreatorIdAndTechnologyId(long creatorId, long technologyId) {
+    public ResponseEntity<List<CodingChallenge>> getCodingChallengesByCreatorIdAndTechnologyId(@PathVariable long creatorId,@PathVariable long technologyId) {
         logger.info("Received GET /admin/coding-challenges/creator/" + creatorId + "/technology/" + technologyId);
         return ResponseEntity.ok(codingChallengeService.getCodingChallengesByCreatorIdAndTechnologyId(creatorId, technologyId));
     }
 
     @PostMapping("")
-    public ResponseEntity<CodingChallenge> saveCodingChallenge(CodingChallengeDTO codingChallenge) {
+    public ResponseEntity<CodingChallenge> saveCodingChallenge(@RequestBody CodingChallengeDTO codingChallenge) {
         logger.info("Received POST /admin/coding-challenges");
         return ResponseEntity.ok(codingChallengeService.saveCodingChallenge(codingChallenge));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCodingChallenge(long id) {
+    public void deleteCodingChallenge(@PathVariable long id) {
         logger.info("Received DELETE /admin/coding-challenges/" + id);
         codingChallengeService.deleteCodingChallenge(id);
     }

@@ -40,25 +40,25 @@ public class AdminQuizzController {
     }
 
     @GetMapping("/technology/{technologyId}")
-    public ResponseEntity<List<Quizz>> getQuizzesByTechnologyId(Long technologyId) {
+    public ResponseEntity<List<Quizz>> getQuizzesByTechnologyId(@PathVariable Long technologyId) {
         List<Quizz> quizzes = quizzService.getQuizzesByTechnologyId(technologyId);
         return ResponseEntity.ok(quizzes);
     }
 
     @GetMapping("/creator/{creatorId}")
-    public ResponseEntity<List<Quizz>> getQuizzesByCreatorId(Long creatorId) {
+    public ResponseEntity<List<Quizz>> getQuizzesByCreatorId(@PathVariable Long creatorId) {
         List<Quizz> quizzes = quizzService.getQuizzesByCreatorId(creatorId);
         return ResponseEntity.ok(quizzes);
     }
 
     @GetMapping("/title/{title}")
-    public ResponseEntity<List<Quizz>> getQuizzesByTitle(String title) {
+    public ResponseEntity<List<Quizz>> getQuizzesByTitle(@PathVariable String title) {
         List<Quizz> quizzes = quizzService.getQuizzesByTitle(title);
         return ResponseEntity.ok(quizzes);
     }
 
     @GetMapping("/difficulty/{difficulty}")
-    public ResponseEntity<List<Quizz>> getQuizzesByDifficulty(String difficulty) {
+    public ResponseEntity<List<Quizz>> getQuizzesByDifficulty(@PathVariable String difficulty) {
         try {
             Difficulty diff = Difficulty.valueOf(difficulty.toUpperCase());
             return ResponseEntity.ok(quizzService.getQuizzesByDifficulty(diff));
@@ -68,17 +68,17 @@ public class AdminQuizzController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Quizz> createQuizz(QuizzDTO quizzDTO) {
+    public ResponseEntity<Quizz> createQuizz(@RequestBody QuizzDTO quizzDTO) {
         return ResponseEntity.ok(quizzService.createQuizz(quizzDTO));
     }
 
     @PutMapping("")
-    public ResponseEntity<Quizz> updateQuizz(Quizz quizz) {
+    public ResponseEntity<Quizz> updateQuizz(@RequestBody Quizz quizz) {
         return ResponseEntity.ok(quizzService.updateQuizz(quizz));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteQuizz(Long id) {
+    public ResponseEntity<?> deleteQuizz(@PathVariable Long id) {
         if (!quizzService.existsById(id)) {
             return ResponseEntity.badRequest().body("Quizz not found");
         }
@@ -92,9 +92,9 @@ public class AdminQuizzController {
         return ResponseEntity.ok("All quizzes deleted successfully");
     }
 
-    // Get quizz history by user Id
+    // Get quizz history by user's id
     @GetMapping("/history/{userId}")
-    public ResponseEntity<List<QuizzHistory>> getQuizzHistoryByUserId(Long userId) {
+    public ResponseEntity<List<QuizzHistory>> getQuizzHistoryByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(quizzHistoryService.findByUserId(userId));
     }
 

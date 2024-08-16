@@ -23,7 +23,7 @@ public class AdminTechnologyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getTechnologyById(Long id) {
+    public ResponseEntity<?> getTechnologyById(@PathVariable Long id) {
         if (!technologyService.existsById(id)) {
             return ResponseEntity.badRequest().body("Technology not found");
         }
@@ -31,22 +31,22 @@ public class AdminTechnologyController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<List<Technology>> getTechnologiesByName(String name) {
+    public ResponseEntity<List<Technology>> getTechnologiesByName(@PathVariable String name) {
         return ResponseEntity.ok(technologyService.getTechnologiesByName(name));
     }
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Technology>> getTechnologiesByCategoryId(Long categoryId) {
+    public ResponseEntity<List<Technology>> getTechnologiesByCategoryId(@PathVariable Long categoryId) {
         return ResponseEntity.ok(technologyService.getTechnologiesByCategoryId(categoryId));
     }
 
     @PostMapping("")
-    public ResponseEntity<Technology> createTechnology(TechnologyDTO technology) {
+    public ResponseEntity<Technology> createTechnology(@RequestBody TechnologyDTO technology) {
         return ResponseEntity.ok(technologyService.createTechnology(technology));
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateTechnology(Technology technology) {
+    public ResponseEntity<?> updateTechnology(@RequestBody Technology technology) {
         if (!technologyService.existsById(technology.getId())) {
             return ResponseEntity.badRequest().body("Technology not found");
         }

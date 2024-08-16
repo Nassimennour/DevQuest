@@ -1,18 +1,19 @@
 package com.project.devQuest.service;
 
 import com.project.devQuest.dto.SolutionDTO;
-import com.project.devQuest.model.CodingChallenge;
-import com.project.devQuest.model.Solution;
-import com.project.devQuest.model.User;
+import com.project.devQuest.model.*;
 import com.project.devQuest.repository.CodingChallengeRepository;
 import com.project.devQuest.repository.SolutionRepository;
+import com.project.devQuest.repository.UserProgressRepository;
 import com.project.devQuest.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SolutionService {
@@ -22,6 +23,8 @@ public class SolutionService {
     private CodingChallengeRepository codingChallengeRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserProgressRepository userProgressRepository;
     private final static Logger logger = LoggerFactory.getLogger(SolutionService.class);
 
 
@@ -62,6 +65,17 @@ public class SolutionService {
         User user = userRepository.findById(solutionDTO.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
         CodingChallenge codingChallenge = codingChallengeRepository.findById(solutionDTO.getCodingChallengeId()).orElseThrow(() -> new RuntimeException("Coding challenge not found"));
         user.getCodingChallengeHistory().add(codingChallenge);
+        // Update user's progress in the technology
+        Technology technology = codingChallenge.getTechnology();
+        Optional<UserProgress> userProgress = userProgressRepository.findByUserIdAndTechnologyId(user.getId(), technology.getId());
+        UserProgress userProgressEntity = userProgress.orElseGet(UserProgress::new);
+        userProgressEntity.setUser(user);
+        userProgressEntity.setTechnology(technology);
+        userProgressEntity.setLastActivityDate(new Date());
+        userProgressEntity.setProgressPercentage((userProgressEntity.getProgressPercentage() + 100) / 2);
+        userProgressEntity.setLastCodingChallenge(codingChallenge);
+        userProgressEntity.setCompletedChallenges(userProgressEntity.getCompletedChallenges() + 1);
+        userProgressRepository.save(userProgressEntity);
         return savedSolution;
     }
 

@@ -19,7 +19,7 @@ public class AdminQuestionController {
     private final static Logger logger = LoggerFactory.getLogger(AdminQuestionController.class);
 
     @GetMapping("/quizz/{quizzId}")
-    public ResponseEntity<List<Question>> getAllQuestions(@PathVariable Long quizzId) {
+    public ResponseEntity<List<Question>> getQuestionsByQuizzId(@PathVariable Long quizzId) {
         logger.info("Fetching all questions for quizz with id: " + quizzId);
         return ResponseEntity.ok(questionService.getAllQuestions(quizzId));
     }

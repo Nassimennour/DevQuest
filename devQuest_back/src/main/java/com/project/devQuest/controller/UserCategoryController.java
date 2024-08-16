@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,19 +28,19 @@ public class UserCategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(Long id) {
+    public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
         logger.info("Received request to get category by id: " + id);
         return ResponseEntity.ok(categoryService.getCategoryById(id));
     }
 
     @GetMapping("/parent/{id}")
-    public ResponseEntity<List<Category>> getCategoryByParentCategoryId(Long id) {
+    public ResponseEntity<List<Category>> getCategoryByParentCategoryId(@PathVariable Long id) {
         logger.info("Received request to get category by parent category id: " + id);
         return ResponseEntity.ok(categoryService.getCategoryByParentCategoryId(id));
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<Category> getCategoryByName(String name) {
+    public ResponseEntity<Category> getCategoryByName(@PathVariable String name) {
         logger.info("Received request to get category by name: " + name);
         return ResponseEntity.ok(categoryService.getCategoryByName(name));
     }

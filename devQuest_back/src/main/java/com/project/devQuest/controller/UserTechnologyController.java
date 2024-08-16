@@ -5,6 +5,7 @@ import com.project.devQuest.service.TechnologyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class UserTechnologyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getTechnologyById(Long id) {
+    public ResponseEntity<?> getTechnologyById(@PathVariable Long id) {
         if (!technologyService.existsById(id)) {
             return ResponseEntity.badRequest().body("Technology not found");
         }
@@ -31,12 +32,12 @@ public class UserTechnologyController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<List<Technology>> getTechnologiesByName(String name) {
+    public ResponseEntity<List<Technology>> getTechnologiesByName(@PathVariable String name) {
         return ResponseEntity.ok(technologyService.getTechnologiesByName(name));
     }
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Technology>> getTechnologiesByCategoryId(Long categoryId) {
+    public ResponseEntity<List<Technology>> getTechnologiesByCategoryId(@PathVariable Long categoryId) {
         return ResponseEntity.ok(technologyService.getTechnologiesByCategoryId(categoryId));
     }
 

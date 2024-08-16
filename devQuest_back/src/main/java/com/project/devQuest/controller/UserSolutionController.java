@@ -25,19 +25,19 @@ public class UserSolutionController {
     private static final Logger logger = LoggerFactory.getLogger(UserSolutionController.class);
 
     @GetMapping("/challenge/{challengeId}")
-    public ResponseEntity<List<Solution>> getSolutionsByChallengeId(long challengeId) {
+    public ResponseEntity<List<Solution>> getSolutionsByChallengeId(@PathVariable long challengeId) {
         logger.info("Received GET /user/solutions/challenge/" + challengeId);
         return ResponseEntity.ok(solutionService.getAllSolutionsForChallenge(challengeId));
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Solution>> getSolutionsByUserId(long userId) {
+    public ResponseEntity<List<Solution>> getSolutionsByUserId(@PathVariable long userId) {
         logger.info("Received GET /user/solutions/user/" + userId);
         return ResponseEntity.ok(solutionService.getAllSolutionsForUser(userId));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Solution> getSolutionById(long id) {
+    public ResponseEntity<Solution> getSolutionById(@PathVariable long id) {
         logger.info("Received GET /user/solutions/" + id);
         return ResponseEntity.ok(solutionService.getSolutionById(id));
     }

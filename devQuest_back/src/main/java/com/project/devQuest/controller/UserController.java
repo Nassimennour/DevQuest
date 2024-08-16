@@ -43,6 +43,13 @@ public class UserController {
         return ResponseEntity.ok(userService.save(user));
     }
 
+    @GetMapping("/my-profile")
+    public ResponseEntity<UserDTO> getMyProfile() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDTO userDTO = userService.findByUsername(userDetails.getUsername());
+        return ResponseEntity.ok(userDTO);
+    }
+
     @GetMapping("/profile/{id}")
     public ResponseEntity<UserDTO> getProfile(@PathVariable Long id) {
         UserDTO userDTO = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));

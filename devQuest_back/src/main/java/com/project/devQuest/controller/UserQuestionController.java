@@ -20,7 +20,7 @@ public class UserQuestionController {
     private final static Logger logger = LoggerFactory.getLogger(UserQuestionController.class);
 
     @GetMapping("/quizz/{quizzId}")
-    public ResponseEntity<List<Question>> getAllQuestions(@PathVariable Long quizzId) {
+    public ResponseEntity<List<Question>> getAllQuestionsByQuizzId(@PathVariable Long quizzId) {
         logger.info("Fetching all questions for quizz with id: " + quizzId);
         return ResponseEntity.ok(questionService.getAllQuestions(quizzId));
     }
@@ -41,6 +41,13 @@ public class UserQuestionController {
     public ResponseEntity<Question> updateQuestion(@RequestBody Question question) {
         logger.info("Updating question with id: " + question.getId());
         return ResponseEntity.ok(questionService.updateQuestion(question));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
+        logger.info("Deleting question with id: " + id);
+        questionService.deleteQuestion(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
