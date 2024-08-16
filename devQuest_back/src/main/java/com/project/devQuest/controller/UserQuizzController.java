@@ -1,5 +1,6 @@
 package com.project.devQuest.controller;
 
+import com.project.devQuest.dto.QuizzDTO;
 import com.project.devQuest.model.Quizz;
 import com.project.devQuest.model.QuizzHistory;
 import com.project.devQuest.service.QuizzHistoryService;
@@ -46,10 +47,10 @@ public class UserQuizzController {
         return ResponseEntity.ok(quizzHistoryService.findByUserId(userId));
     }
 
-
+    // Implement a method to create a new quizz
     @PostMapping("")
-    public ResponseEntity<Quizz> createQuizz(@RequestBody Quizz quizz){
-        return ResponseEntity.ok(quizzService.createQuizz(quizz));
+    public ResponseEntity<Quizz> createQuizz(@RequestBody QuizzDTO quizzDTO){
+        return ResponseEntity.ok(quizzService.createQuizz(quizzDTO));
     }
 
     // update quizzes that the authenticated user created

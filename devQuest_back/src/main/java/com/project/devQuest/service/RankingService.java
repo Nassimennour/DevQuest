@@ -1,7 +1,9 @@
 package com.project.devQuest.service;
 
+import com.project.devQuest.dto.RankingDTO;
 import com.project.devQuest.model.Ranking;
 import com.project.devQuest.repository.RankingRepository;
+import com.project.devQuest.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,14 +17,21 @@ public class RankingService {
 
     @Autowired
     private RankingRepository rankingRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public List<Ranking> getAllRankings(){
         log.info("Finding all rankings");
         return rankingRepository.findAll();
     }
 
-    public Ranking createRanking(Ranking ranking){
-        log.info("Creating ranking: {}", ranking);
+    public Ranking createRanking(RankingDTO rankingDTO){
+        log.info("Creating ranking: {}", rankingDTO);
+        Ranking ranking = new Ranking();
+        ranking.setScore(rankingDTO.getScore());
+        ranking.setUser(userRepository.findById(rankingDTO.getUserId()).orElseThrow(() -> new IllegalArgumentException("User not found")));
+        ranking.setLevel(rankingDTO.getLevel());
+        ranking.setPosition(rankingDTO.getPosition());
         return rankingRepository.save(ranking);
     }
 

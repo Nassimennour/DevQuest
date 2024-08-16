@@ -1,5 +1,6 @@
 package com.project.devQuest.controller;
 
+import com.project.devQuest.dto.TechnologyDTO;
 import com.project.devQuest.model.Technology;
 import com.project.devQuest.service.TechnologyService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +41,7 @@ public class AdminTechnologyController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Technology> createTechnology(Technology technology) {
+    public ResponseEntity<Technology> createTechnology(TechnologyDTO technology) {
         return ResponseEntity.ok(technologyService.createTechnology(technology));
     }
 

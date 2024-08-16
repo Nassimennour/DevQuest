@@ -3,10 +3,9 @@ package com.project.devQuest.service;
 import com.project.devQuest.converter.UserDTOConverter;
 import com.project.devQuest.dto.ChangePasswordDTO;
 import com.project.devQuest.dto.UserDTO;
-import com.project.devQuest.model.Technology;
 import com.project.devQuest.model.User;
 import com.project.devQuest.model.VerificationToken;
-import com.project.devQuest.repository.TechnologyRepositiry;
+import com.project.devQuest.repository.TechnologyRepository;
 import com.project.devQuest.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class UserService {
     private EmailService emailService;
 
     @Autowired
-    private TechnologyRepositiry technologyRepository;
+    private TechnologyRepository technologyRepository;
 
     @Autowired
     private VerificationTokenService verificationTokenService;

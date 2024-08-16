@@ -1,8 +1,11 @@
 package com.project.devQuest.service;
 
+import com.project.devQuest.dto.QuizzDTO;
 import com.project.devQuest.model.Difficulty;
 import com.project.devQuest.model.Quizz;
 import com.project.devQuest.repository.QuizzRepository;
+import com.project.devQuest.repository.TechnologyRepository;
+import com.project.devQuest.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,10 @@ public class QuizzService {
 
     @Autowired
     private QuizzRepository quizzRepository;
+    @Autowired
+    private TechnologyRepository technologyRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public Optional<Quizz> findById(Long id){
         log.info("Finding quizz by id: {}", id);
@@ -32,8 +39,16 @@ public class QuizzService {
         return quizzRepository.findAll();
     }
 
-    public Quizz createQuizz(Quizz quizz){
-        log.info("Creating quizz: {}", quizz.getTitle());
+    public Quizz createQuizz(QuizzDTO quizzDTO){
+        log.info("Creating quizz: {}", quizzDTO.getTitle());
+        Quizz quizz = new Quizz();
+        quizz.setTitle(quizzDTO.getTitle());
+        quizz.setTechnology(technologyRepository.findById(quizzDTO.getTechnologyId()).orElseThrow(() -> new IllegalArgumentException("Technology not found")));
+        quizz.setCreator(userRepository.findById(quizzDTO.getCreatorId()).orElseThrow(() -> new IllegalArgumentException("User not found")));
+        quizz.setDifficulty(quizzDTO.getDifficulty());
+        quizz.setOverview(quizzDTO.getOverview());
+        quizz.setDuration(quizzDTO.getDuration());
+        quizz.setCreationDate(quizzDTO.getCreationDate());
         return quizzRepository.save(quizz);
     }
 

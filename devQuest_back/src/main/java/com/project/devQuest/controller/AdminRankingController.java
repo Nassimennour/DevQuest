@@ -1,5 +1,6 @@
 package com.project.devQuest.controller;
 
+import com.project.devQuest.dto.RankingDTO;
 import com.project.devQuest.model.Ranking;
 import com.project.devQuest.service.RankingService;
 import lombok.extern.slf4j.Slf4j;
@@ -48,7 +49,7 @@ public class AdminRankingController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Ranking> createRanking(Ranking ranking) {
+    public ResponseEntity<Ranking> createRanking(RankingDTO ranking) {
         return ResponseEntity.ok(rankingService.createRanking(ranking));
     }
 

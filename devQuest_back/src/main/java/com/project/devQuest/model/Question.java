@@ -1,5 +1,6 @@
 package com.project.devQuest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,5 +27,6 @@ public class Question {
     private Difficulty difficulty;
     @ManyToOne
     @JoinColumn(name = "quizz_id")
+    @JsonIgnore
     private Quizz quizz;
 }

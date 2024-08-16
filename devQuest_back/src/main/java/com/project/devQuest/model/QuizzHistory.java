@@ -21,6 +21,6 @@ public class QuizzHistory {
     @ManyToOne
     @JoinColumn(name = "quizz_id")
     private Quizz quizz;
-    private int score;
+    private double score;
     private LocalDateTime compltedAt;
 }

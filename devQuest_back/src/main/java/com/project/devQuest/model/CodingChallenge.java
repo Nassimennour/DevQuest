@@ -21,6 +21,9 @@ public class CodingChallenge {
     private String description;
     private Difficulty difficulty;
     @ManyToOne
+    @JoinColumn(name = "creator_id")
+    private User creator;
+    @ManyToOne
     @JoinColumn(name = "technology_id")
     private Technology technology;
     private int duration;

@@ -1,5 +1,6 @@
 package com.project.devQuest.controller;
 
+import com.project.devQuest.dto.QuizzDTO;
 import com.project.devQuest.model.Difficulty;
 import com.project.devQuest.model.Quizz;
 import com.project.devQuest.model.QuizzHistory;
@@ -67,13 +68,13 @@ public class AdminQuizzController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Quizz> createQuizz(Quizz quizz) {
-        return ResponseEntity.ok(quizzService.createQuizz(quizz));
+    public ResponseEntity<Quizz> createQuizz(QuizzDTO quizzDTO) {
+        return ResponseEntity.ok(quizzService.createQuizz(quizzDTO));
     }
 
     @PutMapping("")
     public ResponseEntity<Quizz> updateQuizz(Quizz quizz) {
-        return ResponseEntity.ok(quizzService.createQuizz(quizz));
+        return ResponseEntity.ok(quizzService.updateQuizz(quizz));
     }
 
     @DeleteMapping("/{id}")
