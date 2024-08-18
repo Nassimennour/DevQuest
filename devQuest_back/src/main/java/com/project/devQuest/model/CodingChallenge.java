@@ -31,4 +31,6 @@ public class CodingChallenge {
     private List<Solution> solutions;
     @ManyToMany(mappedBy = "codingChallengeHistory", fetch = FetchType.LAZY)
     private List<User> users; // Users who have attempted this challenge
+    private long timesTaken = 0;
+
 }

@@ -77,6 +77,9 @@ public class ScoreService {
         userProgressEntity.setTechnology(quizzHistory.getQuizz().getTechnology());
         userProgressEntity.setCompletedQuizzes(userProgressEntity.getCompletedQuizzes() + 1);
         userProgressEntity.setLastQuizz(quizzHistory.getQuizz());
+        // Update the Quizz's number of completions
+        Quizz quizz = quizzRepository.findById(quizzId).orElseThrow(() -> new RuntimeException("Quizz not found"));
+        quizz.setTimesTaken(quizz.getTimesTaken() + 1);
         // Save the progress
         userProgressRepository.save(userProgressEntity);
         return savedScore;

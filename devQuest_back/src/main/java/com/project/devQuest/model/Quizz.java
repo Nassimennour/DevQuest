@@ -32,4 +32,6 @@ public class Quizz {
     private User creator;
     @OneToMany(mappedBy = "quizz", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Score> scores;
+    private long timesTaken = 0;
+    private double averageScore = 0;
 }

@@ -76,6 +76,8 @@ public class SolutionService {
         userProgressEntity.setLastCodingChallenge(codingChallenge);
         userProgressEntity.setCompletedChallenges(userProgressEntity.getCompletedChallenges() + 1);
         userProgressRepository.save(userProgressEntity);
+        // Update coding challenge's times taken
+        codingChallenge.setTimesTaken(codingChallenge.getTimesTaken() + 1);
         return savedSolution;
     }
 
