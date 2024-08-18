@@ -35,8 +35,6 @@ public class UserService {
     @Autowired
     private EmailService emailService;
 
-    @Autowired
-    private TechnologyRepository technologyRepository;
 
     @Autowired
     private VerificationTokenService verificationTokenService;
