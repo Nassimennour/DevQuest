@@ -1,3 +1,4 @@
+<app-dark-mode-toggle class="dark-mode-toggle"></app-dark-mode-toggle>
 <div class="login-page">
   <div class="login-card">
     <!-- Logo and title -->
@@ -7,7 +8,7 @@
       class="logo spin-animation"
     />
     <h2>Welcome to DevQuest</h2>
-    <form class="login-form">
+    <form class="login-form" [formGroup]="loginForm" (submit)="loginUser()">
       <div class="form-group">
         <label for="username">Username</label>
         <input
@@ -15,7 +16,21 @@
           type="text"
           class="form-control"
           placeholder="Enter your username"
+          formControlName="username"
         />
+        <!-- Error -->
+        <div
+          class="text-danger"
+          *ngIf="
+            loginForm.get('username')?.invalid &&
+            (loginForm.get('username')?.dirty ||
+              loginForm.get('username')?.touched)
+          "
+        >
+          <span *ngIf="loginForm.get('username')?.errors?.['required']"
+            >Username is required</span
+          >
+        </div>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -25,10 +40,24 @@
             type="password"
             class="form-control"
             placeholder="Enter your password"
+            formControlName="password"
           />
           <span class="toggle-password" (click)="togglePassword($event)"
             ><i class="bi bi-eye-slash-fill"></i
           ></span>
+          <!-- Required Error -->
+          <div
+            class="text-danger"
+            *ngIf="
+              loginForm.get('password')?.invalid &&
+              (loginForm.get('password')?.dirty ||
+                loginForm.get('password')?.touched)
+            "
+          >
+            <span *ngIf="loginForm.get('password')?.errors?.['required']"
+              >Password is required</span
+            >
+          </div>
         </div>
       </div>
       <div class="form-group form-check">

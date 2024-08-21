@@ -1,0 +1,118 @@
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+  [class.show]="isOpen"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+      Admin Menu <i class="bi bi-list"></i>
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="onToggleSideNav()"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <section class="mb-2">
+      <a class="section-header"
+        >Dashboard <i class="bi bi-speedometer float-end me-2"></i
+      ></a>
+    </section>
+    <!-- User section -->
+    <section>
+      <a class="section-header" (click)="toggleUserLinks()"
+        >Manage Users <i class="bi bi-arrow-right float-end me-2"></i
+      ></a>
+      <ul class="mt-2 sub-links" *ngIf="showUserLinks">
+        <li>
+          <a class="list-item">View Users <i class="bi bi-people"></i></a>
+        </li>
+        <li>
+          <a class="list-item">Add User <i class="bi bi-person-plus"></i></a>
+        </li>
+        <li>
+          <a class="list-item"
+            >Roles & Permissions <i class="bi bi-shield-lock"></i
+          ></a>
+        </li>
+      </ul>
+    </section>
+    <!-- Quizz section -->
+    <section class="mb-2">
+      <a class="section-header" (click)="toggleQuizzLinks()"
+        >Manage Quizzes <i class="bi bi-arrow-right float-end me-2"></i
+      ></a>
+      <ul class="mt-2 sub-links" *ngIf="showQuizzLinks">
+        <li>
+          <a class="list-item"
+            >Create Quizz <i class="bi bi-pencil-square"></i
+          ></a>
+        </li>
+        <li>
+          <a class="list-item">View Quizzes <i class="bi bi-eye"></i></a>
+        </li>
+      </ul>
+    </section>
+    <!-- Coding challenges -->
+    <section>
+      <a class="section-header" (click)="toggleCodingLinks()"
+        >Coding Challenges <i class="bi bi-arrow-right float-end me-2"></i
+      ></a>
+      <ul *ngIf="showCodingLinks" class="mt-2 sub-links">
+        <li>
+          <a class="list-item"
+            >Add Challenge <i class="bi bi-plus-square"></i
+          ></a>
+        </li>
+        <li>
+          <a class="list-item"
+            >View Challenges <i class="bi bi-list-check"></i
+          ></a>
+        </li>
+      </ul>
+    </section>
+    <!-- Technologies -->
+    <section>
+      <a class="section-header" (click)="toggleTechLinks()"
+        >Technologies <i class="bi bi-arrow-right float-end me-2"></i
+      ></a>
+      <ul *ngIf="showTechLinks" class="mt-2 sub-links">
+        <li>
+          <a class="list-item"
+            >Add Technology <i class="bi bi-plus-square"></i
+          ></a>
+        </li>
+        <li>
+          <a class="list-item"
+            >View Technologies <i class="bi bi-list-check"></i>
+          </a>
+        </li>
+        <li>
+          <a class="list-item">Categories <i class="bi bi-tags"></i></a>
+        </li>
+      </ul>
+    </section>
+    <!-- Reports & Analytics -->
+    <section>
+      <a class="section-header" (click)="toggleReportsLinks()"
+        >Reports <i class="bi bi-arrow-right float-end me-2"></i
+      ></a>
+      <ul *ngIf="showReportsLinks" class="mt-2 sub-links">
+        <li>
+          <a class="list-item"
+            >User Activity <i class="bi bi-person-lines-fill"></i
+          ></a>
+        </li>
+        <li>
+          <a class="list-item"
+            >Quizz Performance <i class="bi bi-file-earmark-bar-graph"></i
+          ></a>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>

@@ -8,6 +8,8 @@ import com.project.devQuest.service.TechnologyService;
 import com.project.devQuest.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import java.util.Map;
 @Slf4j
 public class UserController {
 
+    private final static Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
     @Autowired
@@ -45,7 +48,9 @@ public class UserController {
 
     @GetMapping("/my-profile")
     public ResponseEntity<UserDTO> getMyProfile() {
+        logger.info("Received request to get profile for user");
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        logger.info("Received request to get profile for user: {}", userDetails.getUsername());
         UserDTO userDTO = userService.findByUsername(userDetails.getUsername());
         return ResponseEntity.ok(userDTO);
     }
@@ -53,6 +58,12 @@ public class UserController {
     @GetMapping("/profile/{id}")
     public ResponseEntity<UserDTO> getProfile(@PathVariable Long id) {
         UserDTO userDTO = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return ResponseEntity.ok(userDTO);
+    }
+
+    @GetMapping("/profile/username/{username}")
+    public ResponseEntity<UserDTO> getProfileByUsername(@PathVariable String username) {
+        UserDTO userDTO = userService.findByUsername(username);
         return ResponseEntity.ok(userDTO);
     }
 

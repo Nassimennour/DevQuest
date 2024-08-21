@@ -1,3 +1,4 @@
+<app-dark-mode-toggle class="dark-mode-toggle"></app-dark-mode-toggle>
 <div class="register-page">
   <div class="register-card">
     <div class="card-header">
@@ -24,6 +25,9 @@
         <h2 class="section-header text-center">
           <i class="bi bi-1-circle-fill"></i> Fill out your account information
         </h2>
+        <div *ngIf="registerErrorMessage !== ''" class="alert alert-danger">
+          {{ registerErrorMessage }}
+        </div>
         <div class="row">
           <div class="col-12 mt-2 mb-2">
             <label for="username" class="form-label">Username</label>
@@ -33,6 +37,7 @@
               class="form-control"
               id="username"
             />
+            <!-- Errors -->
             <div
               class="text-danger"
               *ngIf="

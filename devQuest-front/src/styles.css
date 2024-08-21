@@ -10,6 +10,7 @@ body {
   background: linear-gradient(to right, var(--bg-1), var(--bg-3));
   color: var(--text-1);
   height: 100%;
+  overflow-x: hidden;
 }
 
 [data-theme="dark"] {

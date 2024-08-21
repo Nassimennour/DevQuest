@@ -1,0 +1,99 @@
+nav {
+  background-color: var(--accent-2);
+  color: var(--text-2);
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.navbar {
+  position: relative;
+}
+.navbar-brand {
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.logo {
+  width: 60px;
+  height: 60px;
+  border: 1px solid var(--accent-1);
+  border-radius: 50%;
+}
+.dark-mode-toggle {
+  margin-left: 10px;
+}
+
+.navbar-nav .nav-item a:hover {
+  text-decoration: underline;
+}
+
+nav input {
+  border: 1px solid var(--accent-1);
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn {
+  background-color: var(--primary-1);
+  color: var(--bg-1);
+}
+
+.search-btn:hover {
+  background-color: var(--bg-1);
+  color: var(--primary-1);
+}
+
+.profile {
+  margin-right: 15px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+  border: 1px solid black;
+}
+
+.profile:hover {
+  cursor: pointer;
+}
+
+.profile img:hover {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  white-space: normal;
+  left: auto;
+  right: 0;
+  background-color: var(--bg-1);
+}
+.profile .dropdown-item {
+  color: var(--text-1);
+  font-size: 0.9rem;
+}
+
+.profile .dropdown-item:hover {
+  background-color: var(--bg-1);
+  color: var(--text-1);
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    margin-right: 0;
+  }
+
+  .profile img {
+    width: 30px;
+    height: 30px;
+  }
+  form {
+    display: none;
+  }
+}

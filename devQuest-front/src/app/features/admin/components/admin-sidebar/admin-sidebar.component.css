@@ -1,0 +1,75 @@
+.offcanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 100%;
+  background-color: var(--accent-2);
+  color: black;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid black;
+}
+
+h5 {
+  padding: 10px;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+i {
+  margin-left: 10px;
+  font-size: 18px;
+}
+
+.btn-close {
+  color: var(--accent-2);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+section {
+  padding: 10px;
+  border-bottom: 1px solid var(--accent-1);
+}
+
+.section-header {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+  color: black;
+  font-size: 18px;
+  cursor: pointer;
+}
+.sub-links {
+  padding-left: 20px;
+  list-style-type: none;
+}
+
+.list-item {
+  display: block;
+  padding: 5px 0;
+  margin-left: 18px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.list-item:hover {
+  background-color: var(--accent-2);
+  font-weight: bold;
+  padding: 10px;
+}

@@ -1,0 +1,31 @@
+.content {
+  text-align: center;
+  color: var(--text-1);
+}
+.content h2 {
+  font-size: 28px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.card {
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--text-1);
+  color: var(--bg-1);
+}
+
+.card h5 {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 5px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: var(--text-2);
+  color: var(--bg-1);
+  width: 100%;
+  font-weight: bold;
+}

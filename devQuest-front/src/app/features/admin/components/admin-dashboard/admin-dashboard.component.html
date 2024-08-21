@@ -1,0 +1,11 @@
+<!-- topnav -->
+<app-admin-navbar (toggleSideNav)="onToggleSideNav()"></app-admin-navbar>
+<!-- sidebar -->
+<app-admin-sidebar
+  [isOpen]="isSideNavOpen"
+  (toggleSideNav)="onToggleSideNav()"
+></app-admin-sidebar>
+<!-- main content -->
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

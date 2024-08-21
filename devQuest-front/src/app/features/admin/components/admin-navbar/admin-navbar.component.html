@@ -1,0 +1,81 @@
+<!-- Bootstrap navbar -->
+<nav class="navbar navbar-expand-lg" style="padding: 10px">
+  <div class="container-fluid">
+    <!-- sidenav toggle -->
+    <i
+      class="bi bi-list"
+      style="font-size: 30px; color: var(--primary-1); cursor: pointer"
+      (click)="onToggleSideNav()"
+    ></i>
+    <!-- Navbar brand -->
+    <img src="assets/logo.png" alt="logo" class="logo" />
+    <a class="navbar-brand">Admin Pannel</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Search bar -->
+      <form class="d-flex mx-auto" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn search-btn" type="submit">Search</button>
+      </form>
+      <!-- Dark mode Toggle -->
+      <app-dark-mode-toggle
+        class="dark-mode-toggle me-3"
+      ></app-dark-mode-toggle>
+
+      <!-- Admin profile -->
+      <div class="profile me-3 btn-group">
+        <img src="{{ adminProfile?.profilePicture }}" alt="profile-pic" />
+        <p class="profile-name">{{ adminProfile?.fullName }}</p>
+        <button
+          type="button"
+          class="btn dropdown-toggle dropdown-toggle-split ms-2"
+          style="
+            border-radius: 0;
+            border-color: transparent;
+            height: fit-content;
+            color: var(--accent-1);
+          "
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="#"
+              ><i class="bi bi-person"></i>&nbsp;Profile</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"
+              ><i class="bi bi-gear"></i>&nbsp;Settings</a
+            >
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              style="margin-bottom: 0; background-color: red; color: white"
+              href="#"
+              ><i class="bi bi-box-arrow-left"></i>&nbsp;Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

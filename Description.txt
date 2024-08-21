@@ -1,0 +1,52 @@
+Titre du projet : "DevQuest - Plateforme d'Apprentissage pour Développeurs"
+
+Description :
+Créez une application web Angular qui aide les développeurs débutants et intermédiaires à améliorer leurs compétences en programmation à travers des quiz interactifs et des défis de code.
+
+Caractéristiques principales :
+
+1. Authentification utilisateur :
+   - Inscription et connexion simples
+   - Profils utilisateurs basiques
+
+2. Dashboard personnalisé :
+   - Affichage des progrès de l'utilisateur
+   - Suggestions de quiz et défis basés sur les performances passées
+
+3. Quiz interactifs :
+   - Couvrant différents langages de programmation et concepts
+   - Questions à choix multiples et vrai/faux
+   - Minuteur pour chaque question
+
+4. Défis de code simples :
+   - Petits problèmes de programmation à résoudre
+   - Éditeur de code intégré (vous pouvez utiliser une bibliothèque comme Monaco Editor)
+   - Vérification basique des solutions soumises
+
+5. Système de points et classement :
+   - Attribution de points pour les quiz et défis complétés
+   - Tableau de classement des meilleurs utilisateurs
+
+6. Section ressources :
+   - Liste de liens utiles et ressources d'apprentissage
+   - Possibilité pour les utilisateurs de suggérer des ressources
+
+7. Mode sombre/clair :
+   - Option pour changer le thème de l'application
+
+Aspects techniques à mettre en avant :
+
+1. Structure de projet Angular bien organisée
+2. Utilisation de services pour la gestion des données
+3. Routing Angular pour la navigation entre les pages
+4. Formulaires réactifs pour l'inscription et les quiz
+5. Utilisation de pipes personnalisés (par exemple, pour formater les scores)
+6. Stockage local pour sauvegarder certaines données utilisateur
+7. Intégration d'une bibliothèque UI comme Angular Material
+8. Tests unitaires de base pour les composants principaux
+
+Ce projet est plus simple que le précédent, mais il offre toujours de nombreuses opportunités d'apprentissage et de démonstration de vos compétences en Angular. Il est suffisamment complexe pour être impressionnant dans un portfolio, tout en restant réalisable dans un délai raisonnable.
+
+De plus, ce type de projet montre votre intérêt pour l'apprentissage continu et le partage de connaissances, ce qui est très apprécié dans le domaine du développement logiciel.
+
+Que pensez-vous de cette idée ? Souhaitez-vous que je développe certains aspects ou que je propose des variations de ce concept ?
