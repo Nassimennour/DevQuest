@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { passwordMatchValidator } from '../../validators/passwordMatchValidator';
 import { RegistrationRequest } from '../../models/usermodels';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent {
   step: number = 1;
+  registerErrorMessage: string = '';
 
   registerForm: FormGroup = new FormGroup(
     {
@@ -32,7 +35,7 @@ export class RegisterComponent {
     }
   );
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   nextStep() {
     this.step++;
@@ -57,20 +60,23 @@ export class RegisterComponent {
   }
 
   // Register Form Submission
-  submitRegisterForm() {
+  async submitRegisterForm() {
     let registrationData: RegistrationRequest = {
       username: this.registerForm.get('username')?.value,
       email: this.registerForm.get('email')?.value,
       password: this.registerForm.get('password')?.value,
-      role: 'User',
+      role: 'USER',
     };
-    this.authService.registerUser(registrationData).subscribe(
-      (response) => {
-        console.log('Registration Response: ', response);
-      },
-      (error) => {
-        console.error('Registration Error: ', error);
-      }
-    );
+
+    try {
+      const response = await firstValueFrom(
+        this.authService.registerUser(registrationData)
+      );
+      console.log('Registration response: ', response);
+      this.nextStep();
+    } catch (error) {
+      console.error('Registration error: ', error);
+      this.registerErrorMessage = 'Registration failed. Please try again.';
+    }
   }
 }

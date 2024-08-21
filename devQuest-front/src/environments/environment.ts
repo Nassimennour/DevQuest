@@ -4,5 +4,7 @@ export const environment = {
   endpoints: {
     register: '/register',
     login: '/login',
+    getProfileById: '/user/profile/',
+    getMyProfile: '/user/my-profile',
   },
 };

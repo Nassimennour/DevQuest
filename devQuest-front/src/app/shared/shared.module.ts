@@ -6,9 +6,14 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
+import { DarkModeToggleComponent } from './components/dark-mode-toggle/dark-mode-toggle.component';
 
 @NgModule({
-  declarations: [LoginPageComponent, RegisterComponent],
+  declarations: [
+    LoginPageComponent,
+    RegisterComponent,
+    DarkModeToggleComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -17,5 +22,6 @@ import { provideHttpClient } from '@angular/common/http';
     ReactiveFormsModule,
   ],
   providers: [provideHttpClient()],
+  exports: [DarkModeToggleComponent],
 })
 export class SharedModule {}
