@@ -115,12 +115,24 @@ public class UserService {
         return userRepository.existsById(id);
     }
 
+    public UserDTO update(User user){
+        logger.info("Updating user: {}", user.getUsername());
+        User updatedUser = userRepository.save(user);
+        logger.info("User updated successfully: {}", updatedUser.getUsername());
+        return userDTOConverter.convertToDTO(updatedUser);
+    }
+
     public UserDTO update(UserDTO userDTO){
         logger.info("Updating user: {}", userDTO.getUsername());
         User user = userDTOConverter.convertToEntity(userDTO);
         User updatedUser = userRepository.save(user);
         logger.info("User updated successfully: {}", updatedUser.getUsername());
         return userDTO;
+    }
+
+    // Number of users
+    public  long count(){
+        return userRepository.count();
     }
 
     @Transactional

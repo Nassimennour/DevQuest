@@ -94,4 +94,9 @@ public class QuizzService {
         List<Quizz> quizzes = quizzRepository.findAll();
         return quizzes.stream().filter(quizz -> quizz.getDifficulty().equals(difficulty)).toList();
     }
+
+    // Number of quizzes
+    public long count(){
+        return quizzRepository.count();
+    }
 }

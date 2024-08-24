@@ -1,6 +1,7 @@
 package com.project.devQuest.controller;
 
 import com.project.devQuest.dto.TechnologyDTO;
+import com.project.devQuest.dto.TechnologyPopularityDTO;
 import com.project.devQuest.model.Technology;
 import com.project.devQuest.service.TechnologyService;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,11 @@ public class AdminTechnologyController {
             return ResponseEntity.badRequest().body("Technology not found");
         }
         return ResponseEntity.ok(technologyService.updateTechnology(technology));
+    }
+
+    @GetMapping("/popular")
+    public ResponseEntity<List<TechnologyPopularityDTO>> getPopularTechnologies() {
+        return ResponseEntity.ok(technologyService.getTechnoloyPopularity());
     }
 
 

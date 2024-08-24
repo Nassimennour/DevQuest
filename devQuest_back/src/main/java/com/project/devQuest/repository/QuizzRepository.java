@@ -9,7 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface QuizzRepository extends JpaRepository<Quizz, Long> {
-    public List<Quizz> findByTechnologyId(Long technologyId);
-    public List<Quizz> findByCreatorId(Long creatorId);
-    public List<Quizz> findByTitle(String title);
+    List<Quizz> findByTechnologyId(Long technologyId);
+    List<Quizz> findByCreatorId(Long creatorId);
+    List<Quizz> findByTitle(String title);
+    List<Quizz> findTop10ByOrderByCreationDateDesc();
 }

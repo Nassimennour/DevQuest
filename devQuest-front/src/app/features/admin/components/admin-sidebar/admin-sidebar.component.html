@@ -29,10 +29,14 @@
       ></a>
       <ul class="mt-2 sub-links" *ngIf="showUserLinks">
         <li>
-          <a class="list-item">View Users <i class="bi bi-people"></i></a>
+          <a class="list-item" routerLink="/admin/users-list"
+            >View Users <i class="bi bi-people"></i
+          ></a>
         </li>
         <li>
-          <a class="list-item">Add User <i class="bi bi-person-plus"></i></a>
+          <a class="list-item" routerLink="/admin/add-user"
+            >Add User <i class="bi bi-person-plus"></i
+          ></a>
         </li>
         <li>
           <a class="list-item"

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,5 +33,6 @@ public class CodingChallenge {
     @ManyToMany(mappedBy = "codingChallengeHistory", fetch = FetchType.LAZY)
     private List<User> users; // Users who have attempted this challenge
     private long timesTaken = 0;
+    private Date creationDate;
 
 }

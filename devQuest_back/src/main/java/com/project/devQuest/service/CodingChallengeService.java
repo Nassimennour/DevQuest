@@ -62,12 +62,20 @@ public class CodingChallengeService {
         codingChallenge.setDifficulty(Difficulty.valueOf(codingChallengeDTO.getDifficulty()));
         codingChallenge.setTechnology(technologyRepository.findById(codingChallengeDTO.getTechnologyId()).orElseThrow(() -> new IllegalArgumentException("Technology not found")));
         codingChallenge.setCreator(userRepository.findById(codingChallengeDTO.getCreatorId()).orElseThrow(() -> new IllegalArgumentException("User not found")));
+        codingChallenge.setDuration(codingChallengeDTO.getDuration());
+        codingChallenge.setCreationDate(codingChallengeDTO.getCreationDate());
         return codingChallengeRepository.save(codingChallenge);
     }
 
     public void deleteCodingChallenge(long id) {
         logger.info("Deleting coding challenge with id: " + id);
         codingChallengeRepository.deleteById(id);
+    }
+
+    // Count the number of coding challenges
+    public long countCodingChallenges() {
+        logger.info("Counting the number of coding challenges");
+        return codingChallengeRepository.count();
     }
 
 

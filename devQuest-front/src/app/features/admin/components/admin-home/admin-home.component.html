@@ -54,5 +54,33 @@
         </div>
       </div>
     </div>
+    <hr style="border: 1px solid var(--accent-1)" class="mb-2 mt-2" />
+    <!-- Quizz Completion chart -->
+    <div class="col-12 col-md-6 mt-4 mb-4">
+      <app-quizz-chart></app-quizz-chart>
+    </div>
+    <!-- Popular Technologies -->
+    <div class="col-12 col-md-6 mt-4 mb-4">
+      <app-technology-chart></app-technology-chart>
+    </div>
+    <hr style="border: 1px solid var(--accent-1)" class="mb-2 mt-2" />
+    <!-- Recent Activities -->
+    <div class="col-12 col-md-6 mt-4 mb-4 activity-container">
+      <h3>Recent Activities</h3>
+      <div class="activity-item mb-2" *ngFor="let a of recentActivities">
+        <div class="activity-header me-2">{{ a.type }}</div>
+        <div class="activity-details">{{ a.description }}</div>
+        <div *ngIf="a.optional !== ''" class="activity-details">
+          By {{ a.optional }}
+        </div>
+        <div class="activity-date ms-auto me-1">
+          {{ a.date | date : "short" }}
+        </div>
+      </div>
+    </div>
+    <!-- User activity (last 30 days) chart -->
+    <div class="col-12 col-md-6 mt-4 mb-4">
+      <app-user-activity-chart></app-user-activity-chart>
+    </div>
   </div>
 </div>

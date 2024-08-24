@@ -1,0 +1,110 @@
+<!-- Edit user modal -->
+<div class="modal" tabindex="-1" role="dialog" id="editUserModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit User</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form for editing user -->
+        <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              formControlName="username"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fullName"
+              formControlName="fullName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select class="form-select" id="role" formControlName="role">
+              <option value="ADMIN">Admin</option>
+              <option value="USER">User</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" class="form-select" formControlName="gender">
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="birthDate">Birth Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="birthDate"
+              formControlName="birthDate"
+            />
+          </div>
+          <div class="form-group">
+            <label for="profilePicture">Profile Picture</label>
+            <input
+              type="file"
+              class="form-control"
+              id="profilePicture"
+              formControlName="profilePicture"
+            />
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea
+              class="form-control"
+              id="bio"
+              formControlName="bio"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="darkMode">Theme</label>
+            <select
+              class="form-select"
+              id="darkMode"
+              formControlName="isDarkMode"
+            >
+              <option value="true">Dark</option>
+              <option value="false">Light</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModal()">
+          Close
+        </button>
+        <button type="button" class="btn btn-success" (click)="onSubmit()">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="container-fluid mt-3 mb-3">
+  <!-- Header -->
+  <div class="header mt-2 mb-3">
+    <h2>User Details</h2>
+    <button class="btn btn-primary" (click)="editModal.openModal(userData)">
+      Edit User
+    </button>
+  </div>
+  <div class="row mt-2 mb-2">
+    <!-- User Info -->
+    <div class="col-md-6 col-lg-4 user-info-card card mt-2 mb-2 me-2">
+      <div class="card-body">
+        <h5 class="card-title">User Information</h5>
+        <div class="user-info-content">
+          <img
+            src="{{ userData?.profilePicture }}"
+            alt="profilePic"
+            class="profile img-thumbnail"
+          />
+          <p><strong>Username:</strong><span></span> {{ userData.username }}</p>
+          <p><strong>Email:</strong> {{ userData.email }}</p>
+          <p><strong>Full Name:</strong> {{ userData.fullName }}</p>
+          <p><strong>Role:</strong> {{ userData.role }}</p>
+          <p><strong>Gender:</strong> {{ userData.gender }}</p>
+          <p>
+            <strong>Birth Date:</strong
+            >{{ userData.birthDate | date : "short" }}
+          </p>
+          <p>
+            <strong>Verification:</strong>
+            {{ userData.isVerified ? "Verified" : "Pending" }}
+          </p>
+          <p>
+            <strong>Registration Date:</strong>
+            {{ userData?.registrationDate | date : "short" }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- User Activity -->
+    <div class="col-md-6 col-lg-4 card mt-2 mb-2 ms-2">
+      <div class="card-body">
+        <h5 class="card-title">User Activity</h5>
+        <div class="user-activity-content">
+          <p>
+            <strong>Skills: </strong>
+            <span
+              *ngFor="let skill of userData.skills"
+              class="badge bg-primary me-1"
+              >{{ skill.name }}</span
+            >
+          </p>
+          <h5>Ranking</h5>
+          <p><strong>Rank:</strong> {{ userRanking.position }}</p>
+          <p><strong>Score: </strong>{{ userRanking.score }}</p>
+          <p><strong>Level: </strong>{{ userRanking.level }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit user Modal -->
+<app-edit-user-modal #editModal></app-edit-user-modal>

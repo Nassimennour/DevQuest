@@ -1,7 +1,13 @@
 package com.project.devQuest.controller;
 
+import com.project.devQuest.dto.ActivityDTO;
+import com.project.devQuest.dto.UserActivityDTO;
 import com.project.devQuest.dto.UserDTO;
 import com.project.devQuest.model.User;
+import com.project.devQuest.service.ActivityService;
+import com.project.devQuest.service.CodingChallengeService;
+import com.project.devQuest.service.QuizzService;
+import com.project.devQuest.service.TechnologyService;
 import com.project.devQuest.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -24,6 +30,14 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private QuizzService quizzService;
+    @Autowired
+    private CodingChallengeService codingChallengeService;
+    @Autowired
+    private TechnologyService technologyService;
+    @Autowired
+    private ActivityService activityService;
 
     @GetMapping("")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
@@ -72,7 +86,7 @@ public class AdminController {
 
     @PutMapping("")
     public ResponseEntity<UserDTO> updateUser(@RequestBody User user) {
-        return ResponseEntity.ok(userService.save(user));
+        return ResponseEntity.ok(userService.update(user));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -81,5 +95,31 @@ public class AdminController {
         Map<String, String> response = new HashMap<>();
         response.put("message", ex.getMessage());
         return response;
+    }
+
+    // Get some statistics about the users, quizzes, coding challenges, etc.
+    @GetMapping("/statistics")
+    public ResponseEntity<Map<String, Long>> getStatistics() {
+        Map<String, Long> statistics = new HashMap<>();
+        statistics.put("users", userService.count());
+        statistics.put("quizzes", quizzService.count());
+        statistics.put("codingChallenges", codingChallengeService.countCodingChallenges());
+        statistics.put("technologies", technologyService.count());
+        return ResponseEntity.ok(statistics);
+    }
+
+
+    // Recent activities (users, quizzes, coding challenges, solutions, etc.)
+    @GetMapping("/recent-activities")
+    public ResponseEntity<List<ActivityDTO>> getRecentActivities() {
+       logger.info("Received GET request to fetch recent activities");
+         return ResponseEntity.ok(activityService.getRecentActivities());
+    }
+
+    // User activity stats for the last 30 days
+    @GetMapping("/activity")
+    public ResponseEntity<List<UserActivityDTO>> getUserActivity() {
+        logger.info("Received GET request to fetch user activity stats");
+        return ResponseEntity.ok(activityService.getUserActivity());
     }
 }

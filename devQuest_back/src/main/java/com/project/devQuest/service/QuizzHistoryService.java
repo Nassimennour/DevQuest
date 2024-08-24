@@ -1,11 +1,14 @@
 package com.project.devQuest.service;
 
+import com.project.devQuest.dto.QuizzCompletionStatsDTO;
 import com.project.devQuest.model.QuizzHistory;
 import com.project.devQuest.repository.QuizzHistoryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +45,13 @@ public class QuizzHistoryService {
             throw new IllegalArgumentException("QuizzHistory not found");
         }
         return quizzHistoryRepository.save(quizzHistory);
+    }
+
+    public List<QuizzCompletionStatsDTO> getQuizzCompletionStats(String period) {
+        LocalDateTime startDate = LocalDateTime.now().minus(1, ChronoUnit.YEARS);
+        String format = period.equalsIgnoreCase("month") ? "%Y-%m" : "%Y-%u";  // month or week
+        log.info("Finding quizz completion stats for period: {}", period);
+        return quizzHistoryRepository.findQuizzCompletionStats(startDate, format);
     }
 
 

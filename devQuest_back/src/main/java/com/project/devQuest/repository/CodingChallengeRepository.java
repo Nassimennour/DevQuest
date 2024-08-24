@@ -13,4 +13,6 @@ public interface CodingChallengeRepository extends JpaRepository<CodingChallenge
     List<CodingChallenge> findByCreatorId(Long id);
     List<CodingChallenge> findByDifficulty(Difficulty difficulty);
     List<CodingChallenge> findByCreatorIdAndTechnologyId(Long id, Long technologyId);
+    List<CodingChallenge> findTop10ByOrderByCreationDateDesc();
+
 }

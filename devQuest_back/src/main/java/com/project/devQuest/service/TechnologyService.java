@@ -1,6 +1,7 @@
 package com.project.devQuest.service;
 
 import com.project.devQuest.dto.TechnologyDTO;
+import com.project.devQuest.dto.TechnologyPopularityDTO;
 import com.project.devQuest.model.Technology;
 import com.project.devQuest.repository.CategoryRepository;
 import com.project.devQuest.repository.TechnologyRepository;
@@ -67,5 +68,15 @@ public class TechnologyService {
     public boolean existsById(Long id){
         log.info("Checking if technology exists by id: {}", id);
         return technologyRepository.existsById(id);
+    }
+
+    public long count(){
+        log.info("Counting the number of technologies");
+        return technologyRepository.count();
+    }
+    // Find most popular technologies
+    public List<TechnologyPopularityDTO> getTechnoloyPopularity() {
+        log.info("Finding technology popularity");
+        return technologyRepository.findTechnologyPopularity();
     }
 }

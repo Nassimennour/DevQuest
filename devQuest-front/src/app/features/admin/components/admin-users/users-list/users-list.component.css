@@ -1,0 +1,62 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+button {
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 5px 10px;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+  z-index: 1;
+}
+
+.description {
+  font-size: 1.01rem;
+  margin-top: 5px;
+  margin-left: 5px;
+  color: var(--text-2);
+}
+
+.title {
+  font-size: 2.05rem;
+  margin-top: 10px;
+  margin-left: 5px;
+  color: var(--text-1);
+  font-weight: bold;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.pagination a {
+  cursor: pointer;
+}
+
+.pagination a:hover {
+  color: var(--primary);
+}
+
+.badge-success {
+  background-color: green;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.badge-danger {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+}

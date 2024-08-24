@@ -1,5 +1,6 @@
 package com.project.devQuest.controller;
 
+import com.project.devQuest.dto.QuizzCompletionStatsDTO;
 import com.project.devQuest.dto.QuizzDTO;
 import com.project.devQuest.model.Difficulty;
 import com.project.devQuest.model.Quizz;
@@ -96,6 +97,13 @@ public class AdminQuizzController {
     @GetMapping("/history/{userId}")
     public ResponseEntity<List<QuizzHistory>> getQuizzHistoryByUserId(@PathVariable Long userId) {
         return ResponseEntity.ok(quizzHistoryService.findByUserId(userId));
+    }
+
+    // Get quizz completion stats for a given period
+    @GetMapping("/completion-stats")
+    public ResponseEntity<List<QuizzCompletionStatsDTO>>  getQuizzCompletionStats(@RequestParam String period) {
+        log.info("Fetching quizz completion stats for period: {}", period);
+        return ResponseEntity.ok(quizzHistoryService.getQuizzCompletionStats(period));
     }
 
 
