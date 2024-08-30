@@ -53,3 +53,38 @@ export interface Ranking {
   position: number;
   level?: number;
 }
+
+export interface QuizzDTO {
+  id?: number;
+  title?: string;
+  overview?: string;
+  difficulty?: string;
+  duration?: number;
+  creationDate?: string;
+  technologyId?: number;
+  creatorId?: number;
+  timesTaken?: number;
+  averageScore?: number;
+  questions?: any[];
+  technology?: any;
+  creator?: User;
+}
+
+//export interface QUizz
+
+export interface Question {
+  id?: number;
+  question?: string;
+  options?: string[];
+  correctAnswer?: string;
+  difficulty?: string;
+  quizzId?: number;
+}
+
+export interface Technology {
+  id: number;
+  name: string;
+  overview: string;
+  logo: string;
+  category: any;
+}

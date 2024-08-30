@@ -13,10 +13,12 @@ import { Observable, tap, catchError, map, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
+  // endpoints
   base_api: string = environment.apiUrl;
   registerEndpoint: string = environment.endpoints.register;
   loginEndpoint: string = environment.endpoints.login;
   myProfileEndpoint: string = environment.endpoints.getMyProfile;
+
   token: string | null = null;
   userRole: string | null = null;
   loggedInUserProfile$: Observable<UserProfile> | undefined;

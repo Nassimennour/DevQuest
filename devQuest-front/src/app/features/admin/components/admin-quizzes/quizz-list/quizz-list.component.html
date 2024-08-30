@@ -1,0 +1,82 @@
+<div class="show-quizzes-container container">
+  <!-- Header Section -->
+  <div class="show-quizzes-header">
+    <div class="header">
+      <h2>Available Quizzes</h2>
+      <button class="btn" routerLink="/admin/add-quizz">Add Quiz</button>
+    </div>
+    <div class="search-filter row">
+      <div class="col-md-9 mb-2 mt-2">
+        <input
+          type="text"
+          placeholder="Search quizzes..."
+          class="form-control"
+          (input)="onSearch($event)"
+        />
+      </div>
+      <div class="col-md-3 mt-2 mb-2">
+        <select class="form-select" (change)="onFilterChange($event)">
+          <option value="">All Difficulties</option>
+          <option value="EASY">Easy</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HARD">Hard</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quizzes List Section -->
+  <div class="quizzes-list">
+    <div *ngFor="let quiz of filteredQuizzes" class="quiz-card card">
+      <div class="card-body">
+        <h5 class="card-title">{{ quiz.title }}</h5>
+        <p class="card-text">{{ quiz.overview }}</p>
+        <p><strong>Difficulty:</strong> {{ quiz.difficulty }}</p>
+        <p><strong>Technology:</strong> {{ quiz.technology.name }}</p>
+        <p><strong>Duration:</strong> {{ quiz.duration }} minutes</p>
+        <p><strong>Creator:</strong> {{ quiz.creator.username }}</p>
+        <p><strong>Average Score:</strong> {{ quiz.averageScore }}%</p>
+        <div class="actions">
+          <button
+            class="btn btn-success"
+            (click)="viewQuizDetails(quiz.id)"
+            [routerLink]="['/admin/quiz-details', quiz.id]"
+          >
+            View Details <i class="bi bi-three-dots-vertical"></i>
+          </button>
+          <button class="btn btn-primary" (click)="editQuiz(quiz.id)">
+            Edit <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-danger" (click)="deleteQuiz(quiz.id)">
+            Delete <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination/Navigation Section -->
+  <div class="pagination-section">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="previousPage()"
+            ><i class="bi bi-caret-left-fill"></i> Previous</a
+          >
+        </li>
+        <li
+          class="page-item"
+          *ngFor="let page of pages"
+          [class.active]="page === currentPage"
+        >
+          <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="nextPage()"
+            >Next <i class="bi bi-caret-right-fill"></i
+          ></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

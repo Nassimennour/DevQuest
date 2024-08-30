@@ -46,6 +46,11 @@ public class QuestionService {
 
     public Question updateQuestion(Question question) {
         logger.info("Updating question with id: " + question.getId());
+        Question existingQuestion = questionRepository.findById(question.getId()).orElseThrow(() -> new RuntimeException("Question not found"));
+        existingQuestion.setQuestion(question.getQuestion());
+        existingQuestion.setOptions(question.getOptions());
+        existingQuestion.setCorrectAnswer(question.getCorrectAnswer());
+        existingQuestion.setDifficulty(question.getDifficulty());
         return questionRepository.save(question);
     }
 

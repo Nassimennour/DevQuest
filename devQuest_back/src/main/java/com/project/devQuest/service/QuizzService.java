@@ -53,11 +53,16 @@ public class QuizzService {
     }
 
     public Quizz updateQuizz(Quizz quizz){
-        if (!quizzRepository.existsById(quizz.getId())) {
-            throw new IllegalArgumentException("Quizz not found");
-        }
-        log.info("Updating quizz: {}", quizz.getTitle());
-        return quizzRepository.save(quizz);
+        Quizz existingQuizz = quizzRepository.findById(quizz.getId()).orElseThrow(() -> new IllegalArgumentException("Quizz not found"));
+        existingQuizz.setTitle(quizz.getTitle());
+        existingQuizz.setTechnology(quizz.getTechnology());
+        existingQuizz.setCreator(quizz.getCreator());
+        existingQuizz.setDifficulty(quizz.getDifficulty());
+        existingQuizz.setOverview(quizz.getOverview());
+        existingQuizz.setDuration(quizz.getDuration());
+        existingQuizz.setCreationDate(quizz.getCreationDate());
+        existingQuizz.setTechnology(quizz.getTechnology());
+        return quizzRepository.save(existingQuizz);
     }
 
     public void deleteQuizz(Long id){

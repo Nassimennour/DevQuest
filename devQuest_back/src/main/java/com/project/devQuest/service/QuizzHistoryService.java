@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -51,8 +52,9 @@ public class QuizzHistoryService {
         LocalDateTime startDate = LocalDateTime.now().minus(1, ChronoUnit.YEARS);
         String format = period.equalsIgnoreCase("month") ? "%Y-%m" : "%Y-%u";  // month or week
         log.info("Finding quizz completion stats for period: {}", period);
-        return quizzHistoryRepository.findQuizzCompletionStats(startDate, format);
+        List<Object[]> results = quizzHistoryRepository.findQuizzCompletionStatsNative(startDate, format);
+        return results.stream()
+                .map(result -> new QuizzCompletionStatsDTO((String) result[0], ((Number) result[1]).longValue()))
+                .collect(Collectors.toList());
     }
-
-
 }

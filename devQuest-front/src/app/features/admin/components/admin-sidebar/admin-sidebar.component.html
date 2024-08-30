@@ -18,7 +18,7 @@
   </div>
   <div class="offcanvas-body">
     <section class="mb-2">
-      <a class="section-header"
+      <a class="section-header" routerLink="/admin/home"
         >Dashboard <i class="bi bi-speedometer float-end me-2"></i
       ></a>
     </section>
@@ -52,12 +52,14 @@
       ></a>
       <ul class="mt-2 sub-links" *ngIf="showQuizzLinks">
         <li>
-          <a class="list-item"
+          <a class="list-item" routerLink="/admin/add-quizz"
             >Create Quizz <i class="bi bi-pencil-square"></i
           ></a>
         </li>
         <li>
-          <a class="list-item">View Quizzes <i class="bi bi-eye"></i></a>
+          <a class="list-item" routerLink="/admin/quizz-list"
+            >View Quizzes <i class="bi bi-eye"></i
+          ></a>
         </li>
       </ul>
     </section>

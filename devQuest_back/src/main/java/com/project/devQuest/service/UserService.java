@@ -117,9 +117,21 @@ public class UserService {
 
     public UserDTO update(User user){
         logger.info("Updating user: {}", user.getUsername());
-        User updatedUser = userRepository.save(user);
-        logger.info("User updated successfully: {}", updatedUser.getUsername());
-        return userDTOConverter.convertToDTO(updatedUser);
+        User existingUser = userRepository.findById(user.getId()).orElseThrow(
+                () -> new IllegalArgumentException("User not found")
+        );
+        existingUser.setEmail(user.getEmail());
+        existingUser.setUsername(user.getUsername());
+        existingUser.setFullname(user.getFullname());
+        existingUser.setRole(user.getRole());
+        existingUser.setVerified(user.isVerified());
+        existingUser.setBio(user.getBio());
+        existingUser.setGender(user.getGender());
+        existingUser.setBirthDate(user.getBirthDate());
+        existingUser.setProfilePicture(user.getProfilePicture());
+        userRepository.save(existingUser);
+        logger.info("User updated successfully: {}", existingUser.getUsername());
+        return userDTOConverter.convertToDTO(existingUser);
     }
 
     public UserDTO update(UserDTO userDTO){

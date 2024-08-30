@@ -1,5 +1,7 @@
 package com.project.devQuest.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,8 +31,11 @@ public class CodingChallenge {
     private Technology technology;
     private int duration;
     @OneToMany(mappedBy = "codingChallenge", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Solution> solutions;
     @ManyToMany(mappedBy = "codingChallengeHistory", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JsonBackReference
     private List<User> users; // Users who have attempted this challenge
     private long timesTaken = 0;
     private Date creationDate;

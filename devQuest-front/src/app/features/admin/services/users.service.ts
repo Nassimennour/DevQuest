@@ -13,6 +13,7 @@ export class UsersService {
   deleteUsersEndpoint = environment.endpoints.deleteUserAdmin;
   updateUsersEndpoint = environment.endpoints.updateUserAdmin;
   getUserByIdEndpoint = environment.endpoints.getUserByIdAdmin;
+  createUserEndpoint = environment.endpoints.createUserAdmin;
 
   usersList$: Observable<User[]> = new Observable<User[]>();
 
@@ -57,6 +58,20 @@ export class UsersService {
   getUserById(id: number): Observable<User> {
     return this.httpClient.get<User>(
       `${this.BASE_API}${this.getUserByIdEndpoint}${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+  }
+
+  createUser(user: User): Observable<User> {
+    // convert date to iso string
+    user.birthDate = new Date(user.birthDate).toISOString();
+    return this.httpClient.post<User>(
+      this.BASE_API + this.createUserEndpoint,
+      user,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

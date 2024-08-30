@@ -46,6 +46,7 @@ public class CategoryService {
         logger.info("Creating category: " + categoryDTO.getName());
         Category category = new Category();
         category.setName(categoryDTO.getName());
+        category.setDescription(categoryDTO.getDescription());
         category.setParentCategory(categoryRepository.findById(categoryDTO.getParentCategoryId()).orElse(null));
         return categoryRepository.save(category);
     }

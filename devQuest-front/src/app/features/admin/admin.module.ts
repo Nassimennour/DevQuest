@@ -22,6 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { EditUserModalComponent } from './components/admin-users/edit-user-modal/edit-user-modal.component';
 import { UserDetailsComponent } from './components/admin-users/user-details/user-details.component';
+import { QuizzListComponent } from './components/admin-quizzes/quizz-list/quizz-list.component';
+import { AddQuizzComponent } from './components/admin-quizzes/add-quizz/add-quizz.component';
+import { QuizzDetailsComponent } from './components/admin-quizzes/quizz-details/quizz-details.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { UserDetailsComponent } from './components/admin-users/user-details/user
     AddUserComponent,
     EditUserModalComponent,
     UserDetailsComponent,
+    QuizzListComponent,
+    AddQuizzComponent,
+    QuizzDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +53,7 @@ import { UserDetailsComponent } from './components/admin-users/user-details/user
     RouterLink,
     ReactiveFormsModule,
     FormsModule,
+    CommonModule,
   ],
   providers: [
     provideHttpClient(),

@@ -1,19 +1,19 @@
 <div class="container-fluid mt-3 mb-3">
   <!-- Header -->
   <div class="header mt-2 mb-3">
-    <h2>User Details</h2>
+    <h2 style="color: var(--text-3); font-size: 2.5rem">User Details</h2>
     <button class="btn btn-primary" (click)="editModal.openModal(userData)">
       Edit User
     </button>
   </div>
   <div class="row mt-2 mb-2">
     <!-- User Info -->
-    <div class="col-md-6 col-lg-4 user-info-card card mt-2 mb-2 me-2">
+    <div class="col-md-3 user-info-card card mt-2 mb-2 me-5">
       <div class="card-body">
-        <h5 class="card-title">User Information</h5>
+        <h5 class="card-title mb-2">User Information</h5>
         <div class="user-info-content">
           <img
-            src="{{ userData?.profilePicture }}"
+            src="{{ userData.profilePicture }}"
             alt="profilePic"
             class="profile img-thumbnail"
           />
@@ -32,13 +32,13 @@
           </p>
           <p>
             <strong>Registration Date:</strong>
-            {{ userData?.registrationDate | date : "short" }}
+            {{ userData.registrationDate | date : "short" }}
           </p>
         </div>
       </div>
     </div>
     <!-- User Activity -->
-    <div class="col-md-6 col-lg-4 card mt-2 mb-2 ms-2">
+    <div class="col-md-9 card mt-2 mb-2 ms-5">
       <div class="card-body">
         <h5 class="card-title">User Activity</h5>
         <div class="user-activity-content">
@@ -46,18 +46,114 @@
             <strong>Skills: </strong>
             <span
               *ngFor="let skill of userData.skills"
-              class="badge bg-primary me-1"
+              class="badge bg-primary me-1 ms-1"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Click to view skill details"
+              style="display: inline-block; cursor: pointer; padding: 5px"
               >{{ skill.name }}</span
             >
           </p>
-          <h5>Ranking</h5>
-          <p><strong>Rank:</strong> {{ userRanking.position }}</p>
-          <p><strong>Score: </strong>{{ userRanking.score }}</p>
-          <p><strong>Level: </strong>{{ userRanking.level }}</p>
+          <div class="row mt-2 mb-2">
+            <div class="col-3 me-1">
+              <p><strong>Ranking:</strong> {{ userRanking.position }}</p>
+            </div>
+            <div class="col-3 ms-1">
+              <p><strong>Score:</strong> {{ userRanking.score }}</p>
+            </div>
+            <div class="col-3 ms-1">
+              <p><strong>Level:</strong> {{ userRanking.level }}</p>
+            </div>
+          </div>
+          <!-- Quizz History -->
+          <div class="row mt-2">
+            <h5 style="color: var(--bg-2)">Quizz History</h5>
+            <small>Quizzes taken: {{ userData.quizzHistory?.length }}</small>
+            <div class="col-12 mt-2">
+              <table class="table table-striped-columns table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Quizz</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let quizzHistory of userData.quizzHistory">
+                    <td>{{ quizzHistory.quizz.title }}</td>
+                    <td>{{ quizzHistory.compltedAt | date : "short" }}</td>
+                    <td>{{ quizzHistory.score }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- User Progress -->
+          <div class="row mt-2 mb-2">
+            <h5 style="color: var(--bg-2)">User Progress</h5>
+            <div class="col-12 mt-2">
+              <small
+                >Technologies: {{ userData.userProgressList?.length }}</small
+              >
+              <div class="table-responsive">
+                <table class="table table-striped table-striped-columns">
+                  <thead>
+                    <tr>
+                      <th>Technology</th>
+                      <th>Progress(%)</th>
+                      <th>Completed Quizzes</th>
+                      <th>Completed Challenges</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let progress of userData.userProgressList">
+                      <td>{{ progress.technology.name }}</td>
+                      <td>{{ progress.progressPercentage }}</td>
+                      <td>{{ progress.completedQuizzes }}</td>
+                      <td>{{ progress.completedChallenges }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- User Challenges -->
+          <div class="row mt-1 mb-2">
+            <h5 style="color: var(--bg-2)">User Challenges</h5>
+            <div class="col-12">
+              <small
+                >Challenges Completed:
+                {{ userData.codingChallengeHistory?.length }}</small
+              >
+              <div class="table-responsive">
+                <table class="table table-striped table-striped-columns">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Description</th>
+                      <th>Difficulty</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let challenge of userData.codingChallengeHistory"
+                    >
+                      <td>{{ challenge.title | titlecase }}</td>
+                      <td>
+                        {{ challenge.description.slice(0, 50)
+                        }}{{ challenge.description.length > 50 ? "..." : "" }}
+                      </td>
+                      <td>{{ challenge.difficulty }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <!-- Edit user Modal -->
+    <app-edit-user-modal #editModal></app-edit-user-modal>
   </div>
 </div>
-<!-- Edit user Modal -->
-<app-edit-user-modal #editModal></app-edit-user-modal>

@@ -1,5 +1,6 @@
 package com.project.devQuest.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -50,15 +51,18 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "technology_id"))
     Set<Technology> skills;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     List<QuizzHistory> quizzHistory;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_codingChallenges",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "codingChallenge_id"))
+    @JsonManagedReference
     List<CodingChallenge> codingChallengeHistory;
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private Ranking ranking;
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Dashboard dashboard;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Score> scores; // scores in quizzes

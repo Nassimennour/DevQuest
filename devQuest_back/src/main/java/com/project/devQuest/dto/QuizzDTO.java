@@ -16,7 +16,7 @@ public class QuizzDTO {
     private String overview;
     private Difficulty difficulty;
     private long technologyId;
-    private int duration;
+    private int duration; // In minutes
     private Date creationDate;
     private long creatorId;
 }

@@ -1,0 +1,295 @@
+<div class="add-quiz-container container">
+  <!-- Header Section -->
+  <div class="add-quiz-header">
+    <h2>Add New Quiz</h2>
+    <p>Fill in the details below to create a new quiz.</p>
+  </div>
+
+  <!-- Quiz Details Section -->
+  <div class="quiz-details-card card">
+    <div class="card-body">
+      <h5 class="card-title">Quiz Details</h5>
+      <div class="mb-2 mt-3">
+        <!-- Alert Messages start-->
+        <div class="alert alert-success" *ngIf="successMessage !== ''">
+          {{ successMessage }}<i class="bi bi-check-lg ms-2"></i>
+        </div>
+        <div class="alert alert-danger" *ngIf="errorMessage !== ''">
+          {{ errorMessage }} <i class="bi bi-x-lg ms-2"></i>
+        </div>
+        <!-- Alert messages end -->
+      </div>
+      <form [formGroup]="quizzForm" (ngSubmit)="onSubmit($event)">
+        <div class="form-group mt-2 mb-2">
+          <label for="title" class="form-label">Quiz Title</label>
+          <input
+            type="text"
+            id="title"
+            formControlName="title"
+            class="form-control"
+            placeholder="Enter quiz title"
+          />
+          <div
+            class="text-danger mt-1"
+            *ngIf="
+              quizzForm.get('title')?.invalid &&
+              (quizzForm.get('title')?.touched || quizzForm.get('title')?.dirty)
+            "
+          >
+            <span *ngIf="quizzForm.get('title')?.errors?.['required']"
+              >Title is required</span
+            >
+          </div>
+        </div>
+        <div class="form-group mt-2 mb-2">
+          <label for="overview" class="form-label">Overview</label>
+          <textarea
+            id="overview"
+            formControlName="overview"
+            class="form-control"
+            placeholder="Enter quiz description"
+          ></textarea>
+          <div
+            class="text-danger mt-1"
+            *ngIf="
+              quizzForm.get('overview')?.invalid &&
+              (quizzForm.get('overview')?.touched ||
+                quizzForm.get('overview')?.dirty)
+            "
+          >
+            <span *ngIf="quizzForm.get('overview')?.errors?.['required']"
+              >Description is required</span
+            >
+          </div>
+        </div>
+        <div class="form-group mt-2 mb-2">
+          <label for="technology" class="form-label">Technology</label>
+          <select
+            id="technology"
+            formControlName="technologyId"
+            class="form-select"
+          >
+            <option
+              *ngFor="let technology of technologyOptions"
+              [value]="technology.id"
+            >
+              {{ technology.name }}
+            </option>
+            <div
+              class="text-danger mt-1"
+              *ngIf="
+                quizzForm.get('technologyId')?.invalid &&
+                (quizzForm.get('technologyId')?.touched ||
+                  quizzForm.get('technologyId')?.dirty)
+              "
+            >
+              <span *ngIf="quizzForm.get('technologyId')?.errors?.['required']"
+                >Technology is required</span
+              >
+            </div>
+          </select>
+        </div>
+        <div class="form-group mt-2 mb-2">
+          <label for="difficulty" class="form-label">Difficulty</label>
+          <select
+            id="difficulty"
+            formControlName="difficulty"
+            class="form-select"
+          >
+            <option value="EASY">Easy</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HARD">Hard</option>
+          </select>
+        </div>
+        <div class="form-group row mt-2 mb-2">
+          <label for="duration" class="form-label">Quizz Duration</label>
+          <div class="col-md-9">
+            <input
+              type="number"
+              id="duration"
+              formControlName="duration"
+              class="form-control"
+              placeholder="Enter quiz duration"
+            />
+          </div>
+          <div class="col-md-3">
+            <select
+              id="durationUnit"
+              formControlName="durationUnit"
+              class="form-select"
+            >
+              <option value="seconds">Seconds</option>
+              <option value="minutes">Minutes</option>
+              <option value="hours">Hours</option>
+            </select>
+          </div>
+          <div
+            class="text-danger mt-1"
+            *ngIf="
+              quizzForm.get('duration')?.invalid &&
+              (quizzForm.get('duration')?.touched ||
+                quizzForm.get('duration')?.dirty)
+            "
+          >
+            <span *ngIf="quizzForm.get('duration')?.errors?.['required']"
+              >Duration is required</span
+            >
+          </div>
+        </div>
+        <div class="actions mt-5 mb-3">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="quizzForm.disabled"
+          >
+            <i class="bi bi-check-circle"></i> Create Quiz
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="quizzForm.reset()"
+          >
+            Reset <i class="bi bi-x-circle"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Questions Section -->
+  <div class="questions-card card mt-3" #questionsFormSection>
+    <div class="card-body">
+      <h5 class="card-title">Questions</h5>
+      <form [formGroup]="questionsForm" (ngSubmit)="onAddQuestion()">
+        <div formArrayName="questions">
+          <div
+            *ngFor="let question of questions.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div *ngIf="question.value.editMode === 'VIEW'">
+              <div class="question-view">
+                <p>Question: {{ question.value.question }}</p>
+                <p>Difficulty: {{ question.value.difficulty }}</p>
+                <div class="view-actions">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onEditQuestion(i)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="removeQuestion(i)"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              *ngIf="!(question.value.editMode === 'VIEW')"
+              style="
+                border-bottom: 1px solid var(--accent-1);
+                padding-bottom: 25px;
+              "
+            >
+              <div class="question-edit">
+                <label for="question-{{ i }}" class="form-label"
+                  >Question</label
+                >
+                <input
+                  type="text"
+                  formControlName="question"
+                  class="form-control"
+                  id="question-{{ i }}"
+                  placeholder="Enter question"
+                />
+                <label for="difficulty" class="form-label">Difficulty</label>
+                <select formControlName="difficulty" class="form-select">
+                  <option value="EASY">Easy</option>
+                  <option value="MEDIUM">Medium</option>
+                  <option value="HARD">Hard</option>
+                </select>
+                <div formArrayName="options" class="mt-2">
+                  <label class="form-label">Options</label>
+                  <div
+                    *ngFor="let option of getOptions(i).controls; let j = index"
+                    [formGroupName]="j"
+                    class="input-group mb-2"
+                  >
+                    <input
+                      type="text"
+                      formControlName="option"
+                      class="form-control"
+                      placeholder="Enter option"
+                      #optionInput
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="removeOption(i, j)"
+                      [disabled]="
+                        getOptions(i).length === 2 || optionInput.value === ''
+                      "
+                    >
+                      Remove <i class="bi bi-dash-circle"></i>
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="addOption(i)"
+                  >
+                    <i class="bi bi-plus-circle-dotted"></i> Add Option
+                  </button>
+                </div>
+                <label for="correctAnswer" class="form-label"
+                  >Correct Answer</label
+                >
+                <input
+                  type="text"
+                  formControlName="correctAnswer"
+                  class="form-control"
+                  placeholder="Enter correct answer"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-success mt-3"
+                (click)="onSaveQuestion(i)"
+              >
+                {{
+                  question.value.editMode === "EDIT"
+                    ? "Update Question"
+                    : "Add Question"
+                }}
+                <i class="bi bi-check-circle"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- actions Section -->
+  <div class="actions-card card mt-3">
+    <div class="card-body">
+      <div class="actions">
+        <button type="button" class="btn btn-danger" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i> Back
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          routerLink="/admin/quizz-list"
+          [disabled]="quizzForm.invalid"
+        >
+          <i class="bi bi-check-lg"></i> Finish
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

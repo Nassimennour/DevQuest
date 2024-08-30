@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../../services/users.service';
 import { Ranking, User } from '../../../models/admin-models';
 import { RankingService } from '../../../services/ranking.service';
+import { Tooltip } from 'bootstrap';
 
 @Component({
   selector: 'app-user-details',
@@ -65,6 +66,44 @@ export class UserDetailsComponent implements OnInit {
         },
       },
     ],
+    userProgressList: [
+      {
+        id: 1,
+        completedChallenges: 10,
+        completedQuizzes: 5,
+        progressPercentage: 0.5,
+        technology: {
+          id: 1,
+          name: 'Java',
+          overview: 'Java is a high-level programming language.',
+        },
+      },
+      {
+        id: 2,
+        completedChallenges: 5,
+        completedQuizzes: 2,
+        progressPercentage: 0.2,
+        technology: {
+          id: 2,
+          name: 'Spring Boot',
+          overview: 'Spring Boot is an open source Java-based framework.',
+        },
+      },
+    ],
+    codingChallengeHistory: [
+      {
+        id: 1,
+        title: 'Java Basics',
+        description: 'Solve the Java Basics challenge.',
+        difficulty: 'EASY',
+      },
+      {
+        id: 2,
+        title: 'Java OOP',
+        description: 'Solve the Java OOP challenge.',
+        difficulty: 'MEDIUM',
+      },
+    ],
   };
   userRanking: Ranking = {
     id: 1,
@@ -99,5 +138,11 @@ export class UserDetailsComponent implements OnInit {
     //     console.error('Error fetching user ranking', error);
     //   }
     // );
+    const toolTipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    toolTipTriggerList.forEach(function (tooltipTriggerEl) {
+      new Tooltip(tooltipTriggerEl);
+    });
   }
 }
