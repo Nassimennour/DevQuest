@@ -18,6 +18,7 @@ public class Solution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(length = 2000)
     private String code;
     @ManyToOne
     @JoinColumn(name = "codingChallenge_id")

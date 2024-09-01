@@ -18,6 +18,7 @@ export const environment = {
     getRankingByUserIdAdmin: '/admin/rankings/user/',
     createUserAdmin: '/admin/users',
     getAllTechnologiesAdmin: '/admin/technologies',
+    // Quizzes / Questions
     createQuizzAdmin: '/admin/quizzes',
     addQuestionAdmin: '/admin/questions',
     deleteQuestionAdmin: '/admin/questions/',
@@ -27,5 +28,12 @@ export const environment = {
     getQuestionsByQuizIdAdmin: '/admin/questions/quizz/',
     deleteQuizzAdmin: '/admin/quizzes/',
     updateQuizzAdmin: '/admin/quizzes',
+    getScoresByQuizzIdAdmin: '/admin/scores/quizz/',
+    // Coding Challenges
+    getCodingChallengesAdmin: '/admin/coding-challenges',
+    createCodingChallengeAdmin: '/admin/coding-challenges',
+    updateCodingChallengeAdmin: '/admin/coding-challenges',
+    deleteCodingChallengeAdmin: '/admin/coding-challenges/',
+    getCodingChallengeByIdAdmin: '/admin/coding-challenges/',
   },
 };

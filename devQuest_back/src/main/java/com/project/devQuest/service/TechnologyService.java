@@ -35,11 +35,13 @@ public class TechnologyService {
     }
 
     public Technology updateTechnology(Technology technology){
-        if (!technologyRepository.existsById(technology.getId())) {
-            throw new IllegalArgumentException("Technology not found");
-        }
         log.info("Updating technology: {}", technology.getName());
-        return technologyRepository.save(technology);
+        Technology existingTechnology = technologyRepository.findById(technology.getId()).orElseThrow(() -> new IllegalArgumentException("Technology not found"));
+        existingTechnology.setName(technology.getName());
+        existingTechnology.setLogo(technology.getLogo());
+        existingTechnology.setOverview(technology.getOverview());
+        existingTechnology.setCategory(categoryRepository.findById(technology.getCategory().getId()).orElseThrow(() -> new IllegalArgumentException("Category not found")));
+        return technologyRepository.save(existingTechnology);
     }
 
     public Technology getTechnologyById(Long id){

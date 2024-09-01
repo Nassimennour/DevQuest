@@ -25,6 +25,9 @@ import { UserDetailsComponent } from './components/admin-users/user-details/user
 import { QuizzListComponent } from './components/admin-quizzes/quizz-list/quizz-list.component';
 import { AddQuizzComponent } from './components/admin-quizzes/add-quizz/add-quizz.component';
 import { QuizzDetailsComponent } from './components/admin-quizzes/quizz-details/quizz-details.component';
+import { AddChallengeComponent } from './components/admin-challenges/add-challenge/add-challenge.component';
+import { ChallengeListComponent } from './components/admin-challenges/challenge-list/challenge-list.component';
+import { ChallengeDetailsComponent } from './components/admin-challenges/challenge-details/challenge-details.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { QuizzDetailsComponent } from './components/admin-quizzes/quizz-details/
     QuizzListComponent,
     AddQuizzComponent,
     QuizzDetailsComponent,
+    AddChallengeComponent,
+    ChallengeListComponent,
+    ChallengeDetailsComponent,
   ],
   imports: [
     CommonModule,

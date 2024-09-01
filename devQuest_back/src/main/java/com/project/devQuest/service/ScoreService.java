@@ -80,6 +80,7 @@ public class ScoreService {
         // Update the Quizz's number of completions
         Quizz quizz = quizzRepository.findById(quizzId).orElseThrow(() -> new RuntimeException("Quizz not found"));
         quizz.setTimesTaken(quizz.getTimesTaken() + 1);
+        quizz.setAverageScore((quizz.getAverageScore() + scoreValue) / 2); //Update the quiz's average score
         // Save the progress
         userProgressRepository.save(userProgressEntity);
         return savedScore;

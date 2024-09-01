@@ -1,0 +1,137 @@
+<div class="container mt-5">
+  <h2 class="text-center">Add New Coding Challenge</h2>
+  <form [formGroup]="challengeForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        formControlName="title"
+        [ngClass]="{
+          'is-invalid':
+            (f['title'].touched || f['title'].dirty) && f['title'].errors
+        }"
+      />
+      <div
+        *ngIf="(f['title'].touched || f['title'].dirty) && f['title'].errors"
+        class="text-danger"
+      >
+        Title is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        formControlName="description"
+        rows="5"
+        [ngClass]="{
+          'is-invalid':
+            (f['description'].touched || f['description'].dirty) &&
+            f['description'].errors
+        }"
+      ></textarea>
+      <div
+        *ngIf="
+          (f['description'].touched || f['description'].dirty) &&
+          f['description'].errors
+        "
+        class="text-danger"
+      >
+        Description is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="difficulty">Difficulty</label>
+      <select
+        id="difficulty"
+        class="form-control"
+        formControlName="difficulty"
+        [ngClass]="{
+          'is-invalid':
+            (f['difficulty'].touched || f['difficulty'].dirty) &&
+            f['difficulty'].errors
+        }"
+      >
+        <option value="">Select Difficulty</option>
+        <option value="EASY">Easy</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="HARD">Hard</option>
+      </select>
+      <div
+        *ngIf="
+          (f['difficulty'].touched || f['difficulty'].dirty) &&
+          f['difficulty'].errors
+        "
+        class="text-danger"
+      >
+        Difficulty is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="technology">Technology</label>
+      <select
+        id="technology"
+        class="form-control"
+        formControlName="technologyId"
+        [ngClass]="{
+          'is-invalid':
+            (f['technologyId'].touched || f['technologyId'].dirty) &&
+            f['technologyId'].errors
+        }"
+      >
+        <option value="">Select Technology</option>
+        <option *ngFor="let tech of technologies" [value]="tech.id">
+          <img [src]="tech.logo" alt="{{ tech.name }}" class="tech-logo" />
+          {{ tech.name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          (f['technologyId'].touched || f['technologyId'].dirty) &&
+          f['technologyId'].errors
+        "
+        class="text-danger"
+      >
+        Technology is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="duration">Duration (minutes)</label>
+      <input
+        type="number"
+        id="duration"
+        class="form-control"
+        formControlName="duration"
+        [ngClass]="{
+          'is-invalid':
+            (f['duration'].touched || f['duration'].dirty) &&
+            f['duration'].errors
+        }"
+      />
+      <div
+        *ngIf="
+          (f['duration'].touched || f['duration'].dirty) && f['duration'].errors
+        "
+        class="text-danger"
+      >
+        Duration is required
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary me-3">
+        <i class="bi bi-check-circle"></i> Submit
+      </button>
+      <button type="button" class="btn btn-secondary ms-3" (click)="onReset()">
+        <i class="bi bi-x-circle"></i> Reset
+      </button>
+    </div>
+  </form>
+</div>

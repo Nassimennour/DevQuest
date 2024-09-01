@@ -1,0 +1,85 @@
+<div class="container mt-5">
+  <div
+    class="filter-bar d-flex justify-content-between align-items-center mb-4"
+  >
+    <input
+      type="text"
+      class="form-control me-2"
+      placeholder="Filter by title, description, or technology"
+      [(ngModel)]="filterText"
+      (input)="applyFilters()"
+    />
+    <select
+      class="form-control"
+      [(ngModel)]="filterDifficulty"
+      (change)="applyFilters()"
+    >
+      <option value="">All Difficulties</option>
+      <option value="EASY">Easy</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="HARD">Hard</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <div
+      class="col-md-4 mb-4 d-flex align-items-stretch"
+      *ngFor="let challenge of paginatedChallenges"
+    >
+      <div class="card challenge-card">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ challenge.title }}</h5>
+          <p class="card-text flex-grow-1">
+            {{ challenge.description | slice : 0 : 100 }}...
+          </p>
+          <div class="d-flex align-items-center mb-2">
+            <img
+              [src]="challenge.technology.logo"
+              alt="{{ challenge.technology.name }}"
+              class="tech-logo me-2"
+            />
+            <span>{{ challenge.technology.name }}</span>
+          </div>
+          <p class="card-text">
+            <small
+              style="color: var(--text-2); font-size: 0.9rem; font-weight: 500"
+              >Difficulty: {{ challenge.difficulty }}</small
+            >
+          </p>
+          <div class="d-flex justify-content-between mt-auto">
+            <button
+              class="btn btn-primary"
+              [routerLink]="['/admin/challenge-detalils', challenge.id]"
+            >
+              <i class="bi bi-eye"></i> View Details
+            </button>
+            <button
+              class="btn btn-danger"
+              (click)="deleteChallenge(challenge.id)"
+            >
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="changePage(currentPage - 1)">Previous</a>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of totalPagesArray"
+        [class.active]="page === currentPage"
+      >
+        <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

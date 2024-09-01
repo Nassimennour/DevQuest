@@ -19,7 +19,6 @@ public class Dashboard {
     private long id;
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonBackReference
     private User user;
     private float progressPrecentage;
     @ManyToMany

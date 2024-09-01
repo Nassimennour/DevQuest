@@ -67,6 +67,12 @@ public class AdminCodingChallengeController {
         codingChallengeService.deleteCodingChallenge(id);
     }
 
+    @PutMapping("")
+    public ResponseEntity<CodingChallenge> updateCodingChallenge(@RequestBody CodingChallenge codingChallenge) {
+        logger.info("Received PUT /admin/coding-challenges");
+        return ResponseEntity.ok(codingChallengeService.updateCodingChallenge(codingChallenge));
+    }
+
 
 
 

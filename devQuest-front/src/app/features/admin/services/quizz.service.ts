@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Question } from '../models/admin-models';
+import { Question, Score } from '../models/admin-models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,6 +19,7 @@ export class QuizzService {
     environment.endpoints.getQuestionsByQuizIdAdmin;
   deleteQuizzEndpoint = environment.endpoints.deleteQuizzAdmin;
   updateQuizzEndpoint = environment.endpoints.updateQuizzAdmin;
+  getScoresByQuizIdEndpoint = environment.endpoints.getScoresByQuizzIdAdmin;
 
   constructor(private http: HttpClient) {}
 
@@ -97,5 +98,14 @@ export class QuizzService {
     return this.http.put(this.BASE_API + this.updateQuizzEndpoint, quizzData, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
+  }
+
+  getScoresByQuizId(quizId: string): Observable<Score[]> {
+    return this.http.get<Score[]>(
+      this.BASE_API + this.getScoresByQuizIdEndpoint + quizId,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      }
+    );
   }
 }

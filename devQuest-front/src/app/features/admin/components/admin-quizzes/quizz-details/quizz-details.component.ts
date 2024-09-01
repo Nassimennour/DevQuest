@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuizzService } from '../../../services/quizz.service';
-import { Question, Technology } from '../../../models/admin-models';
+import { Question, Score, Technology } from '../../../models/admin-models';
 import { TechnologyService } from '../../../services/technology.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class QuizzDetailsComponent implements OnInit {
   quiz: any = {};
   questions: Question[] = [];
   technologies: Technology[] = [];
+  scores: Score[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -122,5 +123,28 @@ export class QuizzDetailsComponent implements OnInit {
         console.error('Error updating quiz', error);
       }
     );
+  }
+
+  viewScores(): void {
+    this.quizService.getScoresByQuizId(this.quiz.id).subscribe((scores) => {
+      this.scores = scores.sort((a: Score, b: Score) => {
+        return b.score - a.score;
+      });
+      const modal = document.getElementById('scoresModal');
+      if (modal) {
+        modal.style.display = 'block';
+      }
+    });
+  }
+
+  closeScoresModal(): void {
+    const modal = document.getElementById('scoresModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  getCorrectAnswersCount(answers: any[]): number {
+    return answers.filter((answer) => answer.correct).length;
   }
 }

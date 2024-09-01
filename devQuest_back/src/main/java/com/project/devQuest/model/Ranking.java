@@ -18,6 +18,7 @@ public class Ranking {
     private int score;
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
     private User user;
     private int position;
     private int level;

@@ -78,5 +78,17 @@ public class CodingChallengeService {
         return codingChallengeRepository.count();
     }
 
+    // Update coding challenge
+    public CodingChallenge updateCodingChallenge(CodingChallenge codingChallenge) {
+        logger.info("Updating coding challenge : {}", codingChallenge.getTitle());
+        CodingChallenge existingCodingChallenge = codingChallengeRepository.findById(codingChallenge.getId()).orElseThrow(() -> new IllegalArgumentException("Coding challenge not found"));
+        existingCodingChallenge.setTitle(codingChallenge.getTitle());
+        existingCodingChallenge.setDescription(codingChallenge.getDescription());
+        existingCodingChallenge.setTechnology(codingChallenge.getTechnology());
+        existingCodingChallenge.setDifficulty(codingChallenge.getDifficulty());
+        existingCodingChallenge.setDuration(codingChallenge.getDuration());
+        return codingChallengeRepository.save(existingCodingChallenge);
+    }
+
 
 }

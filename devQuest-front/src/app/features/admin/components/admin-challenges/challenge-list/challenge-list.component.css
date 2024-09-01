@@ -1,0 +1,80 @@
+.container {
+  background-color: var(--bg-1);
+  color: var(--text-1);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filter-bar {
+  background-color: var(--bg-2);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+  background-color: var(--bg-3);
+  color: var(--text-1);
+  border: 1px solid var(--primary-2);
+  border-radius: 4px;
+}
+
+.card {
+  background-color: var(--bg-2);
+  color: var(--text-1);
+  border: 1px solid var(--primary-2);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  color: var(--primary-1);
+}
+
+.card-text {
+  color: var(--text-2);
+}
+
+.tech-logo {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-primary {
+  background-color: var(--primary-1);
+  border-color: var(--primary-1);
+  color: var(--text-1);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-2);
+  border-color: var(--primary-2);
+}
+
+.btn-danger {
+  background-color: var(--accent-1);
+  border-color: var(--accent-1);
+  color: var(--text-1);
+}
+
+.btn-danger:hover {
+  background-color: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--primary-1);
+  border-color: var(--primary-1);
+}
+
+.pagination .page-link {
+  color: var(--text-1);
+  background-color: var(--bg-3);
+  border: 1px solid var(--primary-2);
+}
+
+.pagination .page-link:hover {
+  background-color: var(--primary-2);
+  border-color: var(--primary-2);
+}

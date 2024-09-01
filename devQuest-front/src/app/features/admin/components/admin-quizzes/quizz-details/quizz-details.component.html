@@ -21,7 +21,10 @@
           >{{ quiz?.creator?.username }}</span
         >
       </p>
-      <p><strong>Average Score:</strong> {{ quiz?.averageScore }}%</p>
+      <p>
+        <strong>Average Score:</strong> {{ quiz?.averageScore }}%
+        <span class="scores_link ms-5" (click)="viewScores()">View Scores</span>
+      </p>
       <p><strong>Duration:</strong> {{ quiz?.duration }} minutes</p>
       <p><strong>Times taken:</strong> {{ quiz?.timesTaken }}</p>
     </div>
@@ -196,6 +199,60 @@
         </button>
         <button type="button" class="btn btn-primary" (click)="saveChanges()">
           Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View Scores Modal -->
+<div class="modal" id="scoresModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Quiz Scores</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeScoresModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="scores.length === 0">No scores available.</div>
+        <div *ngIf="scores.length > 0">
+          <div *ngFor="let score of scores" class="score-row">
+            <img
+              [src]="score.user.profilePicture"
+              alt="Profile Picture"
+              class="profile-picture"
+            />
+            <div class="score-details">
+              <span
+                class="username"
+                [routerLink]="['/admin/user-details', score.user.id]"
+                >{{ score.user.username }}</span
+              >
+              <span class="score">{{ score.score }}%</span>
+              <span class="correct-answers"
+                >{{ getCorrectAnswersCount(score.answers) }} correct
+                answers</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="closeScoresModal()"
+        >
+          Close
         </button>
       </div>
     </div>

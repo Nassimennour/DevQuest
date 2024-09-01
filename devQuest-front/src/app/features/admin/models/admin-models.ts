@@ -88,3 +88,43 @@ export interface Technology {
   logo: string;
   category: any;
 }
+
+// Score model
+export interface Score {
+  id: number;
+  score: number;
+  user: any;
+  quizz: any;
+  answers: any[];
+}
+
+// codingChallenge DTO
+export interface CodingChallengeDTO {
+  title?: string;
+  decsription?: string;
+  difficulty?: string;
+  creatorId?: number;
+  creationDate?: string;
+  technologyId?: number;
+  duration?: number;
+}
+// Coding Challenge model
+export interface CodingChallenge {
+  id: number;
+  title?: string;
+  description?: string;
+  difficulty?: string;
+  creator?: any;
+  creationDate?: string;
+  technology?: any;
+  timesTaken?: number;
+}
+
+export interface Solution {
+  id?: number;
+  code?: string;
+  codingChallengeId?: any;
+  user?: any;
+  isCorrect?: boolean;
+  submissionDate?: string;
+}
