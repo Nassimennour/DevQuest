@@ -1,6 +1,7 @@
 package com.project.devQuest.controller;
 
 import com.project.devQuest.dto.CodingChallengeDTO;
+import com.project.devQuest.dto.UpdateChallengeDTO;
 import com.project.devQuest.model.CodingChallenge;
 import com.project.devQuest.service.CodingChallengeService;
 import org.slf4j.Logger;
@@ -68,7 +69,7 @@ public class AdminCodingChallengeController {
     }
 
     @PutMapping("")
-    public ResponseEntity<CodingChallenge> updateCodingChallenge(@RequestBody CodingChallenge codingChallenge) {
+    public ResponseEntity<CodingChallenge> updateCodingChallenge(@RequestBody UpdateChallengeDTO codingChallenge) {
         logger.info("Received PUT /admin/coding-challenges");
         return ResponseEntity.ok(codingChallengeService.updateCodingChallenge(codingChallenge));
     }

@@ -114,6 +114,7 @@ export interface CodingChallenge {
   title?: string;
   description?: string;
   difficulty?: string;
+  duration?: number;
   creator?: any;
   creationDate?: string;
   technology?: any;
@@ -123,7 +124,7 @@ export interface CodingChallenge {
 export interface Solution {
   id?: number;
   code?: string;
-  codingChallengeId?: any;
+  codingChallenge?: any;
   user?: any;
   isCorrect?: boolean;
   submissionDate?: string;

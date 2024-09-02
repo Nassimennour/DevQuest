@@ -37,7 +37,9 @@ export class ChallengeDetailsComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      technologyId: ['', Validators.required],
+      technology: ['', Validators.required],
+      difficulty: ['', Validators.required],
+      duration: ['', Validators.required],
     });
   }
 
@@ -46,12 +48,14 @@ export class ChallengeDetailsComponent implements OnInit {
       .getCodingChallengeById(this.challengeId as string)
       .subscribe((data) => {
         this.challenge = data;
-        this.solutions = data.solutions.sort(
-          (a, b) =>
-            new Date(b.submissionDate).getTime() -
-            new Date(a.submissionDate).getTime()
-        );
-        this.applyPagination();
+        this.editForm.patchValue({
+          title: this.challenge.title,
+          description: this.challenge.description,
+          technology: this.challenge.technology,
+          difficulty: this.challenge.difficulty,
+          duration: this.challenge.duration,
+        });
+        this.fetchSolutions(this.challengeId as string);
       });
   }
 
@@ -67,6 +71,19 @@ export class ChallengeDetailsComponent implements OnInit {
       (_, i) => i + 1
     );
     this.paginateSolutions();
+  }
+
+  fetchSolutions(challengeId: string): void {
+    this.challengeService
+      .getSolutionsByChallengeId(challengeId)
+      .subscribe((data) => {
+        this.solutions = data.sort((a, b) => {
+          const aDate = a.submissionDate ? new Date(a.submissionDate) : null;
+          const bDate = b.submissionDate ? new Date(b.submissionDate) : null;
+          return (bDate?.getTime() || 0) - (aDate?.getTime() || 0);
+        });
+        this.applyPagination();
+      });
   }
 
   paginateSolutions(): void {
@@ -95,6 +112,71 @@ export class ChallengeDetailsComponent implements OnInit {
     this.challengeService.updateCodingChallenge(updatedChallenge).subscribe(
       () => {
         this.router.navigate(['/challenges']);
+      },
+      (error) => {
+        console.error('Error updating challenge:', error);
+      }
+    );
+  }
+
+  openEditModal(): void {
+    const modal = document.getElementById('editModal');
+    if (modal) {
+      modal.style.display = 'block';
+    }
+  }
+
+  openDeleteModal(): void {
+    const modal = document.getElementById('deleteModal');
+    if (modal) {
+      modal.style.display = 'block';
+    }
+  }
+
+  deleteSolution(solutionId: any): void {
+    solutionId = solutionId as number;
+    this.challengeService.deleteSolution(solutionId).subscribe(() => {
+      this.fetchChallenge();
+    });
+  }
+
+  closeEditModal(): void {
+    const modal = document.getElementById('editModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  closeDeleteModal(): void {
+    const modal = document.getElementById('deleteModal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  confirmDelete(): void {
+    this.challengeService
+      .deleteCodingChallenge(this.challenge.id as number)
+      .subscribe(() => {
+        console.log('Challenge deleted');
+        this.router.navigate(['/challenge-list']);
+      });
+  }
+
+  onEditSubmit(): void {
+    if (this.editForm.invalid) {
+      return;
+    }
+
+    const updatedChallenge = {
+      ...this.editForm.value,
+      id: this.challenge.id,
+    };
+    console.log('Updated challenge DTO:', updatedChallenge);
+    this.challengeService.updateCodingChallenge(updatedChallenge).subscribe(
+      (data) => {
+        console.log('Challenge updated:', data);
+        this.fetchChallenge();
       },
       (error) => {
         console.error('Error updating challenge:', error);

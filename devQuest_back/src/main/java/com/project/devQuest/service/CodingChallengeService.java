@@ -1,6 +1,7 @@
 package com.project.devQuest.service;
 
 import com.project.devQuest.dto.CodingChallengeDTO;
+import com.project.devQuest.dto.UpdateChallengeDTO;
 import com.project.devQuest.model.CodingChallenge;
 import com.project.devQuest.model.Difficulty;
 import com.project.devQuest.repository.CodingChallengeRepository;
@@ -79,15 +80,15 @@ public class CodingChallengeService {
     }
 
     // Update coding challenge
-    public CodingChallenge updateCodingChallenge(CodingChallenge codingChallenge) {
-        logger.info("Updating coding challenge : {}", codingChallenge.getTitle());
-        CodingChallenge existingCodingChallenge = codingChallengeRepository.findById(codingChallenge.getId()).orElseThrow(() -> new IllegalArgumentException("Coding challenge not found"));
-        existingCodingChallenge.setTitle(codingChallenge.getTitle());
-        existingCodingChallenge.setDescription(codingChallenge.getDescription());
-        existingCodingChallenge.setTechnology(codingChallenge.getTechnology());
-        existingCodingChallenge.setDifficulty(codingChallenge.getDifficulty());
-        existingCodingChallenge.setDuration(codingChallenge.getDuration());
-        return codingChallengeRepository.save(existingCodingChallenge);
+    public CodingChallenge updateCodingChallenge(UpdateChallengeDTO updateChallengeDTO) {
+        logger.info("Updating coding challenge : {}", updateChallengeDTO.getTitle());
+        CodingChallenge existingChallenge = codingChallengeRepository.findById(updateChallengeDTO.getId()).orElseThrow(() -> new IllegalArgumentException("Coding challenge not found"));
+        existingChallenge.setTitle(updateChallengeDTO.getTitle());
+        existingChallenge.setDescription(updateChallengeDTO.getDescription());
+        existingChallenge.setDifficulty(updateChallengeDTO.getDifficulty());
+        existingChallenge.setTechnology(technologyRepository.findById(updateChallengeDTO.getTechnologyId()).orElseThrow(() -> new IllegalArgumentException("Technology not found")));
+        existingChallenge.setDuration(updateChallengeDTO.getDuration());
+        return codingChallengeRepository.save(existingChallenge);
     }
 
 

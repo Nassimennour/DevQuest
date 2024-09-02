@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'quizz-details/:id', component: QuizzDetailsComponent },
       { path: 'add-challenge', component: AddChallengeComponent },
       { path: 'challenge-list', component: ChallengeListComponent },
-      { path: 'challenge-details', component: ChallengeDetailsComponent },
+      { path: 'challenge-details/:id', component: ChallengeDetailsComponent },
       { path: 'reports', component: AdminReportsComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],

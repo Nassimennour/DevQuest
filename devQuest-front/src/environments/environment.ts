@@ -35,5 +35,8 @@ export const environment = {
     updateCodingChallengeAdmin: '/admin/coding-challenges',
     deleteCodingChallengeAdmin: '/admin/coding-challenges/',
     getCodingChallengeByIdAdmin: '/admin/coding-challenges/',
+    // Solutions
+    getSolutionsByChallengeIdAdmin: '/admin/solutions/challenge/',
+    deleteSolutionAdmin: '/admin/solutions/',
   },
 };

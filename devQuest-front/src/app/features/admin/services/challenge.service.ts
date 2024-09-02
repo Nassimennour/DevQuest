@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
-import { CodingChallenge, CodingChallengeDTO } from '../models/admin-models';
+import {
+  CodingChallenge,
+  CodingChallengeDTO,
+  Solution,
+} from '../models/admin-models';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +24,10 @@ export class ChallengeService {
     environment.endpoints.getCodingChallengesAdmin;
   getChallengeByIdEndpoint: string =
     environment.endpoints.getCodingChallengeByIdAdmin;
+  // Solution endpoints
+  getSolutionsByChallengeIdEndpoint: string =
+    environment.endpoints.getSolutionsByChallengeIdAdmin;
+  deleteSolutionEndpoint: string = environment.endpoints.deleteSolutionAdmin;
 
   constructor(private http: HttpClient) {}
 
@@ -76,6 +84,29 @@ export class ChallengeService {
   deleteCodingChallenge(challengeId: number): Observable<any> {
     return this.http.delete(
       this.BASE_API + this.deleteChallengeEndpoint + challengeId,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          responseType: 'text' as 'json',
+        },
+      }
+    );
+  }
+
+  getSolutionsByChallengeId(challengeId: string): Observable<Solution[]> {
+    return this.http.get<Solution[]>(
+      this.BASE_API + this.getSolutionsByChallengeIdEndpoint + challengeId,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+  }
+
+  deleteSolution(solutionId: number): Observable<any> {
+    return this.http.delete(
+      this.BASE_API + this.deleteSolutionEndpoint + solutionId,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

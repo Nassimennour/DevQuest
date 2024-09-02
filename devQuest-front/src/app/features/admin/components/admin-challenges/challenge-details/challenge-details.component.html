@@ -31,6 +31,7 @@
       </div>
       <div><strong>Difficulty:</strong> {{ challenge?.difficulty }}</div>
       <div><strong>Times Taken:</strong> {{ challenge?.timesTaken }}</div>
+      <div><strong>Duration:</strong> {{ challenge?.duration }} minutes</div>
       <div>
         <strong>Creation Date:</strong> {{ challenge?.creationDate | date }}
       </div>
@@ -64,7 +65,7 @@
       <div class="solution-actions">
         <button
           class="btn btn-primary"
-          (click)="viewSolutionDetails(solution.id)"
+          [routerLink]="['/admin/solution', solution.id]"
         >
           <i class="bi bi-eye"></i> View Details
         </button>
@@ -78,7 +79,7 @@
       <ul class="pagination justify-content-center">
         <li class="page-item" [class.disabled]="currentPage === 1">
           <a class="page-link" (click)="changePage(currentPage - 1)"
-            >Previous</a
+            ><i class="bi bi-arrow-left-short"></i> Previous</a
           >
         </li>
         <li
@@ -89,7 +90,9 @@
           <a class="page-link" (click)="changePage(page)">{{ page }}</a>
         </li>
         <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <a class="page-link" (click)="changePage(currentPage + 1)">Next</a>
+          <a class="page-link" (click)="changePage(currentPage + 1)"
+            >Next <i class="bi bi-arrow-right-short"></i
+          ></a>
         </li>
       </ul>
     </nav>
@@ -103,7 +106,7 @@
           <h5 class="modal-title">Edit Challenge</h5>
           <button
             type="button"
-            class="close"
+            class="close ms-auto"
             data-dismiss="modal"
             aria-label="Close"
             (click)="closeEditModal()"
@@ -122,13 +125,16 @@
                 formControlName="title"
                 [ngClass]="{
                   'is-invalid':
-                    editForm.get('title').touched &&
-                    editForm.get('title').invalid
+                    (editForm.get('title')?.touched ||
+                      editForm.get('title')?.dirty) &&
+                    editForm.get('title')?.invalid
                 }"
               />
               <div
                 *ngIf="
-                  editForm.get('title').touched && editForm.get('title').invalid
+                  (editForm.get('title')?.touched ||
+                    editForm.get('title')?.dirty) &&
+                  editForm.get('title')?.invalid
                 "
                 class="text-danger"
               >
@@ -144,14 +150,16 @@
                 rows="5"
                 [ngClass]="{
                   'is-invalid':
-                    editForm.get('description').touched &&
-                    editForm.get('description').invalid
+                    (editForm.get('description')?.touched ||
+                      editForm.get('description')?.dirty) &&
+                    editForm.get('description')?.invalid
                 }"
               ></textarea>
               <div
                 *ngIf="
-                  editForm.get('description').touched &&
-                  editForm.get('description').invalid
+                  (editForm.get('description')?.touched ||
+                    editForm.get('description')?.dirty) &&
+                  editForm.get('description')?.invalid
                 "
                 class="text-danger"
               >
@@ -159,15 +167,44 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="technology">Technology</label>
+              <label for="difficulty">Difficulty</label>
               <select
-                id="technology"
+                id="difficulty"
+                class="form-control"
+                formControlName="difficulty"
+                [ngClass]="{
+                  'is-invalid':
+                    (editForm.get('difficulty')?.touched ||
+                      editForm.get('difficulty')?.dirty) &&
+                    editForm.get('difficulty')?.invalid
+                }"
+              >
+                <option value="EASY">Easy</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HARD">Hard</option>
+              </select>
+              <div
+                *ngIf="
+                  (editForm.get('difficulty')?.touched ||
+                    editForm.get('difficulty')?.dirty) &&
+                  editForm.get('difficulty')?.invalid
+                "
+                class="text-danger"
+              >
+                Difficulty is required
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="technologyId">Technology</label>
+              <select
+                id="technologyId"
                 class="form-control"
                 formControlName="technologyId"
                 [ngClass]="{
                   'is-invalid':
-                    editForm.get('technologyId').touched &&
-                    editForm.get('technologyId').invalid
+                    (editForm.get('technologyId')?.touched ||
+                      editForm.get('technologyId')?.dirty) &&
+                    editForm.get('technologyId')?.invalid
                 }"
               >
                 <option *ngFor="let tech of technologies" [value]="tech.id">
@@ -176,8 +213,9 @@
               </select>
               <div
                 *ngIf="
-                  editForm.get('technologyId').touched &&
-                  editForm.get('technologyId').invalid
+                  (editForm.get('technology')?.touched ||
+                    editForm.get('technology')?.dirty) &&
+                  editForm.get('technology')?.invalid
                 "
                 class="text-danger"
               >
@@ -185,6 +223,31 @@
               </div>
             </div>
             <div class="form-group">
+              <label for="duration">Duration</label>
+              <input
+                type="number"
+                id="duration"
+                class="form-control"
+                formControlName="duration"
+                [ngClass]="{
+                  'is-invalid':
+                    (editForm.get('duration')?.touched ||
+                      editForm.get('duration')?.dirty) &&
+                    editForm.get('duration')?.invalid
+                }"
+              />
+              <div
+                *ngIf="
+                  (editForm.get('duration')?.touched ||
+                    editForm.get('duration')?.dirty) &&
+                  editForm.get('duration')?.invalid
+                "
+                class="text-danger"
+              >
+                Duration is required
+              </div>
+            </div>
+            <div class="form-group mt-4 me-3">
               <button type="submit" class="btn btn-primary">
                 <i class="bi bi-check-circle"></i> Save Changes
               </button>

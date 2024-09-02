@@ -4,9 +4,15 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--accent-1);
 }
 
 .challenge-details {
+  margin-bottom: 20px;
+}
+
+.challenge-details h2 {
+  color: var(--accent-1);
   margin-bottom: 20px;
 }
 
@@ -102,4 +108,11 @@
 .btn-secondary:hover {
   background-color: var(--primary-2);
   border-color: var(--primary-2);
+}
+
+.close {
+  color: red;
+  background-color: var(--text-1);
+  border: 1px solid var(--primary-2);
+  border-radius: 42%;
 }
