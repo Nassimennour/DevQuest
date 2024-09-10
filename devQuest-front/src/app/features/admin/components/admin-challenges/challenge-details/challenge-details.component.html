@@ -7,7 +7,6 @@
         <a [routerLink]="['/admin/user-details', challenge?.creator?.id]">
           <img
             [src]="challenge?.creator?.profilePicture"
-            alt="Creator"
             class="profile-picture"
           />
           {{ challenge?.creator?.username }}
@@ -29,7 +28,14 @@
           {{ challenge?.technology?.name }}
         </a>
       </div>
-      <div><strong>Difficulty:</strong> {{ challenge?.difficulty }}</div>
+      <div>
+        <strong>Difficulty:</strong>
+        <span
+          [ngStyle]="getDifficultyStyle(challenge?.difficulty)"
+          class="ms-2"
+          >{{ challenge?.difficulty }}</span
+        >
+      </div>
       <div><strong>Times Taken:</strong> {{ challenge?.timesTaken }}</div>
       <div><strong>Duration:</strong> {{ challenge?.duration }} minutes</div>
       <div>
@@ -54,12 +60,27 @@
     <h3>Solutions</h3>
     <div class="solution-card" *ngFor="let solution of paginatedSolutions">
       <div class="solution-meta">
-        <div><strong>User:</strong> {{ solution.user.username }}</div>
+        <div><strong>User ID:</strong> {{ solution.user }}</div>
         <div>
           <strong>Submission Date:</strong> {{ solution.submissionDate | date }}
         </div>
         <div>
-          <strong>Correct:</strong> {{ solution.isCorrect ? "Yes" : "No" }}
+          <strong>Correct:</strong>
+          <span
+            [ngClass]="
+              solution.isCorrect
+                ? 'badge text-bg-success'
+                : 'badge text-bg-danger'
+            "
+            class="ms-2"
+          >
+            {{ solution.isCorrect ? "Yes" : "No" }}
+            <i
+              [ngClass]="
+                solution.isCorrect ? 'bi bi-check ms-1' : 'bi bi-x ms-1'
+              "
+            ></i>
+          </span>
         </div>
       </div>
       <div class="solution-actions">

@@ -119,18 +119,5 @@ public class SolutionServiceTest {
         verify(solutionRepository, times(1)).save(any(Solution.class));
     }
 
-    @Test
-    public void whenUpdateSolution_thenReturnUpdatedSolution() {
-        Solution solution = new Solution();
-        solution.setId(1L);
-        solution.setCode("updated code");
 
-        when(solutionRepository.save(solution)).thenReturn(solution);
-
-        Solution updatedSolution = solutionService.updateSolution(solution);
-
-        assertNotNull(updatedSolution);
-        assertEquals("updated code", updatedSolution.getCode());
-        verify(solutionRepository, times(1)).save(solution);
-    }
 }

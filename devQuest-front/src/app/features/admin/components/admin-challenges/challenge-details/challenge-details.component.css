@@ -64,6 +64,14 @@
   flex: 1;
 }
 
+.solution-meta div {
+  color: var(---accent-2);
+}
+
+.solution-meta div strong {
+  color: var(--accent-2);
+}
+
 .solution-actions {
   display: flex;
   gap: 10px;
@@ -115,4 +123,10 @@
   background-color: var(--text-1);
   border: 1px solid var(--primary-2);
   border-radius: 42%;
+}
+
+.page-item.disabled .page-link {
+  color: var(--text-2);
+  background-color: var(--bg-3);
+  border-color: var(--primary-2);
 }

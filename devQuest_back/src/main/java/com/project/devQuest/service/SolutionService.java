@@ -1,6 +1,7 @@
 package com.project.devQuest.service;
 
 import com.project.devQuest.dto.SolutionDTO;
+import com.project.devQuest.dto.UpdateSolutionDTO;
 import com.project.devQuest.model.*;
 import com.project.devQuest.repository.CodingChallengeRepository;
 import com.project.devQuest.repository.SolutionRepository;
@@ -81,9 +82,13 @@ public class SolutionService {
         return savedSolution;
     }
 
-    public Solution updateSolution(Solution solution) {
-        logger.info("Updating solution with id: " + solution.getId());
-        return solutionRepository.save(solution);
+    public Solution updateSolution(UpdateSolutionDTO solutionDto) {
+        logger.info("Updating solution with id: " + solutionDto.getId());
+        Solution existingSolution = solutionRepository.findById(solutionDto.getId()).orElseThrow(() -> new RuntimeException("Solution not found"));
+        existingSolution.setSubmissionDate(solutionDto.getSubmissionDate());
+        existingSolution.setCode(solutionDto.getCode());
+        existingSolution.setCorrect(solutionDto.isCorrect());
+        return solutionRepository.save(existingSolution);
     }
 
 }

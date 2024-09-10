@@ -38,5 +38,7 @@ export const environment = {
     // Solutions
     getSolutionsByChallengeIdAdmin: '/admin/solutions/challenge/',
     deleteSolutionAdmin: '/admin/solutions/',
+    getSolutionByIdAdmin: '/admin/solutions/',
+    updateSolutionAdmin: '/admin/solutions',
   },
 };

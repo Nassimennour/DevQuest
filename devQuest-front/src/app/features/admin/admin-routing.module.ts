@@ -12,6 +12,7 @@ import { QuizzDetailsComponent } from './components/admin-quizzes/quizz-details/
 import { AddChallengeComponent } from './components/admin-challenges/add-challenge/add-challenge.component';
 import { ChallengeListComponent } from './components/admin-challenges/challenge-list/challenge-list.component';
 import { ChallengeDetailsComponent } from './components/admin-challenges/challenge-details/challenge-details.component';
+import { SolutionDetailsComponent } from './components/admin-challenges/solution-details/solution-details.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'add-challenge', component: AddChallengeComponent },
       { path: 'challenge-list', component: ChallengeListComponent },
       { path: 'challenge-details/:id', component: ChallengeDetailsComponent },
+      { path: 'solution/:id', component: SolutionDetailsComponent },
       { path: 'reports', component: AdminReportsComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],

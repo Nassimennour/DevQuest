@@ -1,5 +1,6 @@
 package com.project.devQuest.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Solution {
     private CodingChallenge codingChallenge;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIdentityReference(alwaysAsId = false)
     private User user; // Submitted by
     private boolean isCorrect;
     private LocalDateTime submissionDate;

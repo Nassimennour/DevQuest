@@ -1,0 +1,117 @@
+.container {
+  background-color: var(--bg-1);
+  color: var(--text-1);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.solution-header {
+  background-color: var(--bg-2);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.user-link {
+  color: var(--primary-1);
+  text-decoration: none;
+}
+
+.user-link:hover {
+  text-decoration: underline;
+}
+
+.solution-details {
+  margin-bottom: 20px;
+}
+
+.tech-logo {
+  width: 30px;
+  height: 30px;
+}
+
+.solution-code pre {
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  background-color: var(--bg-1);
+}
+
+.solution-code {
+  border: 1px solid var(--accent-1);
+}
+
+.solution-meta {
+  background-color: var(--bg-2);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.solution-meta div {
+  margin-bottom: 10px;
+}
+
+.solution-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-primary {
+  background-color: var(--primary-1);
+  border-color: var(--primary-1);
+  color: var(--text-1);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-2);
+  border-color: var(--primary-2);
+}
+
+.btn-danger {
+  background-color: var(--accent-1);
+  border-color: var(--accent-1);
+  color: var(--text-1);
+}
+
+.btn-danger:hover {
+  background-color: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+.modal-content {
+  background-color: var(--bg-2);
+  color: var(--text-1);
+  border-radius: 8px;
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--primary-2);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--primary-2);
+}
+
+.btn-secondary {
+  background-color: var(--bg-3);
+  border-color: var(--primary-2);
+  color: var(--text-1);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-2);
+  border-color: var(--primary-2);
+}

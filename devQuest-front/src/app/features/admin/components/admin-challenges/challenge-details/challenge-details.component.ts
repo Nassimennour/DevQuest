@@ -37,7 +37,7 @@ export class ChallengeDetailsComponent implements OnInit {
     this.editForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      technology: ['', Validators.required],
+      technologyId: ['', Validators.required],
       difficulty: ['', Validators.required],
       duration: ['', Validators.required],
     });
@@ -77,6 +77,7 @@ export class ChallengeDetailsComponent implements OnInit {
     this.challengeService
       .getSolutionsByChallengeId(challengeId)
       .subscribe((data) => {
+        console.log('Solutions:', data);
         this.solutions = data.sort((a, b) => {
           const aDate = a.submissionDate ? new Date(a.submissionDate) : null;
           const bDate = b.submissionDate ? new Date(b.submissionDate) : null;
@@ -182,5 +183,21 @@ export class ChallengeDetailsComponent implements OnInit {
         console.error('Error updating challenge:', error);
       }
     );
+  }
+
+  getDifficultyStyle(difficulty: string | undefined): any {
+    let color: string = '';
+    switch (difficulty) {
+      case 'EASY':
+        color = 'green';
+        break;
+      case 'MEDIUM':
+        color = 'orange';
+        break;
+      case 'HARD':
+        color = 'red';
+        break;
+    }
+    return { color: color };
   }
 }

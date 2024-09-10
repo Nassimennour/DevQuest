@@ -1,6 +1,7 @@
 package com.project.devQuest.controller;
 
 import com.project.devQuest.dto.SolutionDTO;
+import com.project.devQuest.dto.UpdateSolutionDTO;
 import com.project.devQuest.model.Solution;
 import com.project.devQuest.service.SolutionService;
 import com.project.devQuest.service.UserService;
@@ -57,9 +58,9 @@ public class UserSolutionController {
     }
 
     @PutMapping("")
-    public ResponseEntity<Solution> updateSolution(@RequestBody Solution solution) {
+    public ResponseEntity<Solution> updateSolution(@RequestBody UpdateSolutionDTO solutionDTO) {
         logger.info("Received PUT /user/solutions");
-        return ResponseEntity.ok(solutionService.updateSolution(solution));
+        return ResponseEntity.ok(solutionService.updateSolution(solutionDTO));
     }
 
 

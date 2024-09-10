@@ -1,5 +1,6 @@
 package com.project.devQuest.controller;
 
+import com.project.devQuest.dto.UpdateSolutionDTO;
 import com.project.devQuest.model.Solution;
 import com.project.devQuest.service.SolutionService;
 import org.slf4j.Logger;
@@ -47,6 +48,12 @@ public class AdminSolutionController {
         logger.info("Received DELETE /admin/solutions/" + id);
         solutionService.deleteSolution(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("")
+    public ResponseEntity<Solution> updateSolution(@RequestBody UpdateSolutionDTO updateSolutionDTO) {
+        logger.info("Received PUT /admin/solutions");
+        return ResponseEntity.ok(solutionService.updateSolution(updateSolutionDTO));
     }
 
 

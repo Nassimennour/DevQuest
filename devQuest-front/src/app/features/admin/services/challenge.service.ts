@@ -28,6 +28,8 @@ export class ChallengeService {
   getSolutionsByChallengeIdEndpoint: string =
     environment.endpoints.getSolutionsByChallengeIdAdmin;
   deleteSolutionEndpoint: string = environment.endpoints.deleteSolutionAdmin;
+  getSolutionByIdEndpoint: string = environment.endpoints.getSolutionByIdAdmin;
+  updateSolutionEndpoint: string = environment.endpoints.updateSolutionAdmin;
 
   constructor(private http: HttpClient) {}
 
@@ -111,6 +113,29 @@ export class ChallengeService {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           responseType: 'text' as 'json',
+        },
+      }
+    );
+  }
+
+  getSolutionById(solutionId: string): Observable<Solution> {
+    return this.http.get<Solution>(
+      this.BASE_API + this.getSolutionByIdEndpoint + solutionId,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
+  }
+
+  updateSolution(solutionDTO: any): Observable<Solution> {
+    return this.http.put<Solution>(
+      this.BASE_API + this.updateSolutionEndpoint,
+      solutionDTO,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       }
     );
