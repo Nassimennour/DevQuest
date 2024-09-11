@@ -43,7 +43,7 @@ public class AdminCategoryController {
         return ResponseEntity.ok(categoryService.getCategoryByName(name));
     }
 
-    @PostMapping()
+    @PostMapping("")
     public ResponseEntity<Category> createCategory(@RequestBody CategoryDTO category) {
         logger.info("Received request to create category: " + category.getName());
         return ResponseEntity.ok(categoryService.createCategory(category));

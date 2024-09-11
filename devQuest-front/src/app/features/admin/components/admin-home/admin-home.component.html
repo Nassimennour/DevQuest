@@ -56,7 +56,9 @@
         <div class="card-body" *ngIf="adminStats">
           <h5 class="card-title">{{ adminStats.technologies }}</h5>
           <p class="card-text">Total number of technologies</p>
-          <a class="btn btn-primary">View Technologies</a>
+          <a class="btn btn-primary" routerLink="/admin/technology-list"
+            >View Technologies</a
+          >
         </div>
       </div>
     </div>

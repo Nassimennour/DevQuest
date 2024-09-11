@@ -24,6 +24,8 @@ export class ChallengeService {
     environment.endpoints.getCodingChallengesAdmin;
   getChallengeByIdEndpoint: string =
     environment.endpoints.getCodingChallengeByIdAdmin;
+  getChallengesByTechnologyIdEndpoint: string =
+    environment.endpoints.getChallengesByTechnologyIdAdmin;
   // Solution endpoints
   getSolutionsByChallengeIdEndpoint: string =
     environment.endpoints.getSolutionsByChallengeIdAdmin;
@@ -51,6 +53,17 @@ export class ChallengeService {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
+      }
+    );
+  }
+
+  getCodingChallengesByTechnologyId(
+    technogyId: number
+  ): Observable<CodingChallenge[]> {
+    return this.http.get<CodingChallenge[]>(
+      this.BASE_API + this.getChallengesByTechnologyIdEndpoint + technogyId,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       }
     );
   }

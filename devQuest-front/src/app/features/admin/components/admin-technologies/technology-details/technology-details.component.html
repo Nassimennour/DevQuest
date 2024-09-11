@@ -1,0 +1,72 @@
+<!-- technology-details.component.html -->
+<div class="container-fluid mt-3 mb-3">
+  <h2 class="title mb-3">{{ technology?.name }}</h2>
+  <div class="technology-details mb-4">
+    <p><strong>Overview:</strong> {{ technology?.overview }}</p>
+    <p><strong>Category:</strong> {{ technology?.category?.name }}</p>
+    <img
+      [src]="technology?.logo"
+      alt="{{ technology?.name }}"
+      class="logo-img"
+    />
+  </div>
+
+  <div class="section quizzes-section mb-4">
+    <h3 class="section-title">Quizzes</h3>
+    <div class="cards-container">
+      <a
+        class="card"
+        *ngFor="let quiz of quizzes"
+        [routerLink]="['/admin/quizz-details', quiz.id]"
+      >
+        <div class="card-body">
+          <h5 class="card-title">{{ quiz.title }}</h5>
+          <p class="card-text">{{ quiz.overview }}</p>
+          <p class="card-text">
+            <strong>Difficulty:</strong> {{ quiz.difficulty }}
+          </p>
+          <p class="card-text">
+            <strong>Duration:</strong> {{ quiz.duration }} mins
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section challenges-section mb-4">
+    <h3 class="section-title">Coding Challenges</h3>
+    <div class="cards-container">
+      <a
+        class="card"
+        *ngFor="let challenge of challenges"
+        [routerLink]="['/admin/challenge-details', challenge.id]"
+      >
+        <div class="card-body">
+          <h5 class="card-title">{{ challenge.title }}</h5>
+          <p class="card-text">{{ challenge.description }}</p>
+          <p class="card-text">
+            <strong>Difficulty:</strong> {{ challenge.difficulty }}
+          </p>
+          <p class="card-text">
+            <strong>Duration:</strong> {{ challenge.duration }} mins
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="section resources-section mb-4">
+    <h3 class="section-title">Resources</h3>
+    <div class="cards-container">
+      <div class="card" *ngFor="let resource of resources">
+        <div class="card-body">
+          <h5 class="card-title">{{ resource.title }}</h5>
+          <p class="card-text">{{ resource.description }}</p>
+          <a [href]="resource.url" target="_blank" class="btn btn-primary"
+            >View Resource</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<!-- add-technology.component.html -->
+<div class="container-fluid mt-3 mb-3">
+  <h2 class="title mb-3">Add New Technology</h2>
+  <form [formGroup]="addTechnologyForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        id="name"
+        class="form-control"
+        formControlName="name"
+      />
+      <div
+        class="text-danger"
+        *ngIf="name?.invalid && (name?.dirty || name?.touched)"
+      >
+        <span *ngIf="name?.errors?.['required']">Name is required</span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="overview" class="form-label">Overview</label>
+      <textarea
+        id="overview"
+        class="form-control"
+        formControlName="overview"
+      ></textarea>
+      <div
+        class="text-danger"
+        *ngIf="overview?.invalid && (overview?.dirty || overview?.touched)"
+      >
+        <span *ngIf="overview?.errors?.['required']">Overview is required</span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="logo" class="form-label">Logo URL</label>
+      <input
+        type="text"
+        id="logo"
+        class="form-control"
+        formControlName="logo"
+      />
+      <div
+        class="text-danger"
+        *ngIf="logo?.invalid && (logo?.dirty || logo?.touched)"
+      >
+        <span *ngIf="logo?.errors?.['required']">Logo URL is required</span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="categoryId" class="form-label">Category</label>
+      <select id="categoryId" class="form-select" formControlName="categoryId">
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+      <div
+        class="text-danger"
+        *ngIf="
+          categoryId?.invalid && (categoryId?.dirty || categoryId?.touched)
+        "
+      >
+        <span *ngIf="categoryId?.errors?.['required']"
+          >Category is required</span
+        >
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between mt-4 mb-2">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="addTechnologyForm.invalid"
+      >
+        Submit <i class="bi bi-check-circle"></i>
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onReset()">
+        Reset <i class="bi bi-x-circle"></i>
+      </button>
+    </div>
+  </form>
+</div>

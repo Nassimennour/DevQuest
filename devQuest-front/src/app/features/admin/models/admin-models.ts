@@ -83,11 +83,32 @@ export interface Question {
 }
 
 export interface Technology {
-  id: number;
-  name: string;
-  overview: string;
-  logo: string;
-  category: any;
+  id?: number;
+  name?: string;
+  overview?: string;
+  logo?: string;
+  category?: any;
+}
+
+export interface TechnologyDTO {
+  id?: number;
+  name?: string;
+  overview?: string;
+  logo?: string;
+  categoryId?: number;
+}
+
+export interface Category {
+  id?: number;
+  name?: string;
+  description?: string;
+  subcategories?: Category[];
+}
+
+export interface CategoryDTO {
+  name?: string;
+  description?: string;
+  parentCategoryId?: number;
 }
 
 // Score model
@@ -136,4 +157,24 @@ export interface updateSolution {
   code?: string;
   isCorrect?: boolean;
   submissionDate?: string;
+}
+
+export interface Resource {
+  id?: number;
+  title?: string;
+  url?: string;
+  description?: string;
+  user: any;
+  technology: any;
+  approvalStatus?: string;
+}
+
+export interface ResourceDTO {
+  id?: number;
+  title?: string;
+  url?: string;
+  description?: string;
+  userId?: number;
+  technologyId?: number;
+  approvalStatus?: string;
 }

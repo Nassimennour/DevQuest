@@ -1,0 +1,118 @@
+<!-- technology-list.component.html -->
+<div class="container-fluid mt-3 mb-3">
+  <h2 class="title mb-3">Technology List</h2>
+  <table class="table table-responsive table-striped table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Logo</th>
+        <th>Overview</th>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let technology of technologies">
+        <td>{{ technology.id }}</td>
+        <td>{{ technology.name }}</td>
+        <td>
+          <img
+            [src]="technology.logo"
+            alt="{{ technology.name }}"
+            class="logo-img"
+          />
+        </td>
+        <td>{{ technology.overview }}</td>
+        <td>{{ technology.category.name }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="openEditModal(technology)">
+            Edit <i class="bi bi-pencil"></i>
+          </button>
+          <button class="btn btn-danger" (click)="confirmDelete(technology.id)">
+            Delete <i class="bi bi-trash"></i>
+          </button>
+          <button
+            class="btn btn-success"
+            [routerLink]="['/admin/technology-details', technology.id]"
+          >
+            Details <i class="bi bi-info-circle"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Edit Modal -->
+  <div class="modal" tabindex="-1" id="editModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Technology</h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="closeEditModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editTechnologyForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="id" class="form-label">ID</label>
+              <input
+                type="text"
+                id="id"
+                class="form-control"
+                formControlName="id"
+                [disabled]="true"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                formControlName="name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="overview" class="form-label">Overview</label>
+              <textarea
+                id="overview"
+                class="form-control"
+                formControlName="overview"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="logo" class="form-label">Logo</label>
+              <input
+                type="text"
+                id="logo"
+                class="form-control"
+                formControlName="logo"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select
+                name="category"
+                id="category"
+                class="form-control"
+                formControlName="categoryId"
+              >
+                <option
+                  *ngFor="let category of categories"
+                  [value]="category.id"
+                >
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

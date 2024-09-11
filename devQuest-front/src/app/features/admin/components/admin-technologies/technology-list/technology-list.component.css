@@ -1,0 +1,56 @@
+/* technology-list.component.css */
+.container-fluid {
+  background-color: var(--bg-1);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.title {
+  color: var(--text-1);
+}
+
+.table {
+  background-color: var(--bg-2);
+}
+
+.table th,
+.table td {
+  color: var(--text-2);
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+}
+
+.btn-primary {
+  background-color: var(--primary-1);
+  border-color: var(--primary-2);
+}
+
+.btn-danger {
+  background-color: var(--accent-1);
+  border-color: var(--accent-2);
+}
+
+.btn-success {
+  background-color: green;
+  border-color: white;
+}
+
+.modal-content {
+  background-color: var(--bg-3);
+}
+
+.modal-title {
+  color: var(--text-1);
+}
+
+.form-label {
+  color: var(--text-2);
+}
+
+.btn-close {
+  background-color: var(--bg-2);
+  border: none;
+}

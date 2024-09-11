@@ -47,7 +47,7 @@ public class AdminTechnologyController {
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateTechnology(@RequestBody Technology technology) {
+    public ResponseEntity<?> updateTechnology(@RequestBody TechnologyDTO technology) {
         if (!technologyService.existsById(technology.getId())) {
             return ResponseEntity.badRequest().body("Technology not found");
         }
@@ -57,6 +57,12 @@ public class AdminTechnologyController {
     @GetMapping("/popular")
     public ResponseEntity<List<TechnologyPopularityDTO>> getPopularTechnologies() {
         return ResponseEntity.ok(technologyService.getTechnoloyPopularity());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteTechnology(@PathVariable Long id) {
+        technologyService.deleteTechnology(id);
+        return ResponseEntity.ok("Technology deleted successfully");
     }
 
 

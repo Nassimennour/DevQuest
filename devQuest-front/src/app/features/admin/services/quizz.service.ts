@@ -15,6 +15,8 @@ export class QuizzService {
   updateQuestionEndpoint = environment.endpoints.updateQuestionAdmin;
   getAllQuizzesEndpoint = environment.endpoints.getAllQuizzesAdmin;
   getQuizzByIdEndpoint = environment.endpoints.getQuizzByIdAdmin;
+  getQuizzesByTechnologyIdEndpoint =
+    environment.endpoints.getQuizzesByTechnologyIdAdmin;
   getQuestionsByQuizIdEndpoint =
     environment.endpoints.getQuestionsByQuizIdAdmin;
   deleteQuizzEndpoint = environment.endpoints.deleteQuizzAdmin;
@@ -74,6 +76,15 @@ export class QuizzService {
     return this.http.get(this.BASE_API + this.getQuizzByIdEndpoint + quizId, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     });
+  }
+
+  getQuizzesByTechnologyId(technologyId: number): Observable<any> {
+    return this.http.get(
+      this.BASE_API + this.getQuizzesByTechnologyIdEndpoint + technologyId,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      }
+    );
   }
 
   getQuestionsByQuizzId(quizId: string): Observable<Question[]> {

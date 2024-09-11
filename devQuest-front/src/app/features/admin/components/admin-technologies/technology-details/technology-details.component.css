@@ -1,0 +1,73 @@
+/* technology-details.component.css */
+.container-fluid {
+  background-color: var(--bg-1);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.title {
+  color: var(--text-1);
+}
+
+.technology-details {
+  background-color: var(--bg-2);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.logo-img {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 10px 0;
+}
+
+.section {
+  background-color: var(--bg-3);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  color: var(--text-1);
+  margin-bottom: 15px;
+}
+
+.cards-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+}
+
+.card {
+  min-width: 250px;
+  background-color: var(--bg-2);
+  border: 1px solid var(--primary-1);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.012);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  color: var(--text-1);
+}
+
+.card-text {
+  color: var(--text-2);
+}
+
+.btn-primary {
+  background-color: var(--primary-1);
+  border-color: var(--primary-2);
+}

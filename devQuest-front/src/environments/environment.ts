@@ -17,7 +17,18 @@ export const environment = {
     getUserByIdAdmin: '/admin/users/',
     getRankingByUserIdAdmin: '/admin/rankings/user/',
     createUserAdmin: '/admin/users',
+    // Technologies
     getAllTechnologiesAdmin: '/admin/technologies',
+    updateTechnologyAdmin: '/admin/technologies',
+    deleteTechnologyAdmin: '/admin/technologies/',
+    createTechnologyAdmin: '/admin/technologies',
+    getTechnologyByIdAdmin: '/admin/technologies/',
+    // Categories
+    getAllCategoriesAdmin: '/admin/categories',
+    getCategoryByIdAdmin: '/admin/categories/',
+    createCategoryAdmin: '/admin/categories',
+    updateCategoryAdmin: '/admin/categories',
+    deleteCategoryAdmin: '/admin/categories/',
     // Quizzes / Questions
     createQuizzAdmin: '/admin/quizzes',
     addQuestionAdmin: '/admin/questions',
@@ -25,6 +36,7 @@ export const environment = {
     updateQuestionAdmin: '/admin/questions',
     getAllQuizzesAdmin: '/admin/quizzes',
     getQuizzByIdAdmin: '/admin/quizzes/',
+    getQuizzesByTechnologyIdAdmin: '/admin/quizzes/technology/',
     getQuestionsByQuizIdAdmin: '/admin/questions/quizz/',
     deleteQuizzAdmin: '/admin/quizzes/',
     updateQuizzAdmin: '/admin/quizzes',
@@ -35,10 +47,18 @@ export const environment = {
     updateCodingChallengeAdmin: '/admin/coding-challenges',
     deleteCodingChallengeAdmin: '/admin/coding-challenges/',
     getCodingChallengeByIdAdmin: '/admin/coding-challenges/',
+    getChallengesByTechnologyIdAdmin: '/admin/coding-challenges/technology/',
     // Solutions
     getSolutionsByChallengeIdAdmin: '/admin/solutions/challenge/',
     deleteSolutionAdmin: '/admin/solutions/',
     getSolutionByIdAdmin: '/admin/solutions/',
     updateSolutionAdmin: '/admin/solutions',
+    // Resources
+    getResourcesByTechnologyIdAdmin: '/admin/resources/technology/',
+    createResourceAdmin: '/admin/resources',
+    deleteResourceAdmin: '/admin/resources/',
+    updateResourceAdmin: '/admin/resources',
+    getResourceByIdAdmin: '/admin/resources/',
+    getAllResourcesAdmin: '/admin/resources',
   },
 };

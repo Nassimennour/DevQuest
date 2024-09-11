@@ -35,13 +35,13 @@ public class TechnologyService {
         return technologyRepository.save(technology);
     }
 
-    public Technology updateTechnology(Technology technology){
+    public Technology updateTechnology(TechnologyDTO technology){
         log.info("Updating technology: {}", technology.getName());
         Technology existingTechnology = technologyRepository.findById(technology.getId()).orElseThrow(() -> new IllegalArgumentException("Technology not found"));
         existingTechnology.setName(technology.getName());
         existingTechnology.setLogo(technology.getLogo());
         existingTechnology.setOverview(technology.getOverview());
-        existingTechnology.setCategory(categoryRepository.findById(technology.getCategory().getId()).orElseThrow(() -> new IllegalArgumentException("Category not found")));
+        existingTechnology.setCategory(categoryRepository.findById(technology.getCategoryId()).orElseThrow(() -> new IllegalArgumentException("Category not found")));
         return technologyRepository.save(existingTechnology);
     }
 

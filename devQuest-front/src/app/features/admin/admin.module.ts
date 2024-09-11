@@ -29,6 +29,9 @@ import { AddChallengeComponent } from './components/admin-challenges/add-challen
 import { ChallengeListComponent } from './components/admin-challenges/challenge-list/challenge-list.component';
 import { ChallengeDetailsComponent } from './components/admin-challenges/challenge-details/challenge-details.component';
 import { SolutionDetailsComponent } from './components/admin-challenges/solution-details/solution-details.component';
+import { TechnologyListComponent } from './components/admin-technologies/technology-list/technology-list.component';
+import { AddTechnologyComponent } from './components/admin-technologies/add-technology/add-technology.component';
+import { TechnologyDetailsComponent } from './components/admin-technologies/technology-details/technology-details.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { SolutionDetailsComponent } from './components/admin-challenges/solution
     ChallengeListComponent,
     ChallengeDetailsComponent,
     SolutionDetailsComponent,
+    TechnologyListComponent,
+    AddTechnologyComponent,
+    TechnologyDetailsComponent,
   ],
   imports: [
     CommonModule,
