@@ -36,7 +36,15 @@ export class TechnologyChartComponent implements OnInit {
   constructor(private statsService: StatsService) {}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
     // Get the technology popularity stats from the stats service
+    // this.statsService
+    //   .getTechnologyPopularityStats()
+    //   .subscribe((technologyPopularity) => {
+    //     console.log('Technology Popularity : ', technologyPopularity);
+    //     this.pieChartLabels = technologyPopularity.map((tech) => tech.name);
+    //     this.pieChartData[0].data = technologyPopularity.map(
+    //       (tech) => tech.popularityCount
+    //     );
+    //   });
   }
 }

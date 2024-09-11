@@ -13,7 +13,7 @@ export class RankingService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getRankingByUserId(userId: number): Observable<Ranking> {
+  getRankingByUserId(userId: string): Observable<Ranking> {
     return this.httpClient.get<Ranking>(
       `${this.BASE_API}${this.getRankingByUserIdEndpoint}${userId}`,
       {

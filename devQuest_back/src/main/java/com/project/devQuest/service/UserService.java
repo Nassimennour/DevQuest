@@ -4,6 +4,7 @@ import com.project.devQuest.converter.UserDTOConverter;
 import com.project.devQuest.dto.ChangePasswordDTO;
 import com.project.devQuest.dto.UserDTO;
 import com.project.devQuest.model.Dashboard;
+import com.project.devQuest.model.Ranking;
 import com.project.devQuest.model.User;
 import com.project.devQuest.model.VerificationToken;
 import com.project.devQuest.repository.TechnologyRepository;
@@ -47,6 +48,8 @@ public class UserService {
         user.setVerified(false);
         Dashboard dashboard = new Dashboard();
         user.setDashboard(dashboard);
+        Ranking ranking = new Ranking();
+        user.setRanking(ranking);
         User savedUser = userRepository.save(user);
         logger.info("User saved successfully: {}", savedUser.getUsername());
         VerificationToken verificationToken = verificationTokenService.createVerificationToken(savedUser);

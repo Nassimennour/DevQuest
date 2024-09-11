@@ -26,7 +26,6 @@ public class Solution {
     private CodingChallenge codingChallenge;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIdentityReference(alwaysAsId = false)
     private User user; // Submitted by
     private boolean isCorrect;
     private LocalDateTime submissionDate;

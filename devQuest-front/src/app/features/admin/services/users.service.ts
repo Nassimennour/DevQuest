@@ -37,6 +37,7 @@ export class UsersService {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
+        responseType: 'text',
       }
     );
   }
@@ -66,9 +67,10 @@ export class UsersService {
     );
   }
 
-  createUser(user: User): Observable<User> {
+  createUser(user: any): Observable<User> {
     // convert date to iso string
     user.birthDate = new Date(user.birthDate).toISOString();
+    console.log('User to create : ', user);
     return this.httpClient.post<User>(
       this.BASE_API + this.createUserEndpoint,
       user,

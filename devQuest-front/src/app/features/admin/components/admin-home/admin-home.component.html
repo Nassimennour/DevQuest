@@ -8,10 +8,12 @@
         <div class="card-header d-flex justify-content-between">
           Users Overview <i class="bi bi-people"></i>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">100</h5>
+        <div class="card-body" *ngIf="adminStats">
+          <h5 class="card-title">{{ adminStats.users }}</h5>
           <p class="card-text">Total number of users</p>
-          <a class="btn btn-primary">View Users</a>
+          <a class="btn btn-primary" routerLink="/admin/users-list"
+            >View Users</a
+          >
         </div>
       </div>
     </div>
@@ -21,10 +23,12 @@
         <div class="card-header d-flex justify-content-between">
           Quizzes Overview <i class="bi bi-pencil-square"></i>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">10</h5>
+        <div class="card-body" *ngIf="adminStats">
+          <h5 class="card-title">{{ adminStats.quizzes }}</h5>
           <p class="card-text">Total number of quizzes</p>
-          <a class="btn btn-primary">View Quizzes</a>
+          <a class="btn btn-primary" routerLink="/admin/quizz-list"
+            >View Quizzes</a
+          >
         </div>
       </div>
     </div>
@@ -34,10 +38,12 @@
         <div class="card-header d-flex justify-content-between">
           Coding Challenges <i class="bi bi-code-slash"></i>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">5</h5>
+        <div class="card-body" *ngIf="adminStats">
+          <h5 class="card-title">{{ adminStats.codingChallenges }}</h5>
           <p class="card-text">Total number of coding challenges</p>
-          <a class="btn btn-primary">View Challenges</a>
+          <a class="btn btn-primary" routerLink="/admin/challenge-list"
+            >View Challenges</a
+          >
         </div>
       </div>
     </div>
@@ -47,8 +53,8 @@
         <div class="card-header d-flex justify-content-between">
           Technologies Overview <i class="bi bi-laptop"></i>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">10</h5>
+        <div class="card-body" *ngIf="adminStats">
+          <h5 class="card-title">{{ adminStats.technologies }}</h5>
           <p class="card-text">Total number of technologies</p>
           <a class="btn btn-primary">View Technologies</a>
         </div>
@@ -70,7 +76,10 @@
       <div class="activity-item mb-2" *ngFor="let a of recentActivities">
         <div class="activity-header me-2">{{ a.type }}</div>
         <div class="activity-details">{{ a.description }}</div>
-        <div *ngIf="a.optional !== ''" class="activity-details">
+        <div
+          *ngIf="a.optional !== '' && a.optional !== null"
+          class="activity-details"
+        >
           By {{ a.optional }}
         </div>
         <div class="activity-date ms-auto me-1">

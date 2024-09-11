@@ -13,7 +13,7 @@ export const environment = {
     getUserActivity: '/admin/users/activity',
     getAllUsersAdmin: '/admin/users',
     deleteUserAdmin: '/admin/users/',
-    updateUserAdmin: '/admin/users/',
+    updateUserAdmin: '/admin/users',
     getUserByIdAdmin: '/admin/users/',
     getRankingByUserIdAdmin: '/admin/rankings/user/',
     createUserAdmin: '/admin/users',

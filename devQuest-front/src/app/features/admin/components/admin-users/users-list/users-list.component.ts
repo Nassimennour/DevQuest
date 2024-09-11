@@ -22,50 +22,7 @@ export class UsersListComponent implements OnInit {
     'ACTIONS',
   ];
 
-  users: User[] = [
-    {
-      id: 1,
-      username: 'john_doe',
-      email: 'john@gmail.com',
-      fullName: 'John Doe',
-      role: 'ADMIN',
-      gender: 'MALE',
-      bio: 'I am a software engineer',
-      birthDate: '1990-01-01',
-      profilePicture: 'https://www.google.com',
-      isVerified: true,
-      registrationDate: '2021-01-01',
-      isDarkMode: false,
-    },
-    {
-      id: 2,
-      username: 'jane_doe',
-      email: 'jane@gmail.com',
-      fullName: 'Jane Doe',
-      gender: 'FEMALE',
-      role: 'USER',
-      bio: 'I am a software engineer',
-      birthDate: '1990-01-01',
-      profilePicture: 'https://www.google.com',
-      isVerified: false,
-      registrationDate: '2021-01-01',
-      isDarkMode: true,
-    },
-    {
-      id: 3,
-      username: 'joe_doe',
-      email: 'joe@gmail.com',
-      fullName: 'Joe Doe',
-      gender: 'MALE',
-      role: 'USER',
-      bio: 'I am a software engineer',
-      birthDate: '1990-01-01',
-      profilePicture: 'https://www.google.com',
-      isVerified: true,
-      registrationDate: '2021-01-01',
-      isDarkMode: false,
-    },
-  ];
+  users: User[] = [];
 
   // pagination logic
   paginatedUsers: User[] = [];
@@ -82,15 +39,16 @@ export class UsersListComponent implements OnInit {
   constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    // this.getUsers();
-    this.filteredUsers = this.users;
-    this.updatePagination();
+    this.getUsers();
   }
 
   getUsers() {
     this.usersService.getAllUsers().subscribe(
       (users) => {
+        console.log('Users list : ', users);
         this.users = users;
+        this.filteredUsers = users;
+        this.updatePagination();
       },
       (error) => {
         console.log('Error getting users list : ', error);
@@ -140,8 +98,9 @@ export class UsersListComponent implements OnInit {
     const confirmed = confirm('Are you sure you want to delete this user?');
     if (confirmed) {
       this.usersService.deleteUser(id).subscribe(
-        (response) => {
-          // this.getUsers();
+        () => {
+          console.log('User deleted successfully.');
+          this.getUsers();
         },
         (error) => {
           console.log('Error deleting user : ', error);

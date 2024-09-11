@@ -57,14 +57,20 @@
         </td>
         <td>{{ user.registrationDate | date : "short" }}</td>
         <td>
-          <button class="btn btn-primary" (click)="editModal.openModal(user)">
+          <button
+            class="btn btn-primary mt-1 mb-1"
+            (click)="editModal.openModal(user)"
+          >
             Edit <i class="bi bi-pencil"></i>
           </button>
-          <button class="btn btn-danger" (click)="confirmDelete(user.id)">
+          <button
+            class="btn btn-danger mt-1 mb-1"
+            (click)="confirmDelete(user.id)"
+          >
             Delete <i class="bi bi-trash3"></i>
           </button>
           <button
-            class="btn btn-success"
+            class="btn btn-success mt-1 mb-1"
             [routerLink]="['/admin', 'user-details', user.id]"
           >
             Details
@@ -98,4 +104,7 @@
 </div>
 
 <!-- Modal Component -->
-<app-edit-user-modal #editModal></app-edit-user-modal>
+<app-edit-user-modal
+  #editModal
+  (userUpdated)="getUsers()"
+></app-edit-user-modal>

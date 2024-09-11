@@ -4,6 +4,8 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { User } from '../../../models/admin-models';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -16,6 +18,7 @@ import { UsersService } from '../../../services/users.service';
 })
 export class EditUserModalComponent implements OnInit, OnChanges {
   @Input() user!: User;
+  @Output() userUpdated = new EventEmitter<void>();
   editUserForm!: FormGroup;
   selectedFile: File | null = null;
 
@@ -40,6 +43,7 @@ export class EditUserModalComponent implements OnInit, OnChanges {
       gender: [''],
       bio: [''],
       birthDate: [''],
+      profilePicture: [''],
       isDarkMode: [false],
     });
   }
@@ -84,10 +88,13 @@ export class EditUserModalComponent implements OnInit, OnChanges {
 
   onSubmit(): void {
     if (this.editUserForm.valid) {
-      const updatedUser = this.editUserForm.value;
+      console.log('Submitting form...');
+      const updatedUser = { ...this.editUserForm.value, id: this.user.id };
+      console.log('Updated user:', updatedUser);
       this.usersService.updateUser(updatedUser).subscribe(
         (user) => {
-          console.log('User updated:', user);
+          console.log('User updated successfully:', user);
+          this.userUpdated.emit();
           this.closeModal();
         },
         (error) => {

@@ -30,14 +30,17 @@ export class AddUserComponent implements OnInit {
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
+        // min 1 digit, 1 uppercase, 1 lowercase, 1 special character
+        Validators.pattern(
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/
+        ),
       ]),
     });
   }
 
   onSubmit(event: Event) {
     event.preventDefault();
-    console.log(this.addUserForm.value);
+    console.log('Form value: ', this.addUserForm.value);
     // call the service to add the user
     this.usersService.createUser(this.addUserForm.value).subscribe(
       (res) => {
@@ -48,6 +51,7 @@ export class AddUserComponent implements OnInit {
       },
       (error) => {
         console.error(error);
+        this.addUserForm.reset();
         this.successMessage = '';
         this.errorMessage = 'Failed to add user';
       }

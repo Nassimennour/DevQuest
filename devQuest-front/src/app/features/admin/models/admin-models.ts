@@ -32,6 +32,7 @@ export interface User {
   username: string;
   email: string;
   fullName: string;
+  password?: string;
   role: string;
   gender: string;
   bio?: string;
@@ -126,6 +127,13 @@ export interface Solution {
   code?: string;
   codingChallenge?: any;
   user?: any;
+  isCorrect?: boolean;
+  submissionDate?: string;
+}
+
+export interface updateSolution {
+  id?: number;
+  code?: string;
   isCorrect?: boolean;
   submissionDate?: string;
 }

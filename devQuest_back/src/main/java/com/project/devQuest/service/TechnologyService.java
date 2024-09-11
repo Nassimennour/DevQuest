@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -79,6 +80,12 @@ public class TechnologyService {
     // Find most popular technologies
     public List<TechnologyPopularityDTO> getTechnoloyPopularity() {
         log.info("Finding technology popularity");
-        return technologyRepository.findTechnologyPopularity();
+        List<TechnologyPopularityDTO> technologyPopularityList = new ArrayList<>();
+        List<Technology> technologies = technologyRepository.findAll();
+        for (Technology technology : technologies) {
+            technologyPopularityList.add(new TechnologyPopularityDTO(technology.getName(), technology.getQuizzList().size() + technology.getCodingChallengeList().size() -1));
+        }
+        technologyPopularityList.sort((t1, t2) -> Math.toIntExact(t1.getPopularityCount() - t2.getPopularityCount()));
+        return technologyPopularityList.subList(0, Math.min(3, technologyPopularityList.size()));
     }
 }

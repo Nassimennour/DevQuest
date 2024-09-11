@@ -79,6 +79,7 @@ public class SolutionService {
         userProgressRepository.save(userProgressEntity);
         // Update coding challenge's times taken
         codingChallenge.setTimesTaken(codingChallenge.getTimesTaken() + 1);
+        codingChallengeRepository.save(codingChallenge);
         return savedSolution;
     }
 

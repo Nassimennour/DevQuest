@@ -58,14 +58,15 @@ public class AdminController {
         return ResponseEntity.ok(userDTO);
     }
 
-    @GetMapping("/{username}")
+    @GetMapping("/username/{username}")
     public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
         UserDTO userDTO = userService.findByUsername(username);
         return ResponseEntity.ok(userDTO);
     }
 
     @PostMapping("")
-    public ResponseEntity<UserDTO> createUser(User user) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
+        logger.info("Received POST request to create user: {}", user.getUsername());
         return ResponseEntity.ok(userService.save(user));
     }
 

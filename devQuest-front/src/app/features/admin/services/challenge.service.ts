@@ -130,6 +130,7 @@ export class ChallengeService {
   }
 
   updateSolution(solutionDTO: any): Observable<Solution> {
+    console.log('updating solution:', solutionDTO);
     return this.http.put<Solution>(
       this.BASE_API + this.updateSolutionEndpoint,
       solutionDTO,

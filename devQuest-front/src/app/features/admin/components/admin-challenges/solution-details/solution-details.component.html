@@ -39,13 +39,35 @@
     <div>
       <strong>Submission Date:</strong> {{ solution?.submissionDate | date }}
     </div>
-    <!-- <div>
-      <strong>Correct:</strong>
-      <select [(ngModel)]="solution.isCorrect" (change)="updateIsCorrect()">
-        <option [value]="true">Yes</option>
-        <option [value]="false">No</option>
-      </select>
-    </div> -->
+    <div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <strong class="me-3">Correct:</strong>
+          <span
+            [ngClass]="{
+              'text-success': solution?.isCorrect,
+              'text-danger': !solution?.isCorrect
+            }"
+            >{{ solution?.isCorrect ? "True" : "False" }}</span
+          >
+        </div>
+        <i
+          class="bi bi-pencil-fill me-5"
+          style="cursor: pointer"
+          (click)="triggerChange()"
+        ></i>
+      </div>
+
+      <div class="form-group mt-2 mb-2 p-2" *ngIf="inputTriggered">
+        <select id="isCorrect" class="form-select mt-2 mb-2" #isCorrectSelect>
+          <option value="true">Correct</option>
+          <option value="false">False</option>
+        </select>
+        <button class="btn btn-success" (click)="updateIsCorrect()">
+          Update
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Delete Confirmation Modal -->

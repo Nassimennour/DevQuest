@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Solution } from '../../../models/admin-models';
+import { Solution, updateSolution, User } from '../../../models/admin-models';
 import { ChallengeService } from '../../../services/challenge.service';
 import { UsersService } from '../../../services/users.service';
 import { Modal } from 'bootstrap';
@@ -11,10 +11,13 @@ import { Modal } from 'bootstrap';
   styleUrls: ['./solution-details.component.css'],
 })
 export class SolutionDetailsComponent implements OnInit {
+  @ViewChild('isCorrectSelect') isCorrectSelect!: ElementRef<HTMLSelectElement>;
+
   solutionId: string | null = null;
   solution: Solution | null = null;
-  user: any = null;
+  user!: User;
   highlightedCode: string = '';
+  inputTriggered: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,8 +49,24 @@ export class SolutionDetailsComponent implements OnInit {
   }
 
   updateIsCorrect(): void {
-    if (this.solution) {
-      this.challengeService.updateSolution(this.solution).subscribe();
+    if (this.solution && this.isCorrectSelect.nativeElement.value) {
+      this.solution.isCorrect =
+        this.isCorrectSelect.nativeElement.value === 'true';
+      let solutionDTO: updateSolution = {
+        id: this.solution.id,
+        isCorrect: this.solution.isCorrect,
+        code: this.solution.code,
+        submissionDate: this.solution.submissionDate,
+      };
+      this.challengeService.updateSolution(solutionDTO).subscribe(
+        (data) => {
+          console.log('solution updated: ', data);
+          this.solution = data;
+        },
+        (error) => {
+          console.error('error updating solution: ', error);
+        }
+      );
     }
   }
 
@@ -64,5 +83,9 @@ export class SolutionDetailsComponent implements OnInit {
         this.router.navigate(['/admin/solutions']);
       });
     }
+  }
+
+  triggerChange(): void {
+    this.inputTriggered = true;
   }
 }
