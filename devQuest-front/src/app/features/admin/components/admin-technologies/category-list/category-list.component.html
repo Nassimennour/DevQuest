@@ -1,0 +1,37 @@
+<!-- category-list.component.html -->
+<div class="container-fluid mt-3 mb-3">
+  <div class="header row">
+    <div class="col-md-8 mb-2">
+      <h2 class="title mb-3">Category List</h2>
+    </div>
+    <div class="col-md-4 mb-2 d-flex justify-content-end">
+      <button class="add-btn me-2" routerLink="/admin/add-category">
+        <i class="bi bi-plus"></i>Add Category&nbsp;
+      </button>
+    </div>
+  </div>
+  <table class="table table-responsive table-striped table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Subcategories</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>{{ category.description }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let subcategory of category.subCategories">
+              {{ subcategory.name }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

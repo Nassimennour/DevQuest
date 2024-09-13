@@ -102,7 +102,7 @@ export interface Category {
   id?: number;
   name?: string;
   description?: string;
-  subcategories?: Category[];
+  subCategories?: Category[];
 }
 
 export interface CategoryDTO {

@@ -51,11 +51,28 @@
 
     <div class="mb-3">
       <label for="categoryId" class="form-label">Category</label>
-      <select id="categoryId" class="form-select" formControlName="categoryId">
-        <option *ngFor="let category of categories" [value]="category.id">
-          {{ category.name }}
-        </option>
-      </select>
+      <div class="row">
+        <div class="col-md-9 mt-1 mb-1">
+          <select
+            id="categoryId"
+            class="form-select"
+            formControlName="categoryId"
+          >
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-3 mt-1 mb-1 ms-auto">
+          <button
+            class="btn btn-primary btn-md"
+            routerLink="/admin/add-category"
+          >
+            Add Category
+            <i class="bi bi-plus-circle"></i>
+          </button>
+        </div>
+      </div>
       <div
         class="text-danger"
         *ngIf="
@@ -71,7 +88,7 @@
     <div class="d-flex justify-content-between mt-4 mb-2">
       <button
         type="submit"
-        class="btn btn-primary"
+        class="btn btn-success"
         [disabled]="addTechnologyForm.invalid"
       >
         Submit <i class="bi bi-check-circle"></i>

@@ -16,6 +16,8 @@ import { SolutionDetailsComponent } from './components/admin-challenges/solution
 import { TechnologyListComponent } from './components/admin-technologies/technology-list/technology-list.component';
 import { TechnologyDetailsComponent } from './components/admin-technologies/technology-details/technology-details.component';
 import { AddTechnologyComponent } from './components/admin-technologies/add-technology/add-technology.component';
+import { AddCategoryComponent } from './components/admin-technologies/add-category/add-category.component';
+import { CategoryListComponent } from './components/admin-technologies/category-list/category-list.component';
 
 const routes: Routes = [
   {
@@ -35,6 +37,8 @@ const routes: Routes = [
       { path: 'technology-list', component: TechnologyListComponent },
       { path: 'technology-details/:id', component: TechnologyDetailsComponent },
       { path: 'add-technology', component: AddTechnologyComponent },
+      { path: 'add-category', component: AddCategoryComponent },
+      { path: 'category-list', component: CategoryListComponent },
       { path: 'solution/:id', component: SolutionDetailsComponent },
       { path: 'reports', component: AdminReportsComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },

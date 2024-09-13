@@ -1,0 +1,63 @@
+/* category-list.component.css */
+.container-fluid {
+  background-color: var(--bg-1);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 0.8px solid var(--bg-2);
+}
+
+.title {
+  color: var(--text-1);
+}
+
+.header {
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.table {
+  background-color: var(--bg-2);
+}
+
+.table th {
+  color: var(--primary-1);
+}
+
+.table td {
+  color: #000;
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  list-style-type: disc;
+}
+
+.add-btn {
+  background-color: var(--primary-1);
+  border-color: var(--primary-2);
+  color: var(--text-1);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+.add-btn:hover {
+  background-color: var(--primary-2);
+  border-color: var(--primary-3);
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 10px;
+  }
+
+  .table {
+    font-size: 14px;
+  }
+}

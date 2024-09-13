@@ -61,8 +61,9 @@ export class AddTechnologyComponent implements OnInit {
   onSubmit(): void {
     if (this.addTechnologyForm.valid) {
       const newTechnology: TechnologyDTO = this.addTechnologyForm.value;
-      this.technologyService.createCategory(newTechnology).subscribe(
+      this.technologyService.createTechnology(newTechnology).subscribe(
         (response) => {
+          console.log('Technology added successfully:', response);
           this.router.navigate(['/admin/technology-list']);
         },
         (error) => {
