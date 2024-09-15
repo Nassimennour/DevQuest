@@ -86,7 +86,7 @@ public class AdminController {
     }
 
     @PutMapping("")
-    public ResponseEntity<UserDTO> updateUser(@RequestBody User user) {
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user) {
         return ResponseEntity.ok(userService.update(user));
     }
 

@@ -165,7 +165,12 @@
       </section>
     </form>
     <!-- Profile information -->
-    <form (submit)="onSubmit($event)" class="form-group" *ngIf="step === 2">
+    <form
+      (submit)="onSubmit($event)"
+      class="form-group"
+      *ngIf="step === 2"
+      [formGroup]="detailsForm"
+    >
       <section class="personnal-section">
         <h2 class="section-header text-center">
           <i class="bi bi-2-circle-fill"></i> Fill out your Profile Information
@@ -173,20 +178,34 @@
 
         <div class="row">
           <div class="col-12 mt-3 mb-3">
-            <label for="pic" class="form-label">Profile Pic</label>
-            <input type="file" class="form-control" id="pic" />
+            <label for="pic" class="form-label">Profile Pic URL</label>
+            <input
+              type="text"
+              class="form-control"
+              id="pic"
+              placeholder="https://example.com/profile-pic.jpg"
+              formControlName="profilePicture"
+            />
           </div>
           <div class="col-12 col-md-6 mt-3 mb-3">
             <label for="first-name" class="form-label">First Name</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+            />
           </div>
           <div class="col-12 col-md-6 mt-3 mb-3">
             <label for="last-name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" />
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+            />
           </div>
           <div class="col-12 mt-3 mb-3">
             <label for="gender" class="form-label">Gender</label>
-            <select class="form-select" id="gender">
+            <select class="form-select" id="gender" formControlName="gender">
               <option value="">Select your Gender</option>
               <option value="MALE">Male</option>
               <option value="FEMALE">Female</option>
@@ -194,7 +213,12 @@
           </div>
           <div class="col-12 mt-3 mb-3">
             <label for="birth-date" class="form-label">Date of Birth</label>
-            <input type="date" id="birth-date" class="form-control" />
+            <input
+              type="date"
+              id="birth-date"
+              class="form-control"
+              formControlName="birthDate"
+            />
           </div>
           <div class="col-12 mt-3 mb-4">
             <label for="first-name" class="form-label">Bio</label>
@@ -202,18 +226,15 @@
               class="form-control"
               rows="3"
               placeholder="Tell us about yourself ..."
+              formControlName="bio"
             ></textarea>
           </div>
         </div>
         <div class="actions mt-2">
-          <button
-            class="back-button btn btn-md"
-            type="submit"
-            (click)="prevStep()"
-          >
+          <button class="back-button btn btn-md" (click)="prevStep()">
             <i class="bi bi-arrow-left-circle-fill"></i>&nbsp;Back
           </button>
-          <button class="next-button btn btn-md" (click)="nextStep()">
+          <button class="next-button btn btn-md" type="submit">
             Next&nbsp;<i class="bi bi-arrow-right-circle-fill"></i>
           </button>
         </div>
@@ -221,9 +242,12 @@
     </form>
     <!-- Verify your account section -->
     <section class="verify-section" *ngIf="step === 3">
-      <h2 class="section-header text-center">
-        <i class="bi bi-3-circle-fill"></i> Verify your account
-      </h2>
+      <div class="d-flex justify-content-between">
+        <h2 class="section-header text-center">
+          <i class="bi bi-3-circle-fill"></i> Verify your account
+        </h2>
+        <i class="skip" routerLink="/login">Skip for now?</i>
+      </div>
       <p class="verify-msg">
         We have sent a verification code to your email. Please enter the code
         below to verify your account.

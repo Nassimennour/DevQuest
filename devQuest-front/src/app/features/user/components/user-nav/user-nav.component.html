@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/dashboard">
+      <img src="assets/logo.png" alt="App Logo" class="logo-img" />
+      DevQuest
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="toggleNavbar()"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse"
+      [ngClass]="{ show: navbarOpen }"
+      id="navbarNav"
+    >
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user/profile">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user/quizzes">Quizzes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user/coding-challenges"
+            >Coding Challenges</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user/ranking">Leaderboard</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <app-dark-mode-toggle></app-dark-mode-toggle>
+        </li>
+        <li class="nav-item dropdown" (click)="toggleDropdown()">
+          <a
+            class="nav-link dropdown-toggle"
+            id="profileDropdown"
+            role="button"
+            aria-expanded="false"
+          >
+            <img
+              [src]="userProfile?.profilePicture"
+              alt="Profile Picture"
+              class="profile-img"
+            />
+            {{ userProfile?.username }}
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            [ngClass]="{ show: dropdownOpen }"
+            aria-labelledby="profileDropdown"
+          >
+            <li>
+              <a class="dropdown-item" routerLink="/user/profile"
+                >View Profile <i class="bi bi-person-fill ms-5"></i
+              ></a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/user/dashboard"
+                >My Dashboard <i class="bi bi-speedometer ms-5"></i
+              ></a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item logout" (click)="logout()"
+                >Logout <i class="bi bi-box-arrow-right ms-5"></i
+              ></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,5 +1,100 @@
-<p>Welcome</p>
-<!-- Logged-in toast -->
+<!-- user dashboard start -->
+<div class="user-dashboard-container">
+  <div class="dashboard-header">
+    <h1>
+      Welcome, <span class="username">{{ userProfile?.username }}</span>
+    </h1>
+    <p>Here's an overview of your progress and activities.</p>
+  </div>
+
+  <div class="dashboard-section">
+    <h2><i class="bi bi-lightbulb"></i> Suggested Quizzes</h2>
+    <div class="suggested-quizzes">
+      <div
+        class="quiz-card"
+        *ngFor="let quiz of userDashboard?.suggestedQuizzes?.slice(0, 5)"
+      >
+        <h3>{{ quiz.title }}</h3>
+        <p>{{ quiz.overview }}</p>
+        <button class="btn btn-primary" (click)="viewQuizDetails(quiz.id)">
+          <i class="bi bi-eye"></i> View Details
+        </button>
+        <button class="btn btn-success" (click)="takeQuiz(quiz.id)">
+          <i class="bi bi-play-circle"></i> Take Quiz
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-section">
+    <h2><i class="bi bi-code-slash"></i> Suggested Coding Challenges</h2>
+    <div class="suggested-challenges">
+      <div
+        class="challenge-card"
+        *ngFor="
+          let challenge of userDashboard?.suggestedCodingChallenges?.slice(0, 5)
+        "
+      >
+        <h3>{{ challenge.title }}</h3>
+        <p>
+          {{ challenge.description?.slice(0, 100)
+          }}{{ challenge.description?.length! >= 100 ? "..." : "" }}
+        </p>
+        <button
+          class="btn btn-primary"
+          (click)="viewChallengeDetails(challenge.id)"
+        >
+          <i class="bi bi-eye"></i> View Details
+        </button>
+        <button class="btn btn-success" (click)="takeChallenge(challenge.id)">
+          <i class="bi bi-play-circle"></i> Take Challenge
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-section">
+    <h2><i class="bi bi-clock-history"></i> Quiz History</h2>
+    <div class="history-list">
+      <div
+        class="history-item"
+        *ngFor="let history of userProfile?.quizzHistory"
+      >
+        <h3>{{ history.quizz.title }}</h3>
+        <p>Score: {{ history.score | percent }}</p>
+        <p>Completed At: {{ history.compltedAt | date }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-section">
+    <h2><i class="bi bi-clock-history"></i> Coding Challenge History</h2>
+    <div class="history-list">
+      <div
+        class="history-item"
+        *ngFor="let challenge of userProfile?.codingChallengeHistory"
+      >
+        <h3>{{ challenge.title }}</h3>
+        <p>Technology: {{ challenge.technology?.name }}</p>
+        <p>Difficulty: {{ challenge.difficulty }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-section">
+    <h2><i class="bi bi-trophy"></i> Your Ranking</h2>
+    <div class="ranking-info">
+      <p>Position: {{ userRanking?.position }}</p>
+      <p>Score: {{ userRanking?.score }}</p>
+      <p>Level: {{ userRanking?.level }}</p>
+      <a routerLink="/full-ranking" class="btn btn-outline-primary">
+        <i class="bi bi-list"></i> View Full Ranking
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Logged-in toast start -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <div
     id="loginToast"
@@ -32,3 +127,4 @@
     </div>
   </div>
 </div>
+<!-- Logged-in Toast end  -->

@@ -4,11 +4,15 @@ import { LoginPageComponent } from './shared/components/login-page/login-page.co
 import { RegisterComponent } from './shared/components/register/register.component';
 import { AdminDashboardComponent } from './features/admin/components/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './features/user/components/user-dashboard/user-dashboard.component';
+import { LandingComponent } from './shared/components/landing/landing.component';
+import { ContactComponent } from './shared/components/contact/contact.component';
+import { AboutComponent } from './shared/components/about/about.component';
+import { TermsComponent } from './shared/components/terms/terms.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'landing',
     pathMatch: 'full',
   },
   {
@@ -18,6 +22,22 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'landing',
+    component: LandingComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'terms',
+    component: TermsComponent,
   },
   {
     path: 'admin',

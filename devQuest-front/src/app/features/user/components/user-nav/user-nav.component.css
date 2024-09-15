@@ -1,0 +1,78 @@
+.navbar {
+  background-color: var(--bg-1);
+  padding: 10px 20px;
+}
+
+.navbar-brand {
+  color: var(--text-1);
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.nav-link {
+  color: var(--text-2);
+  margin-right: 15px;
+}
+
+.nav-link:hover {
+  color: var(--primary-1);
+}
+
+.profile-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: var(--bg-2);
+  border: 1px solid var(--primary-2);
+  right: 0;
+  z-index: 1000;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  color: var(--text-2);
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: var(--primary-1);
+  color: var(--text-1);
+}
+.logout {
+  color: white;
+  background-color: red;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .nav-link {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .collapse.navbar-collapse {
+    display: none;
+  }
+
+  .collapse.navbar-collapse.show {
+    display: block;
+  }
+}

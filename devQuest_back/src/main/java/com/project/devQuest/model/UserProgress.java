@@ -31,10 +31,10 @@ public class UserProgress {
     private double progressPercentage = 0;
     private int totalScore = 0;
     private Date lastActivityDate;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "last_quizz_id", referencedColumnName = "id", nullable = true)
     private Quizz lastQuizz;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "last_codingChallenge_id", referencedColumnName = "id", nullable = true)
     private CodingChallenge lastCodingChallenge;
 }

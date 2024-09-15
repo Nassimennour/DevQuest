@@ -1,0 +1,63 @@
+<div class="solutions-container">
+  <div class="solutions-header">
+    <h1>Challenge Solutions</h1>
+  </div>
+
+  <div class="solutions-list">
+    <div
+      class="solution-card"
+      *ngFor="let solution of paginatedSolutions"
+      [class.user-solution]="solution.user.id === currentUser?.id"
+    >
+      <div class="solution-header">
+        <img
+          [src]="solution.user.profilePicture"
+          alt="{{ solution.user.username }}"
+          class="profile-picture"
+        />
+        <span class="username">{{ solution.user.username }}</span>
+        <span class="submission-date">
+          {{ solution.submissionDate | date : "short" }}
+        </span>
+      </div>
+      <button
+        class="btn btn-outline-primary"
+        (click)="openSolutionModal(solution)"
+      >
+        <i class="bi bi-code-slash"></i> View Code
+      </button>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <button
+      class="btn btn-outline-primary"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1"
+    >
+      <i class="bi bi-arrow-left"></i> Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="btn btn-outline-primary"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+    >
+      Next <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+
+  <div class="modal" *ngIf="selectedSolution" (click)="closeSolutionModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>Solution Code</h2>
+        <button class="close-btn" (click)="closeSolutionModal()">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre>{{ selectedSolution.code }}</pre>
+      </div>
+    </div>
+  </div>
+</div>

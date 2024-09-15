@@ -27,6 +27,7 @@ public class UserDashboardController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         logger.info("Received GET /user/dashboards/my-dashboard from user: " + userDetails.getUsername());
         long id = userService.findByUsername(userDetails.getUsername()).getId();
+        dashboardService.computeSuggestions(id);
         return ResponseEntity.ok(dashboardService.getDashboardByUserId(id));
     }
 }

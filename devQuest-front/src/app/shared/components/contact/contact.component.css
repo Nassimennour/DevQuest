@@ -1,0 +1,65 @@
+.contact-page {
+  padding: 60px 20px;
+  background-color: var(--bg-2);
+  color: var(--text-1);
+}
+
+.section-header {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--accent-1);
+}
+
+.section-description {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--text-2);
+}
+
+.contact-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--accent-2);
+}
+
+.form-label {
+  color: var(--text-2);
+}
+
+.btn-primary {
+  background-color: var(--primary-1);
+  border-color: var(--primary-2);
+}
+
+.social-icons a {
+  color: var(--text-1);
+  font-size: 1.5rem;
+  margin-right: 15px;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: var(--primary-1);
+}
+
+@media (max-width: 768px) {
+  .section-header {
+    font-size: 1.5rem;
+  }
+
+  .section-description {
+    font-size: 1rem;
+  }
+
+  .contact-title {
+    font-size: 1.25rem;
+  }
+
+  .social-icons a {
+    margin-right: 10px;
+  }
+}

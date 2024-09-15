@@ -58,7 +58,7 @@ export class AddCategoryComponent implements OnInit {
       const newCategory: CategoryDTO = this.addCategoryForm.value;
       this.technologyService.createCategory(newCategory).subscribe(
         (response) => {
-          this.router.navigate(['/admin/categories']);
+          this.router.navigate(['/admin/category-list']);
         },
         (error) => {
           console.error('Error adding category:', error);

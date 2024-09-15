@@ -1,5 +1,6 @@
 package com.project.devQuest.service;
 
+import com.project.devQuest.controller.UserController;
 import com.project.devQuest.converter.UserDTOConverter;
 import com.project.devQuest.dto.ChangePasswordDTO;
 import com.project.devQuest.dto.UserDTO;
@@ -7,6 +8,8 @@ import com.project.devQuest.model.Dashboard;
 import com.project.devQuest.model.Ranking;
 import com.project.devQuest.model.User;
 import com.project.devQuest.model.VerificationToken;
+import com.project.devQuest.repository.DashboardRepository;
+import com.project.devQuest.repository.RankingRepository;
 import com.project.devQuest.repository.TechnologyRepository;
 import com.project.devQuest.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -29,6 +32,12 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private DashboardRepository dashboardRepository;
+    @Autowired
+    private RankingRepository rankingRepository;
+    @Autowired
+    private TechnologyRepository technologyRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -46,14 +55,16 @@ public class UserService {
         logger.info("Saving user: {}", user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setVerified(false);
-        Dashboard dashboard = new Dashboard();
-        user.setDashboard(dashboard);
-        Ranking ranking = new Ranking();
-        user.setRanking(ranking);
         User savedUser = userRepository.save(user);
         logger.info("User saved successfully: {}", savedUser.getUsername());
+        Ranking ranking = new Ranking();
+        ranking.setUser(savedUser);
+        rankingRepository.save(ranking);
+        Dashboard dashboard = new Dashboard();
+        dashboard.setUser(savedUser);
+        dashboardRepository.save(dashboard);
         VerificationToken verificationToken = verificationTokenService.createVerificationToken(savedUser);
-        emailService.sendVerificationEmail(user.getEmail(), verificationToken.getToken());
+        //emailService.sendVerificationEmail(user.getEmail(), verificationToken.getToken());
         return userDTOConverter.convertToDTO(savedUser);
     }
 
@@ -118,7 +129,7 @@ public class UserService {
         return userRepository.existsById(id);
     }
 
-    public UserDTO update(User user){
+    public UserDTO update(UserDTO user){
         logger.info("Updating user: {}", user.getUsername());
         User existingUser = userRepository.findById(user.getId()).orElseThrow(
                 () -> new IllegalArgumentException("User not found")
@@ -132,18 +143,23 @@ public class UserService {
         existingUser.setGender(user.getGender());
         existingUser.setBirthDate(user.getBirthDate());
         existingUser.setProfilePicture(user.getProfilePicture());
+        existingUser.setRegistrationDate(user.getRegistrationDate());
         userRepository.save(existingUser);
         logger.info("User updated successfully: {}", existingUser.getUsername());
         return userDTOConverter.convertToDTO(existingUser);
     }
 
-    public UserDTO update(UserDTO userDTO){
-        logger.info("Updating user: {}", userDTO.getUsername());
-        User user = userDTOConverter.convertToEntity(userDTO);
-        User updatedUser = userRepository.save(user);
-        logger.info("User updated successfully: {}", updatedUser.getUsername());
-        return userDTO;
+    public UserDTO addSkill(String username, long technologyId){
+        User user = userRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("User not found with username: " + username)
+        );
+        user.getSkills().add(technologyRepository.findById(technologyId).orElseThrow(
+                () -> new IllegalArgumentException("Technology not found")
+        ));
+        userRepository.save(user);
+        return userDTOConverter.convertToDTO(user);
     }
+
 
     // Number of users
     public  long count(){
@@ -161,6 +177,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
         userRepository.save(user);
     }
+
 
 
 }}

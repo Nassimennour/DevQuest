@@ -42,8 +42,9 @@ public class UserController {
     }
 
     @PostMapping("/profile")
-    public ResponseEntity<UserDTO> createProfile(@Valid @RequestBody User user) {
-        return ResponseEntity.ok(userService.save(user));
+    public ResponseEntity<UserDTO> createProfile(@Valid @RequestBody UserDTO user) {
+        logger.info("Received request to create profile for user: {}", user.getUsername());
+        return ResponseEntity.ok(userService.update(user));
     }
 
     @GetMapping("/my-profile")
@@ -68,8 +69,8 @@ public class UserController {
     }
 
     @PutMapping("/profile")
-    public ResponseEntity<UserDTO> updateProfile(@Valid @RequestBody User user) {
-        return ResponseEntity.ok(userService.save(user));
+    public ResponseEntity<UserDTO> updateProfile(@Valid @RequestBody UserDTO user) {
+        return ResponseEntity.ok(userService.update(user));
     }
 
     @DeleteMapping("/profile/{id}")
@@ -85,10 +86,8 @@ public class UserController {
     @PutMapping("/profile/add-skill/{technologyId}")
     public ResponseEntity<UserDTO> addSkill(@PathVariable long technologyId) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDTO userDTO = userService.findByUsername(userDetails.getUsername());
-        Technology technology = technologyService.getTechnologyById(technologyId);
-        userDTO.getSkills().add(technology);
-        return ResponseEntity.ok(userService.update(userDTO));
+        UserDTO user =  userService.addSkill(userDetails.getUsername(), technologyId);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/verify")

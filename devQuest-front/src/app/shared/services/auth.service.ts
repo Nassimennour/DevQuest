@@ -18,10 +18,11 @@ export class AuthService {
   registerEndpoint: string = environment.endpoints.register;
   loginEndpoint: string = environment.endpoints.login;
   myProfileEndpoint: string = environment.endpoints.getMyProfile;
+  createProfileEndpoint: string = environment.userEndpoints.createProfile;
 
   token: string | null = null;
   userRole: string | null = null;
-  loggedInUserProfile$: Observable<UserProfile> | undefined;
+  loggedInUserProfile$: Observable<UserProfile> | null = null;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -35,7 +36,7 @@ export class AuthService {
           if (response.status >= 200 && response.status < 300) {
             console.log('User registered successfully');
           }
-          return response.body;
+          return response;
         }),
         catchError((error) => {
           if (error.status >= 400 && error.status < 500) {
@@ -110,5 +111,17 @@ export class AuthService {
         },
       }
     ));
+  }
+
+  createUserProfile(userProfile: any): Observable<any> {
+    return this.httpClient.post(
+      this.base_api + this.createProfileEndpoint,
+      userProfile,
+      {
+        headers: {
+          Authorization: `Bearer ${this.getToken()}`,
+        },
+      }
+    );
   }
 }

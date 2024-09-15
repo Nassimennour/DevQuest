@@ -34,4 +34,9 @@ export class AdminSidebarComponent {
   toggleReportsLinks(): void {
     this.showReportsLinks = !this.showReportsLinks;
   }
+
+  logout() {
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  }
 }

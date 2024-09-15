@@ -1,0 +1,55 @@
+<!-- challenge.component.html -->
+<div class="challenge-container">
+  <div class="challenge-header">
+    <h1>{{ challenge?.title }}</h1>
+    <div class="creator-info">
+      <img
+        [src]="challenge?.creator?.profilePicture"
+        alt="Profile"
+        class="profile-img"
+      />
+      <span>{{ challenge?.creator?.username }}</span>
+    </div>
+  </div>
+
+  <div class="challenge-details">
+    <div class="detail-item">
+      <i class="bi bi-bar-chart"></i>
+      <span>Difficulty: {{ challenge?.difficulty }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-clock"></i>
+      <span>Duration: {{ challenge?.duration }} mins</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-calendar"></i>
+      <span>Created on: {{ challenge?.creationDate | date }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-people"></i>
+      <span>Times Taken: {{ challenge?.timesTaken }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-star"></i>
+      <span
+        >Technology:
+        <img [src]="challenge?.technology?.logo" alt="Logo" class="tech-logo" />
+        {{ challenge?.technology?.name }} ({{
+          challenge?.technology?.category?.name
+        }})
+      </span>
+    </div>
+  </div>
+
+  <div class="challenge-description">
+    <h2>Description</h2>
+    <p>{{ challenge?.description }}</p>
+  </div>
+
+  <button
+    class="btn btn-primary start-challenge-btn"
+    (click)="startChallenge()"
+  >
+    <i class="bi bi-play-circle"></i> Start Challenge
+  </button>
+</div>

@@ -1,0 +1,168 @@
+<!-- navbar -->
+<app-basic-nav></app-basic-nav>
+<!-- Hero section -->
+<section class="hero-section">
+  <div class="container text-center">
+    <h1 class="hero-title">
+      Master Your Skills with <span class="brand">DevQuest</span>
+    </h1>
+    <p class="hero-description">
+      Interactive <span class="underlined">quizzes</span>,coding
+      <span class="underlined">challenges</span>, and personalized learning
+      paths for developers.
+    </p>
+    <div class="hero-buttons">
+      <a class="btn btn-primary btn-lg" routerLink="/register"
+        >Get Started
+        <i class="bi bi-box-arrow-in-right"></i>
+      </a>
+      <a class="btn btn-secondary btn-lg" (click)="scrollToMoreInfo()"
+        >Learn More <i class="bi bi-arrow-down-circle"></i
+      ></a>
+    </div>
+  </div>
+</section>
+<!-- Features section -->
+<section class="features-section" id="more-info" #moreInfo>
+  <div class="container">
+    <h2 class="section-header">Why Choose DevQuest?</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="feature-card">
+          <div class="icon">
+            <i class="bi bi-question-circle"></i>
+          </div>
+          <h3 class="feature-title">Quizzes</h3>
+          <p class="feature-description">
+            Test your knowledge with interactive quizzes designed to challenge
+            and educate.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature-card">
+          <div class="icon">
+            <i class="bi bi-code-slash"></i>
+          </div>
+          <h3 class="feature-title">Challenges</h3>
+          <p class="feature-description">
+            Improve your coding skills with hands-on challenges and real-world
+            scenarios.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature-card">
+          <div class="icon">
+            <i class="bi bi-graph-up"></i>
+          </div>
+          <h3 class="feature-title">Track Progress</h3>
+          <p class="feature-description">
+            Monitor your learning journey and track your progress over time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials section -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-header">What Our Users Say</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="testimonial-card">
+          <div class="profile-img">
+            <img
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.EwG6x9w6RngqsKrPJYxULAHaHa%26pid%3DApi&f=1&ipt=6d90995e05d157b826ccee42e71d140c93504e98521db31ec5e52554b4142ffd&ipo=images"
+              alt="User 1"
+            />
+          </div>
+          <p class="testimonial-quote">
+            "DevQuest has transformed the way I learn. The quizzes and
+            challenges are engaging and really help me improve my skills."
+          </p>
+          <p class="testimonial-name">- John Doe</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="testimonial-card">
+          <div class="profile-img">
+            <img
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ZZf5ANaOGgdbBM-ot_12FgHaHa%26pid%3DApi&f=1&ipt=e89f5221495a677c7f45f9b9b3ede0da08d61b6ab42afce72474df5096fed37e&ipo=images"
+              alt="User 2"
+            />
+          </div>
+          <p class="testimonial-quote">
+            "The personalized learning paths are fantastic. I can track my
+            progress and see how much I've improved over time."
+          </p>
+          <p class="testimonial-name">- Jane Smith</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="testimonial-card">
+          <div class="profile-img">
+            <img
+              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.explicit.bing.net%2Fth%3Fid%3DOIP.VOnsU2XuuWeDj_0qNe2lCwHaIH%26pid%3DApi&f=1&ipt=2a0218e81ca33bcc664783c786f4640da7bb3be562e9130929f8d8b666fe7b7b&ipo=images"
+              alt="User 3"
+            />
+          </div>
+          <p class="testimonial-quote">
+            "DevQuest's coding challenges are top-notch. They simulate
+            real-world scenarios and help me prepare for job interviews."
+          </p>
+          <p class="testimonial-name">- Alex Johnson</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- How it works section -->
+<section class="how-it-works-section">
+  <div class="container">
+    <h2 class="section-header">How It Works?</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="how-it-works-step">
+          <div class="icon">
+            <i class="bi bi-person-plus"></i>
+          </div>
+          <h3 class="step-title">Step 1: Register an account</h3>
+          <p class="step-description">
+            Sign up to get started with DevQuest and unlock all features.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="how-it-works-step">
+          <div class="icon">
+            <i class="bi bi-code-slash"></i>
+          </div>
+          <h3 class="step-title">
+            Step 2: Start quizzes and coding challenges
+          </h3>
+          <p class="step-description">
+            Dive into interactive quizzes and coding challenges to test and
+            improve your skills.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="how-it-works-step">
+          <div class="icon">
+            <i class="bi bi-graph-up"></i>
+          </div>
+          <h3 class="step-title">
+            Step 3: Track your progress and gain new skills
+          </h3>
+          <p class="step-description">
+            Monitor your progress and see how much you've improved over time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

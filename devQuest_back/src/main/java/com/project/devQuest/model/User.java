@@ -2,7 +2,6 @@ package com.project.devQuest.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -13,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -41,6 +41,7 @@ public class User {
     @NotBlank(message = "Password is required")
     private String password;
     private String bio;
+    @Column(length = 2000)
     private String profilePicture;
     private Gender gender;
     private Date birthDate;
@@ -49,16 +50,16 @@ public class User {
     private Date registrationDate;
     @ManyToMany
     @JoinTable(name = "user_skills",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "technology_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "technology_id"))
     Set<Technology> skills;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     List<QuizzHistory> quizzHistory;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_codingChallenges",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "codingChallenge_id"))
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "codingChallenge_id"))
     List<CodingChallenge> codingChallengeHistory;
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -81,6 +82,20 @@ public class User {
     private List<Quizz> createdQuizzes;
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private VerificationToken verificationToken;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
     @Override
     public String toString() {
         return "User{" +

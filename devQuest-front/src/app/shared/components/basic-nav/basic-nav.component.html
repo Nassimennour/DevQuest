@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/logo.png" alt="App Logo" class="logo-img" />
+      DevQuest
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register"
+            >Sign Up <i class="bi bi-box-arrow-in-right"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login"
+            >Login <i class="bi bi-arrow-right"></i
+          ></a>
+        </li>
+        <li class="nav-item">
+          <app-dark-mode-toggle></app-dark-mode-toggle>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

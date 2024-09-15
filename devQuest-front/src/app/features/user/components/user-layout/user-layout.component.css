@@ -1,0 +1,17 @@
+/* user-layout.component.css */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+  margin-top: 10px;
+}
+
+app-footer {
+  color: var(--text-1);
+  padding: 5px;
+  text-align: center;
+}

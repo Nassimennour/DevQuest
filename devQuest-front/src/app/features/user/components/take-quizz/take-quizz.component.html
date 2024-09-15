@@ -1,0 +1,35 @@
+<div class="take-quizz-container">
+  <div class="quizz-header">
+    <h1>{{ quizz?.title }}</h1>
+    <p>{{ quizz?.overview }}</p>
+  </div>
+
+  <div class="questions-container">
+    <div
+      *ngFor="let question of questions; let i = index"
+      class="question-item"
+    >
+      <h2>Question {{ i + 1 }}</h2>
+      <p>{{ question.question }}</p>
+      <div class="options-container">
+        <div
+          *ngFor="let option of question.options"
+          class="option-item"
+          (click)="selectAnswer(question.id, option)"
+          [class.selected]="isSelected(question.id, option)"
+        >
+          {{ option }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions-container">
+    <button class="btn btn-outline-secondary" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i> Back
+    </button>
+    <button class="btn btn-primary" (click)="submitQuizz()">
+      <i class="bi bi-check-circle"></i> Submit
+    </button>
+  </div>
+</div>

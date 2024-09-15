@@ -1,0 +1,109 @@
+<div class="quizzes-container">
+  <div class="quizzes-header">
+    <h1>Available Quizzes</h1>
+    <div class="search-filter">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search quizzes..."
+        [(ngModel)]="searchTerm"
+        (input)="filterQuizzes()"
+      />
+      <select
+        class="form-select"
+        [(ngModel)]="selectedDifficulty"
+        (change)="filterQuizzes()"
+      >
+        <option value="">All Difficulties</option>
+        <option value="EASY">Easy</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="HARD">Hard</option>
+      </select>
+      <select
+        class="form-select"
+        [(ngModel)]="selectedTechnology"
+        (change)="filterQuizzes()"
+      >
+        <option value="">All Technologies</option>
+        <option *ngFor="let tech of technologies" [value]="tech.name">
+          {{ tech.name }}
+        </option>
+      </select>
+      <select
+        class="form-select"
+        [(ngModel)]="selectedDuration"
+        (change)="filterQuizzes()"
+      >
+        <option value="">All Durations</option>
+        <option value="short">Short (<= 30 mins)</option>
+        <option value="medium">Medium (30-60 mins)</option>
+        <option value="long">Long (> 60 mins)</option>
+      </select>
+      <select
+        class="form-select"
+        [(ngModel)]="sortOrder"
+        (change)="sortQuizzes()"
+      >
+        <option value="title">Title</option>
+        <option value="difficulty">Difficulty</option>
+        <option value="duration">Duration</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="quizzes-list">
+    <div
+      class="quiz-card"
+      *ngFor="let quiz of paginatedQuizzes"
+      [class.taken]="hasTakenQuiz(quiz.id)"
+    >
+      <h3>{{ quiz.title }}</h3>
+      <p>{{ quiz.overview }}</p>
+      <p>Difficulty: {{ quiz.difficulty }}</p>
+      <p>Duration: {{ quiz.duration }} mins</p>
+      <div *ngIf="hasTakenQuiz(quiz.id)" class="taken-icon">
+        <i class="bi bi-check-circle-fill"></i> Taken
+      </div>
+      <button
+        class="btn btn-primary"
+        (click)="viewQuizDetails(quiz.id)"
+        *ngIf="!hasTakenQuiz(quiz.id)"
+      >
+        <i class="bi bi-eye"></i> View Details
+      </button>
+      <button
+        class="btn btn-success"
+        (click)="takeQuiz(quiz.id)"
+        *ngIf="!hasTakenQuiz(quiz.id)"
+      >
+        <i class="bi bi-play-circle"></i> Take Quiz
+      </button>
+      <button
+        class="btn btn-info"
+        (click)="viewScore(quiz.id)"
+        *ngIf="hasTakenQuiz(quiz.id)"
+      >
+        <i class="bi bi-bar-chart"></i> View Score
+      </button>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <button
+      class="btn btn-outline-primary"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1"
+    >
+      <i class="bi bi-arrow-left"></i>
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="btn btn-outline-primary"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+    >
+      Next <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</div>

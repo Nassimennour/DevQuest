@@ -1,0 +1,55 @@
+<div class="quizz-container">
+  <div class="quizz-header">
+    <h1>{{ quizz?.title }}</h1>
+    <p>{{ quizz?.overview }}</p>
+  </div>
+
+  <div class="quizz-details">
+    <div class="detail-item">
+      <i class="bi bi-bar-chart"></i>
+      <span>Difficulty: {{ quizz?.difficulty }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-clock"></i>
+      <span>Duration: {{ quizz?.duration }} mins</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-calendar"></i>
+      <span>Created on: {{ quizz?.creationDate | date }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-person"></i>
+      <span>Created by: {{ quizz?.creator?.username }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-people"></i>
+      <span>Times Taken: {{ quizz?.timesTaken }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-star"></i>
+      <span>Average Score: {{ quizz?.averageScore }}%</span>
+    </div>
+  </div>
+
+  <div class="top-scores">
+    <h2>Top Scores</h2>
+    <div class="score-item" *ngFor="let score of topScores">
+      <img
+        [src]="score.user.profilePicture"
+        alt="Profile Picture"
+        class="profile-img"
+      />
+      <div class="score-info">
+        <span>{{ score.user.username }}</span>
+        <span>{{ score.score }}%</span>
+      </div>
+    </div>
+    <div *ngIf="topScores.length === 0" class="no-scores">
+      <span>No scores yet! <i class="bi bi-emoji-frown"></i></span>
+    </div>
+  </div>
+
+  <button class="btn btn-primary start-quiz-btn" (click)="startQuiz()">
+    <i class="bi bi-play-circle"></i> Start Quiz
+  </button>
+</div>

@@ -26,6 +26,7 @@ public class AdminDashboardController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<Dashboard> getDashboardByUserId(@PathVariable long userId) {
         logger.info("Received GET /admin/dashboards/user/" + userId);
+        dashboardService.computeSuggestions(userId);
         return ResponseEntity.ok(dashboardService.getDashboardByUserId(userId));
     }
 

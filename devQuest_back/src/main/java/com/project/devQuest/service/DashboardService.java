@@ -3,6 +3,7 @@ package com.project.devQuest.service;
 import com.project.devQuest.model.Dashboard;
 import com.project.devQuest.model.Quizz;
 import com.project.devQuest.model.CodingChallenge;
+import com.project.devQuest.model.User;
 import com.project.devQuest.repository.DashboardRepository;
 import com.project.devQuest.repository.QuizzRepository;
 import com.project.devQuest.repository.CodingChallengeRepository;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DashboardService {
@@ -76,4 +78,23 @@ public class DashboardService {
         return dashboardRepository.save(dashboard);
     }
 
+    // Compute suggested quizzes and coding challenges
+    public void computeSuggestions(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        Dashboard dashboard = dashboardRepository.findByUserId(userId);
+
+        // Suggest quizzes based on user's skills
+        List<Quizz> suggestedQuizzes = quizzRepository.findAll().stream()
+                .filter(quizz -> user.getSkills().contains(quizz.getTechnology()))
+                .collect(Collectors.toList());
+
+        // Suggest coding challenges based on user's skills
+        List<CodingChallenge> suggestedCodingChallenges = codingChallengeRepository.findAll().stream()
+                .filter(challenge -> user.getSkills().contains(challenge.getTechnology()))
+                .collect(Collectors.toList());
+
+        dashboard.setSuggestedQuizzes(suggestedQuizzes);
+        dashboard.setSuggestedCodingChallenges(suggestedCodingChallenges);
+        dashboardRepository.save(dashboard);
+    }
 }

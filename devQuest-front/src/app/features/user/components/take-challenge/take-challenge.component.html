@@ -1,0 +1,79 @@
+<div class="take-challenge-container">
+  <div class="challenge-header">
+    <h1>{{ challenge?.title }}</h1>
+    <div class="creator-info">
+      <img
+        [src]="challenge?.creator?.profilePicture"
+        alt="Profile"
+        class="profile-img"
+      />
+      <span>{{ challenge?.creator?.username }}</span>
+    </div>
+  </div>
+
+  <div class="challenge-details">
+    <div class="detail-item">
+      <i class="bi bi-bar-chart"></i>
+      <span>Difficulty: {{ challenge?.difficulty }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-clock"></i>
+      <span>Duration: {{ challenge?.duration }} mins</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-calendar"></i>
+      <span>Created on: {{ challenge?.creationDate | date }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-people"></i>
+      <span>Times Taken: {{ challenge?.timesTaken }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-star"></i>
+      <span
+        >Technology:
+        <img [src]="challenge?.technology?.logo" alt="Logo" class="tech-logo" />
+        {{ challenge?.technology?.name }} ({{
+          challenge?.technology?.category?.name
+        }})
+      </span>
+    </div>
+  </div>
+
+  <div class="challenge-description">
+    <h2>Description</h2>
+    <p>{{ challenge?.description }}</p>
+  </div>
+
+  <div class="solution-section">
+    <h2>Your Solution</h2>
+    <textarea
+      [(ngModel)]="solution.code"
+      [readonly]="isSubmitted"
+      class="solution-textarea"
+      placeholder="Write your solution here..."
+    ></textarea>
+    <div class="solution-actions">
+      <button
+        class="btn btn-primary"
+        (click)="submitSolution()"
+        *ngIf="!isSubmitted"
+      >
+        <i class="bi bi-send"></i> Submit
+      </button>
+      <button
+        class="btn btn-secondary"
+        (click)="editSolution()"
+        *ngIf="isSubmitted"
+      >
+        <i class="bi bi-pencil"></i> Edit
+      </button>
+      <button class="btn btn-outline-secondary" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Back
+      </button>
+    </div>
+    <div *ngIf="submissionMessage" class="submission-message">
+      {{ submissionMessage }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+.score-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--bg-1);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.score-container:hover {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+.score-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.score-header h1 {
+  color: var(--text-1);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.score-header p {
+  color: var(--text-2);
+  font-size: 18px;
+}
+
+.questions-container {
+  margin-bottom: 30px;
+}
+
+.question-item {
+  margin-bottom: 20px;
+}
+
+.question-item h2 {
+  color: var(--text-1);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.question-item p {
+  color: var(--text-2);
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.options-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option-item {
+  background-color: var(--bg-2);
+  color: var(--text-1);
+  padding: 10px 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.option-item.correct {
+  background-color: var(--success);
+}
+
+.option-item.chosen {
+  border: 2px solid var(--primary-1);
+}
+
+.correct-icon {
+  color: var(--success);
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.wrong-icon {
+  color: var(--danger);
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.correct-answer {
+  color: var(--success);
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn {
+  margin: 5px;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.btn-outline-secondary {
+  background-color: var(--bg-2);
+  color: var(--text-1);
+  border: 1px solid var(--primary-2);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--primary-2);
+}
+
+i {
+  color: var(--primary-2);
+}
+
+.score {
+  color: var(--primary-1);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  background-color: var(--bg-2);
+  padding: 5px 10px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-1);
+}

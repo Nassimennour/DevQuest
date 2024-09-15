@@ -1,0 +1,56 @@
+<div class="solution-container">
+  <div class="solution-header">
+    <h1>{{ challenge?.title }}</h1>
+    <div class="creator-info">
+      <img
+        [src]="challenge?.creator?.profilePicture"
+        alt="Profile"
+        class="profile-img"
+      />
+      <span>{{ challenge?.creator?.username }}</span>
+    </div>
+  </div>
+
+  <div class="solution-details">
+    <div class="detail-item">
+      <i class="bi bi-bar-chart"></i>
+      <span>Difficulty: {{ challenge?.difficulty }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-clock"></i>
+      <span>Duration: {{ challenge?.duration }} mins</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-calendar"></i>
+      <span>Created on: {{ challenge?.creationDate | date }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-people"></i>
+      <span>Times Taken: {{ challenge?.timesTaken }}</span>
+    </div>
+    <div class="detail-item">
+      <i class="bi bi-star"></i>
+      <span
+        >Technology:
+        <img [src]="challenge?.technology?.logo" alt="Logo" class="tech-logo" />
+        {{ challenge?.technology?.name }} ({{
+          challenge?.technology?.category?.name
+        }})
+      </span>
+    </div>
+  </div>
+
+  <div class="solution-code-section">
+    <h2>Your Solution</h2>
+    <pre><code [innerHTML]="highlightedCode" class="language-{{ challenge?.technology?.name }}"></code></pre>
+  </div>
+
+  <div class="solution-actions">
+    <button class="btn btn-outline-secondary" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i> Back
+    </button>
+    <button class="btn btn-primary" (click)="viewOtherSolutions()">
+      <i class="bi bi-eye"></i> View Other Solutions
+    </button>
+  </div>
+</div>

@@ -25,7 +25,7 @@ public class UserScoreController {
     private UserService userService;
     private final static Logger logger = LoggerFactory.getLogger(UserScoreController.class);
 
-    @GetMapping("")
+    @GetMapping("/my-scores")
     public ResponseEntity<List<Score>> getMyScores() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         logger.info("Getting scores for user: " + userDetails.getUsername());
@@ -78,6 +78,13 @@ public class UserScoreController {
         logger.info("Getting average score for user: " + userDetails.getUsername() + " at category: " + categoryId);
         Double averageScore = scoreService.getAverageScoreByUserIdAndCategoryId(userService.findByUsername(userDetails.getUsername()).getId(), categoryId);
         return ResponseEntity.ok(averageScore);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Score> getScoreById(@PathVariable long id) {
+        logger.info("Getting score by id: " + id);
+        Score score = scoreService.getScoreById(id);
+        return ResponseEntity.ok(score);
     }
 
 

@@ -73,3 +73,19 @@ section {
   font-weight: bold;
   padding: 10px;
 }
+
+.logout-button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+  min-height: 40px;
+}
+
+.logout-button:hover {
+  background-color: darkred;
+}

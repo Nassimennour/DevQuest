@@ -1,0 +1,85 @@
+<div class="coding-challenges-container">
+  <div class="challenges-header">
+    <h1>Available Coding Challenges</h1>
+    <div class="search-filter">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search challenges..."
+        [(ngModel)]="searchTerm"
+        (input)="filterChallenges()"
+      />
+      <select
+        class="form-select"
+        [(ngModel)]="selectedTechnology"
+        (change)="filterChallenges()"
+      >
+        <option value="">All Technologies</option>
+        <option *ngFor="let tech of technologies" [value]="tech.name">
+          {{ tech.name }}
+        </option>
+      </select>
+      <select
+        class="form-select"
+        [(ngModel)]="sortOrder"
+        (change)="sortChallenges()"
+      >
+        <option value="title">Title</option>
+        <option value="difficulty">Difficulty</option>
+        <option value="duration">Duration</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="challenges-list">
+    <div
+      class="challenge-card"
+      *ngFor="let challenge of paginatedChallenges"
+      [ngClass]="{ 'taken-challenge': hasUserTakenChallenge(challenge.id) }"
+    >
+      <h3>{{ challenge.title }}</h3>
+      <p>{{ challenge.description | slice : 0 : 100 }}...</p>
+      <p>Difficulty: {{ challenge.difficulty }}</p>
+      <p>Duration: {{ challenge.duration }} mins</p>
+      <button
+        class="btn btn-primary"
+        (click)="viewChallengeDetails(challenge.id)"
+      >
+        <i class="bi bi-eye"></i> View Details
+      </button>
+      <button
+        *ngIf="!hasUserTakenChallenge(challenge.id)"
+        class="btn btn-success"
+        (click)="takeChallenge(challenge.id)"
+      >
+        <i class="bi bi-play-circle"></i> Take Challenge
+      </button>
+      <button
+        *ngIf="hasUserTakenChallenge(challenge.id)"
+        class="btn btn-info"
+        (click)="viewUserSolution(challenge.id)"
+      >
+        <i class="bi bi-file-earmark-code"></i> View Solution
+      </button>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <button
+      class="btn btn-outline-primary"
+      (click)="previousPage()"
+      [disabled]="currentPage === 1"
+    >
+      <i class="bi bi-arrow-left"></i>
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button
+      class="btn btn-outline-primary"
+      (click)="nextPage()"
+      [disabled]="currentPage === totalPages"
+    >
+      Next <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</div>

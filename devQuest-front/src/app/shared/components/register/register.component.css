@@ -223,3 +223,12 @@ textarea::placeholder {
   top: 10px;
   right: 10px;
 }
+
+.skip {
+  color: var(--primary-1);
+  cursor: pointer;
+}
+
+.skip:hover {
+  color: var(--accent-1);
+}
