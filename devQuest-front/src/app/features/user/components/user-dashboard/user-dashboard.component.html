@@ -70,13 +70,10 @@
   <div class="dashboard-section">
     <h2><i class="bi bi-clock-history"></i> Coding Challenge History</h2>
     <div class="history-list">
-      <div
-        class="history-item"
-        *ngFor="let challenge of userProfile?.codingChallengeHistory"
-      >
-        <h3>{{ challenge.title }}</h3>
-        <p>Technology: {{ challenge.technology?.name }}</p>
-        <p>Difficulty: {{ challenge.difficulty }}</p>
+      <div class="history-item" *ngFor="let solution of userSolutions">
+        <h3>{{ solution.codingChallenge?.title }}</h3>
+        <p>Technology: {{ solution.codingChallenge.technology?.name }}</p>
+        <p>Difficulty: {{ solution.codingChallenge?.difficulty }}</p>
       </div>
     </div>
   </div>
@@ -87,7 +84,7 @@
       <p>Position: {{ userRanking?.position }}</p>
       <p>Score: {{ userRanking?.score }}</p>
       <p>Level: {{ userRanking?.level }}</p>
-      <a routerLink="/full-ranking" class="btn btn-outline-primary">
+      <a routerLink="/user/ranking" class="btn btn-outline-primary">
         <i class="bi bi-list"></i> View Full Ranking
       </a>
     </div>

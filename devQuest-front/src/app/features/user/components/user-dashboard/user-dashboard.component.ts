@@ -7,12 +7,15 @@ import {
 } from '@angular/core';
 import { Toast } from 'bootstrap';
 import {
+  CodingChallenge,
   Dashboard,
   Ranking,
   UserProfile,
 } from '../../../../shared/models/usermodels';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { CodingChallengesService } from '../../services/coding-challenges.service';
+import { Solution } from '../../../admin/models/admin-models';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -23,15 +26,21 @@ export class UserDashboardComponent implements AfterViewInit, OnInit {
   userProfile: UserProfile | null = null;
   userRanking: Ranking | null = null;
   userDashboard: Dashboard | null = null;
+  userSolutions: Solution[] = [];
 
   @ViewChild('toast') toast!: ElementRef;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private CodingChallengesService: CodingChallengesService
+  ) {}
 
   ngOnInit(): void {
     this.fetchUserProfile();
     this.fetchUserRanking();
     this.fetchUserDashboard();
+    this.fetchUserSolutions();
   }
 
   ngAfterViewInit(): void {
@@ -78,7 +87,7 @@ export class UserDashboardComponent implements AfterViewInit, OnInit {
   }
 
   takeQuiz(quizId: number | undefined): void {
-    // Navigate to take quiz page
+    this.router.navigate(['/user/take-quiz', quizId]);
   }
 
   viewChallengeDetails(challengeId: number | undefined): void {
@@ -86,6 +95,16 @@ export class UserDashboardComponent implements AfterViewInit, OnInit {
   }
 
   takeChallenge(challengeId: number | undefined): void {
-    // Navigate to take challenge page
+    this.router.navigate(['/user/take-challenge', challengeId]);
+  }
+  fetchUserSolutions(): void {
+    this.CodingChallengesService.getMySolutions().subscribe(
+      (solutions) => {
+        this.userSolutions = solutions;
+      },
+      (error) => {
+        console.error('Error fetching user solutions:', error);
+      }
+    );
   }
 }

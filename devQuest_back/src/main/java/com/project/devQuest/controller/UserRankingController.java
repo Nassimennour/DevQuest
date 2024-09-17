@@ -28,6 +28,7 @@ public class UserRankingController {
 
     @GetMapping("")
     public ResponseEntity<List<Ranking>> getAllRankings() {
+        rankingService.updateRankings();
         return ResponseEntity.ok(rankingService.getAllRankings());
     }
 
@@ -35,6 +36,8 @@ public class UserRankingController {
     public ResponseEntity<Ranking> getMyRanking() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDTO userDTO = userService.findByUsername(userDetails.getUsername());
+        // Update rankings
+        rankingService.updateRankings();
         return ResponseEntity.ok(rankingService.getRankingByUserId(userDTO.getId()).get());
     }
 
