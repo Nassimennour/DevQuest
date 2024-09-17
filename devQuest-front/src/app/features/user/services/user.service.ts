@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import {
   ChangePasswordDTO,
+  Ranking,
   Technology,
   UserProfile,
 } from '../../../shared/models/usermodels';
@@ -64,12 +65,15 @@ export class UserService {
     );
   }
 
-  getAllRankings() {
-    return this.http.get(`${this.API_URL}${this.getAllRankingsEndpoint}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
+  getAllRankings(): Observable<Ranking[]> {
+    return this.http.get<Ranking[]>(
+      `${this.API_URL}${this.getAllRankingsEndpoint}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
   }
 
   addSkill(technologyId: number) {

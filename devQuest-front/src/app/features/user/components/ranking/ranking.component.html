@@ -1,1 +1,27 @@
-<p>ranking works!</p>
+<div class="ranking-container">
+  <div class="ranking-header">
+    <h1>Leaderboard</h1>
+  </div>
+
+  <div class="ranking-list">
+    <div
+      *ngFor="let ranking of rankings"
+      class="ranking-item"
+      [class.logged-in-user]="isLoggedInUser(ranking.user.id)"
+    >
+      <div class="ranking-position">{{ ranking.position }}</div>
+      <div class="ranking-profile">
+        <img
+          [src]="ranking.user.profilePicture"
+          alt="{{ ranking.user.username }}"
+          class="profile-picture"
+        />
+        <div class="username">{{ ranking.user.username }}</div>
+      </div>
+      <div class="ranking-score">{{ ranking.score }}</div>
+      <div class="ranking-level" [ngClass]="getLevelClass(ranking.level)">
+        Level {{ ranking.level }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+.ranking-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--bg-1);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.ranking-container:hover {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+.ranking-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ranking-header h1 {
+  color: var(--text-1);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--bg-2);
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.ranking-item:hover {
+  background-color: var(--bg-3);
+}
+
+.ranking-item.logged-in-user {
+  background-color: var(--primary-1);
+  color: var(--text-1);
+}
+
+.ranking-position {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.ranking-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.ranking-score {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.ranking-level {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.level-one {
+  background-color: var(--success);
+  color: var(--text-1);
+}
+
+.level-two {
+  background-color: var(--warning);
+  color: var(--text-1);
+}
+
+.level-three {
+  background-color: var(--danger);
+  color: var(--text-1);
+}
